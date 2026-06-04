@@ -4,13 +4,14 @@
 
 package main;
 
+import ui.frame.LoginFrame;
+
 /**
  *
  * @author Admin
  */
 public class AppHocTu {
-
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        new LoginFrame();
     }
 }

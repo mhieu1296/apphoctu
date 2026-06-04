@@ -8,6 +8,9 @@ package dao;
  *
  * @author Admin
  */
+
+// viết các phương thức truy vấn csdl với bảng chủ đề
+// vào đây
 public class ChuDeDAO {
     
 }

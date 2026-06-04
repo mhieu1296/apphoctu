@@ -8,6 +8,14 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>24</maven.compiler.release>
-        <exec.mainClass>com.mycompany.apphoctu.AppHocTu</exec.mainClass>
+        <exec.mainClass>com.mycompany.main.AppHocTu</exec.mainClass>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.6</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
 </project>

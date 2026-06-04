@@ -8,6 +8,9 @@ package dao;
  *
  * @author Admin
  */
+
+// viết các phương thức truy vấn csdl với bảng từ vựng
+// vào đây
 public class TuVungDAO {
     
 }

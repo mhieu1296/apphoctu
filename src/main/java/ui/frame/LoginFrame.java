@@ -2,20 +2,31 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package ui;
+package ui.frame;
 
+import ui.panel.LoginPanel;
+import com.formdev.flatlaf.FlatLightLaf;
 /**
  *
  * @author Admin
  */
-public class Temp extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Temp.class.getName());
+public class LoginFrame extends javax.swing.JFrame {
+
+    private LoginPanel loginpanel;
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginFrame.class.getName());
 
     /**
-     * Creates new form Temp
+     * Creates new form LoginFrame
      */
-    public Temp() {
+    public LoginFrame() {
+        FlatLightLaf.setup();
+        setTitle("Đăng nhập");
+        loginpanel = new LoginPanel();
+        add(loginpanel);
+        pack();
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setVisible(true);
         initComponents();
     }
 
@@ -34,11 +45,11 @@ public class Temp extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 480, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 360, Short.MAX_VALUE)
         );
 
         pack();
@@ -66,7 +77,7 @@ public class Temp extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Temp().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new LoginFrame().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

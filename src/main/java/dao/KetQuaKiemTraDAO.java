@@ -8,6 +8,9 @@ package dao;
  *
  * @author Admin
  */
+
+// viết các phương thức truy vấn csdl với bảng kết quả
+// kiểm tra vào đây
 public class KetQuaKiemTraDAO {
     
 }

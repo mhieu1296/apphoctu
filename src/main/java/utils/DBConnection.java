@@ -8,6 +8,10 @@ package utils;
  *
  * @author Admin
  */
+
+// viết phương thức kết nối csdl mysql vào đây:
+// cài mysql rồi lấy port, username (thường là root)
+// và password, kết nối vào nó rồi viết DAO
 public class DBConnection {
     
 }
