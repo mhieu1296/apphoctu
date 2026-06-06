@@ -5,7 +5,9 @@
 package ui.panel;
 
 import java.awt.CardLayout;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import ui.MainFrame;
 import ui.frame.LoginFrame;
 
@@ -184,8 +186,8 @@ public class MenuAdminPanel extends javax.swing.JPanel {
         if (chon == JOptionPane.YES_OPTION) {
 
             new LoginFrame().setVisible(true);
-
-//            this.dispose();
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            frame.dispose();
         }
     }//GEN-LAST:event_jLabel8MousePressed
 

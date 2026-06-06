@@ -5,6 +5,7 @@
 package ui.panel;
 
 import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import ui.dialog.CRUDChuDe;
 
@@ -70,12 +71,22 @@ public class QuanLyChuDe extends javax.swing.JPanel {
         lblXoaChuDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trash-can-regular (1).png"))); // NOI18N
         lblXoaChuDe.setText("Xóa chủ đề ");
         lblXoaChuDe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblXoaChuDe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblXoaChuDeMousePressed(evt);
+            }
+        });
 
         jLabel4.setText("Tìm kiếm chủ đề:");
 
         lblTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/magnifying-glass-solid.png"))); // NOI18N
         lblTimKiem.setText("Tìm kiếm");
         lblTimKiem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblTimKiemMousePressed(evt);
+            }
+        });
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Sắp xếp chủ đề theo bảng chữ cái");
@@ -83,6 +94,11 @@ public class QuanLyChuDe extends javax.swing.JPanel {
         lblSapXepTheoAlphabet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/arrow-down-a-z-solid.png"))); // NOI18N
         lblSapXepTheoAlphabet.setText("Sắp xếp");
         lblSapXepTheoAlphabet.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblSapXepTheoAlphabet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblSapXepTheoAlphabetMousePressed(evt);
+            }
+        });
 
         tableChuDe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -222,7 +238,8 @@ public class QuanLyChuDe extends javax.swing.JPanel {
             System.out.println("Chưa chọn dòng nào!");
             return;
         }
-
+        
+        String maCD = tableChuDe.getValueAt(row, 1).toString();
         String tenCD = tableChuDe.getValueAt(row, 2).toString();
         System.out.println("tenCD = " + tenCD);
 
@@ -231,7 +248,8 @@ public class QuanLyChuDe extends javax.swing.JPanel {
 
         // truyền dữ liệu sang panel trước khi show
         panel.setTenChuDe(tenCD);   // bạn cần tạo hàm này
-
+        panel.setMaChuDe(maCD);
+        
         dialog.getContentPane().removeAll();
         dialog.getContentPane().setLayout(new BorderLayout());
         dialog.getContentPane().add(panel, BorderLayout.CENTER);
@@ -240,6 +258,27 @@ public class QuanLyChuDe extends javax.swing.JPanel {
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }//GEN-LAST:event_lblSuaChuDeMousePressed
+
+    private void lblXoaChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblXoaChuDeMousePressed
+        int chon = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa chủ đề này?", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+        if (chon == JOptionPane.YES_OPTION) {
+            // gọi phương thức xóa từ trong service
+            
+            JOptionPane.showMessageDialog(null, "Đã xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+//        JOptionPane.showConfirmDialog(crudchude, evt, TOOL_TIP_TEXT_KEY, WIDTH)
+    }//GEN-LAST:event_lblXoaChuDeMousePressed
+
+    private void lblTimKiemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTimKiemMousePressed
+        // TODO add your handling code here:
+        // gọi hàm từ service, services gọi dao và dao gọi db để lấy data
+    }//GEN-LAST:event_lblTimKiemMousePressed
+
+    private void lblSapXepTheoAlphabetMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSapXepTheoAlphabetMousePressed
+        // TODO add your handling code here:
+                // gọi hàm từ service, services gọi dao và dao gọi db để lấy data
+
+    }//GEN-LAST:event_lblSapXepTheoAlphabetMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

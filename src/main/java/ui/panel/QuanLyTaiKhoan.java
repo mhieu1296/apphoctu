@@ -4,6 +4,11 @@
  */
 package ui.panel;
 
+import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
+import ui.dialog.CRUDChuDe;
+import ui.dialog.CRUDTaiKhoan;
+
 /**
  *
  * @author Admin
@@ -38,7 +43,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         lblSapXepTheoAlphabet = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableTaiKhoan = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -49,16 +54,31 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
         lblThemChuDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus-solid.png"))); // NOI18N
         lblThemChuDe.setText("Thêm tài khoản");
         lblThemChuDe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblThemChuDe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblThemChuDeMousePressed(evt);
+            }
+        });
 
         lblSuaChuDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/pen-to-square-regular.png"))); // NOI18N
         lblSuaChuDe.setText("Sửa thông tin tài khoản");
         lblSuaChuDe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblSuaChuDe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblSuaChuDeMousePressed(evt);
+            }
+        });
 
         lblXoaChuDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trash-can-regular (1).png"))); // NOI18N
         lblXoaChuDe.setText("Xóa tài khoản");
         lblXoaChuDe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblXoaChuDe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblXoaChuDeMousePressed(evt);
+            }
+        });
 
-        jLabel4.setText("Tìm kiếm chủ đề:");
+        jLabel4.setText("Tìm kiếm tài khoản:");
 
         lblTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/magnifying-glass-solid.png"))); // NOI18N
         lblTimKiem.setText("Tìm kiếm");
@@ -79,7 +99,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
         lblSapXepTheoAlphabet.setText("Sắp xếp");
         lblSapXepTheoAlphabet.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableTaiKhoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"01", "USER01", "finn", "f6844161f9f09f3662d617d4b57894543c648d2c82da63ebde4c8f0593a42f66", "User"},
                 {"02", "ADMIN01", "mhieu1296", "ce7be241b6eedf067dd780122fb68b9ab1b852a6c478e1d9c5c2743632a979f5", "Admin"},
@@ -105,7 +125,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableTaiKhoan);
 
         jLabel3.setText("Số lượng tài khoản");
 
@@ -182,7 +202,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
                     .addComponent(jLabel5)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblSuaChuDe)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -190,7 +210,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
                     .addComponent(lblTimKiem)
                     .addComponent(lblTimKiem1)
                     .addComponent(lblSapXepTheoAlphabet))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel3)
@@ -201,6 +221,58 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lblXoaChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblXoaChuDeMousePressed
+        int chon = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa tài khoản này?", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+        if (chon == JOptionPane.YES_OPTION) {
+            // gọi phương thức xóa từ trong service
+            
+            JOptionPane.showMessageDialog(null, "Đã xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_lblXoaChuDeMousePressed
+
+    private void lblThemChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemChuDeMousePressed
+        // TODO add your handling code here:
+        CRUDTaiKhoan dialog = new CRUDTaiKhoan(null, true);
+
+        ThemTaiKhoan panel = new ThemTaiKhoan();
+
+        dialog.getContentPane().removeAll();
+        dialog.getContentPane().setLayout(new BorderLayout());
+        dialog.getContentPane().add(panel, BorderLayout.CENTER);
+
+        dialog.pack();
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_lblThemChuDeMousePressed
+
+    private void lblSuaChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSuaChuDeMousePressed
+        // TODO add your handling code here:
+        int row = tableTaiKhoan.getSelectedRow();
+
+        if (row == -1) {
+            System.out.println("Chưa chọn dòng nào!");
+            return;
+        }
+        
+        String maTaiKhoan = tableTaiKhoan.getValueAt(row, 1).toString();
+        String username = tableTaiKhoan.getValueAt(row, 2).toString();
+        String vaiTro = tableTaiKhoan.getValueAt(row, 4).toString();
+
+        CRUDChuDe dialog = new CRUDChuDe(null, true);
+        CapNhatTaiKhoan panel = new CapNhatTaiKhoan();
+
+        // truyền dữ liệu sang panel trước khi show
+        panel.setAll(maTaiKhoan, username, vaiTro);
+        
+        dialog.getContentPane().removeAll();
+        dialog.getContentPane().setLayout(new BorderLayout());
+        dialog.getContentPane().add(panel, BorderLayout.CENTER);
+
+        dialog.pack();
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_lblSuaChuDeMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -213,13 +285,13 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblSapXepTheoAlphabet;
     private javax.swing.JLabel lblSuaChuDe;
     private javax.swing.JLabel lblThemChuDe;
     private javax.swing.JLabel lblTimKiem;
     private javax.swing.JLabel lblTimKiem1;
     private javax.swing.JLabel lblXoaChuDe;
+    private javax.swing.JTable tableTaiKhoan;
     private javax.swing.JTextField txtTimChuDe;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,7 +5,9 @@
 package ui.panel;
 
 import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
 import ui.dialog.CRUDChuDe;
+import ui.dialog.CRUDTu;
 
 /**
  *
@@ -45,8 +47,8 @@ public class QuanLyTu extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableTu = new javax.swing.JTable();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lblEng = new javax.swing.JLabel();
+        lblVie = new javax.swing.JLabel();
         lblXoaChuDe1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -56,6 +58,11 @@ public class QuanLyTu extends javax.swing.JPanel {
         lblThemChuDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus-solid.png"))); // NOI18N
         lblThemChuDe.setText("Thêm từ mới vào chủ đề");
         lblThemChuDe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblThemChuDe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblThemChuDeMousePressed(evt);
+            }
+        });
 
         lblSuaChuDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/pen-to-square-regular.png"))); // NOI18N
         lblSuaChuDe.setText("Sửa 1 từ trong chủ đề");
@@ -69,12 +76,22 @@ public class QuanLyTu extends javax.swing.JPanel {
         lblXoaChuDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trash-can-regular (1).png"))); // NOI18N
         lblXoaChuDe.setText("Xóa 1 từ trong chủ đề ");
         lblXoaChuDe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblXoaChuDe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblXoaChuDeMousePressed(evt);
+            }
+        });
 
         jLabel4.setText("Tìm kiếm từ:");
 
         lblTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/magnifying-glass-solid.png"))); // NOI18N
         lblTimKiem.setText("Tìm kiếm");
         lblTimKiem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblTimKiemMousePressed(evt);
+            }
+        });
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Sắp xếp chủ đề theo bảng chữ cái");
@@ -82,6 +99,11 @@ public class QuanLyTu extends javax.swing.JPanel {
         lblSapXepTheoAlphabet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/arrow-down-a-z-solid.png"))); // NOI18N
         lblSapXepTheoAlphabet.setText("Sắp xếp");
         lblSapXepTheoAlphabet.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblSapXepTheoAlphabet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblSapXepTheoAlphabetMousePressed(evt);
+            }
+        });
 
         jLabel2.setText("Chủ đề:");
 
@@ -123,15 +145,20 @@ public class QuanLyTu extends javax.swing.JPanel {
         });
         tableTu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tableTu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tableTu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tableTuMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableTu);
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 102, 102));
-        jLabel8.setText("English word");
+        lblEng.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblEng.setForeground(new java.awt.Color(255, 102, 102));
+        lblEng.setText("English word");
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 204, 102));
-        jLabel9.setText("Vietnamese meaning");
+        lblVie.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblVie.setForeground(new java.awt.Color(0, 204, 102));
+        lblVie.setText("Vietnamese meaning");
 
         lblXoaChuDe1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/file-export-solid (1).png"))); // NOI18N
         lblXoaChuDe1.setText("Xuất TXT");
@@ -148,8 +175,8 @@ public class QuanLyTu extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)))
+                            .addComponent(lblEng)
+                            .addComponent(lblVie)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel2)
@@ -220,9 +247,9 @@ public class QuanLyTu extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(65, 65, 65)
-                        .addComponent(jLabel8)
+                        .addComponent(lblEng)
                         .addGap(30, 30, 30)
-                        .addComponent(jLabel9))
+                        .addComponent(lblVie))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -254,7 +281,80 @@ public class QuanLyTu extends javax.swing.JPanel {
 //        dialog.pack();
 //        dialog.setLocationRelativeTo(null);
 //        dialog.setVisible(true);
+        int row = tableTu.getSelectedRow();
+
+        if (row == -1) {
+            System.out.println("Chưa chọn dòng nào!");
+            return;
+        }
+        String maTu = tableTu.getValueAt(row, 1).toString();
+        String eng = tableTu.getValueAt(row, 2).toString();
+        String vie = tableTu.getValueAt(row, 3).toString();
+        String maChuDe = tableTu.getValueAt(row, 4).toString();
+        
+
+        CRUDTu dialog = new CRUDTu(null, true);
+        CapNhatTu panel = new CapNhatTu();
+
+        // truyền dữ liệu sang panel trước khi show
+        panel.setAll(maChuDe, maTu, eng, vie);  // bạn cần tạo hàm này
+
+        dialog.getContentPane().removeAll();
+        dialog.getContentPane().setLayout(new BorderLayout());
+        dialog.getContentPane().add(panel, BorderLayout.CENTER);
+
+        dialog.pack();
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
     }//GEN-LAST:event_lblSuaChuDeMousePressed
+
+    private void tableTuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableTuMousePressed
+        // TODO add your handling code here:
+        int row = tableTu.getSelectedRow();
+        if (row == -1) {
+            System.out.println("Chưa chọn dòng nào!");
+            return;
+        }
+        lblEng.setText((String) tableTu.getValueAt(row, 2));
+        lblVie.setText((String) tableTu.getValueAt(row, 3));
+
+    }//GEN-LAST:event_tableTuMousePressed
+
+    private void lblXoaChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblXoaChuDeMousePressed
+        int chon = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa từ này?", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+        if (chon == JOptionPane.YES_OPTION) {
+            // gọi phương thức xóa từ trong service
+
+            JOptionPane.showMessageDialog(null, "Đã xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_lblXoaChuDeMousePressed
+
+    private void lblThemChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemChuDeMousePressed
+        // TODO add your handling code here:
+        CRUDTu dialog = new CRUDTu(null, true);
+
+        ThemTu panel = new ThemTu();
+
+        dialog.getContentPane().removeAll();
+        dialog.getContentPane().setLayout(new BorderLayout());
+        dialog.getContentPane().add(panel, BorderLayout.CENTER);
+
+        dialog.pack();
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_lblThemChuDeMousePressed
+
+    private void lblTimKiemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTimKiemMousePressed
+        // TODO add your handling code here:
+                // gọi hàm từ service, services gọi dao và dao gọi db để lấy data
+
+    }//GEN-LAST:event_lblTimKiemMousePressed
+
+    private void lblSapXepTheoAlphabetMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSapXepTheoAlphabetMousePressed
+        // TODO add your handling code here:
+                // gọi hàm từ service, services gọi dao và dao gọi db để lấy data
+
+    }//GEN-LAST:event_lblSapXepTheoAlphabetMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -266,13 +366,13 @@ public class QuanLyTu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblEng;
     private javax.swing.JLabel lblSapXepTheoAlphabet;
     private javax.swing.JLabel lblSuaChuDe;
     private javax.swing.JLabel lblThemChuDe;
     private javax.swing.JLabel lblTimKiem;
+    private javax.swing.JLabel lblVie;
     private javax.swing.JLabel lblXoaChuDe;
     private javax.swing.JLabel lblXoaChuDe1;
     private javax.swing.JTable tableTu;
