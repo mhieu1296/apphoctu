@@ -31,54 +31,54 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblThemChuDe = new javax.swing.JLabel();
-        lblSuaChuDe = new javax.swing.JLabel();
-        lblXoaChuDe = new javax.swing.JLabel();
+        lblThemTaiKhoan = new javax.swing.JLabel();
+        lblSuaTaiKhoan = new javax.swing.JLabel();
+        lblXoaTaiKhoan = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtTimChuDe = new javax.swing.JTextField();
+        txtTimTaiKhoan = new javax.swing.JTextField();
         lblTimKiem = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        lblTimKiem1 = new javax.swing.JLabel();
+        comboboxRole = new javax.swing.JComboBox<>();
+        lblLocTheoRole = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         lblSapXepTheoAlphabet = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableTaiKhoan = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lblSoLuongAcc = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lblSoLuongAdmin = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        lblThemChuDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus-solid.png"))); // NOI18N
-        lblThemChuDe.setText("Thêm tài khoản");
-        lblThemChuDe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblThemChuDe.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblThemTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus-solid.png"))); // NOI18N
+        lblThemTaiKhoan.setText("Thêm tài khoản");
+        lblThemTaiKhoan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblThemTaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                lblThemChuDeMousePressed(evt);
+                lblThemTaiKhoanMousePressed(evt);
             }
         });
 
-        lblSuaChuDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/pen-to-square-regular.png"))); // NOI18N
-        lblSuaChuDe.setText("Sửa thông tin tài khoản");
-        lblSuaChuDe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblSuaChuDe.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblSuaTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/pen-to-square-regular.png"))); // NOI18N
+        lblSuaTaiKhoan.setText("Sửa thông tin tài khoản");
+        lblSuaTaiKhoan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblSuaTaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                lblSuaChuDeMousePressed(evt);
+                lblSuaTaiKhoanMousePressed(evt);
             }
         });
 
-        lblXoaChuDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trash-can-regular (1).png"))); // NOI18N
-        lblXoaChuDe.setText("Xóa tài khoản");
-        lblXoaChuDe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblXoaChuDe.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblXoaTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/trash-can-regular (1).png"))); // NOI18N
+        lblXoaTaiKhoan.setText("Xóa tài khoản");
+        lblXoaTaiKhoan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblXoaTaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                lblXoaChuDeMousePressed(evt);
+                lblXoaTaiKhoanMousePressed(evt);
             }
         });
 
-        jLabel4.setText("Tìm kiếm tài khoản:");
+        jLabel4.setText("Tìm kiếm username:");
 
         lblTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/magnifying-glass-solid.png"))); // NOI18N
         lblTimKiem.setText("Tìm kiếm");
@@ -86,11 +86,11 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
 
         jLabel5.setText("Lọc theo role:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Admin" }));
+        comboboxRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Admin" }));
 
-        lblTimKiem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/filter-solid.png"))); // NOI18N
-        lblTimKiem1.setText("Lọc");
-        lblTimKiem1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblLocTheoRole.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/filter-solid.png"))); // NOI18N
+        lblLocTheoRole.setText("Lọc");
+        lblLocTheoRole.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Sắp xếp theo tên tài khoản");
@@ -129,15 +129,15 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
 
         jLabel3.setText("Số lượng tài khoản");
 
-        jLabel7.setFont(new java.awt.Font("UTM HelvetIns", 0, 36)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 204, 102));
-        jLabel7.setText("1");
+        lblSoLuongAcc.setFont(new java.awt.Font("UTM HelvetIns", 0, 36)); // NOI18N
+        lblSoLuongAcc.setForeground(new java.awt.Color(0, 204, 102));
+        lblSoLuongAcc.setText("1");
 
         jLabel8.setText("Số lượng admin");
 
-        jLabel9.setFont(new java.awt.Font("UTM HelvetIns", 0, 36)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 204, 102));
-        jLabel9.setText("1");
+        lblSoLuongAdmin.setFont(new java.awt.Font("UTM HelvetIns", 0, 36)); // NOI18N
+        lblSoLuongAdmin.setForeground(new java.awt.Color(0, 204, 102));
+        lblSoLuongAdmin.setText("1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -148,27 +148,27 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSuaChuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSuaTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblThemChuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblThemTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(76, 76, 76)
                                         .addComponent(jLabel4))
-                                    .addComponent(lblXoaChuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblXoaTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lblTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                                    .addComponent(txtTimChuDe))
+                                    .addComponent(txtTimTaiKhoan))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(40, 40, 40)
                                         .addComponent(jLabel5)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(comboboxRole, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(93, 93, 93)
-                                        .addComponent(lblTimKiem1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(lblLocTheoRole, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(76, 76, 76)
@@ -183,11 +183,11 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblSoLuongAcc, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(32, 32, 32)
                                 .addComponent(jLabel8)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblSoLuongAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
@@ -196,42 +196,42 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblThemChuDe)
+                    .addComponent(lblThemTaiKhoan)
                     .addComponent(jLabel4)
-                    .addComponent(txtTimChuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboboxRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblSuaChuDe)
+                .addComponent(lblSuaTaiKhoan)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblXoaChuDe)
+                    .addComponent(lblXoaTaiKhoan)
                     .addComponent(lblTimKiem)
-                    .addComponent(lblTimKiem1)
+                    .addComponent(lblLocTheoRole)
                     .addComponent(lblSapXepTheoAlphabet))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(lblSoLuongAcc)
                     .addComponent(jLabel3)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel9))
+                    .addComponent(lblSoLuongAdmin))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblXoaChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblXoaChuDeMousePressed
+    private void lblXoaTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblXoaTaiKhoanMousePressed
         int chon = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa tài khoản này?", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         if (chon == JOptionPane.YES_OPTION) {
             // gọi phương thức xóa từ trong service
-            
+
             JOptionPane.showMessageDialog(null, "Đã xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_lblXoaChuDeMousePressed
+    }//GEN-LAST:event_lblXoaTaiKhoanMousePressed
 
-    private void lblThemChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemChuDeMousePressed
+    private void lblThemTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemTaiKhoanMousePressed
         // TODO add your handling code here:
         CRUDTaiKhoan dialog = new CRUDTaiKhoan(null, true);
 
@@ -244,17 +244,18 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
-    }//GEN-LAST:event_lblThemChuDeMousePressed
+    }//GEN-LAST:event_lblThemTaiKhoanMousePressed
 
-    private void lblSuaChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSuaChuDeMousePressed
+    private void lblSuaTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSuaTaiKhoanMousePressed
         // TODO add your handling code here:
         int row = tableTaiKhoan.getSelectedRow();
 
         if (row == -1) {
-            System.out.println("Chưa chọn dòng nào!");
+            JOptionPane.showMessageDialog(null, "Phải chọn 1 dòng trong bảng!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+
             return;
         }
-        
+
         String maTaiKhoan = tableTaiKhoan.getValueAt(row, 1).toString();
         String username = tableTaiKhoan.getValueAt(row, 2).toString();
         String vaiTro = tableTaiKhoan.getValueAt(row, 4).toString();
@@ -264,7 +265,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
 
         // truyền dữ liệu sang panel trước khi show
         panel.setAll(maTaiKhoan, username, vaiTro);
-        
+
         dialog.getContentPane().removeAll();
         dialog.getContentPane().setLayout(new BorderLayout());
         dialog.getContentPane().add(panel, BorderLayout.CENTER);
@@ -272,26 +273,26 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
-    }//GEN-LAST:event_lblSuaChuDeMousePressed
+    }//GEN-LAST:event_lblSuaTaiKhoanMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> comboboxRole;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblLocTheoRole;
     private javax.swing.JLabel lblSapXepTheoAlphabet;
-    private javax.swing.JLabel lblSuaChuDe;
-    private javax.swing.JLabel lblThemChuDe;
+    private javax.swing.JLabel lblSoLuongAcc;
+    private javax.swing.JLabel lblSoLuongAdmin;
+    private javax.swing.JLabel lblSuaTaiKhoan;
+    private javax.swing.JLabel lblThemTaiKhoan;
     private javax.swing.JLabel lblTimKiem;
-    private javax.swing.JLabel lblTimKiem1;
-    private javax.swing.JLabel lblXoaChuDe;
+    private javax.swing.JLabel lblXoaTaiKhoan;
     private javax.swing.JTable tableTaiKhoan;
-    private javax.swing.JTextField txtTimChuDe;
+    private javax.swing.JTextField txtTimTaiKhoan;
     // End of variables declaration//GEN-END:variables
 }

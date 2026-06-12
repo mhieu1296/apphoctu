@@ -43,9 +43,9 @@ public class LoginPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         fieldUserName = new javax.swing.JTextField();
         fieldMatKhau = new javax.swing.JPasswordField();
-        jLabel4 = new javax.swing.JLabel();
+        lblDangNhap = new javax.swing.JLabel();
         lblAnHienMK = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblThoat = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -60,14 +60,14 @@ public class LoginPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Mật khẩu");
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/login.png"))); // NOI18N
-        jLabel4.setText("Đăng nhập");
-        jLabel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 102), 2, true));
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblDangNhap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/login.png"))); // NOI18N
+        lblDangNhap.setText("Đăng nhập");
+        lblDangNhap.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 102), 2, true));
+        lblDangNhap.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblDangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel4MousePressed(evt);
+                lblDangNhapMousePressed(evt);
             }
         });
 
@@ -85,14 +85,14 @@ public class LoginPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/circle-xmark-regular.png"))); // NOI18N
-        jLabel6.setText("Thoát");
-        jLabel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 102), 2, true));
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblThoat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/circle-xmark-regular.png"))); // NOI18N
+        lblThoat.setText("Thoát");
+        lblThoat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 102), 2, true));
+        lblThoat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblThoat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel6MousePressed(evt);
+                lblThoatMousePressed(evt);
             }
         });
 
@@ -105,9 +105,9 @@ public class LoginPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -135,8 +135,8 @@ public class LoginPanel extends javax.swing.JPanel {
                 .addComponent(lblAnHienMK)
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6))
+                    .addComponent(lblDangNhap)
+                    .addComponent(lblThoat))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -152,10 +152,10 @@ public class LoginPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_lblAnHienMKMousePressed
 
-    private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
+    private void lblThoatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThoatMousePressed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         frame.dispose();
-    }//GEN-LAST:event_jLabel6MousePressed
+    }//GEN-LAST:event_lblThoatMousePressed
 
     // chuyển mật khẩu thành hash
     public static String hashPassword(char[] password) {
@@ -179,13 +179,13 @@ public class LoginPanel extends javax.swing.JPanel {
         }
     }
 
-    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
+    private void lblDangNhapMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDangNhapMousePressed
         char[] password = fieldMatKhau.getPassword();
         String username = fieldUserName.getText();
         
         TaiKhoanService taiKhoanService = new TaiKhoanService(this);
         taiKhoanService.dangNhap(username, password);
-    }//GEN-LAST:event_jLabel4MousePressed
+    }//GEN-LAST:event_lblDangNhapMousePressed
 
     private void lblAnHienMKMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnHienMKMouseEntered
         lblAnHienMK.setForeground(Color.red);
@@ -202,8 +202,8 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lblAnHienMK;
+    private javax.swing.JLabel lblDangNhap;
+    private javax.swing.JLabel lblThoat;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,7 +4,9 @@
  */
 package ui.panel;
 
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -31,8 +33,8 @@ public class ThemChuDe extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtChuDe = new javax.swing.JTextField();
-        lblChuDe = new javax.swing.JLabel();
         lblThemChuDe = new javax.swing.JLabel();
+        lblHuyThemChuDe = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtMaChuDe = new javax.swing.JTextField();
 
@@ -47,27 +49,27 @@ public class ThemChuDe extends javax.swing.JPanel {
 
         jLabel2.setText("Tên chủ đề");
 
-        lblChuDe.setBackground(new java.awt.Color(0, 205, 102));
-        lblChuDe.setForeground(new java.awt.Color(255, 255, 255));
-        lblChuDe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblChuDe.setText("Thêm");
-        lblChuDe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblChuDe.setOpaque(true);
-        lblChuDe.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                lblChuDeMousePressed(evt);
-            }
-        });
-
-        lblThemChuDe.setBackground(new java.awt.Color(255, 0, 0));
+        lblThemChuDe.setBackground(new java.awt.Color(0, 205, 102));
         lblThemChuDe.setForeground(new java.awt.Color(255, 255, 255));
         lblThemChuDe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblThemChuDe.setText("Hủy");
+        lblThemChuDe.setText("Thêm");
         lblThemChuDe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblThemChuDe.setOpaque(true);
         lblThemChuDe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblThemChuDeMousePressed(evt);
+            }
+        });
+
+        lblHuyThemChuDe.setBackground(new java.awt.Color(255, 0, 0));
+        lblHuyThemChuDe.setForeground(new java.awt.Color(255, 255, 255));
+        lblHuyThemChuDe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHuyThemChuDe.setText("Hủy");
+        lblHuyThemChuDe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHuyThemChuDe.setOpaque(true);
+        lblHuyThemChuDe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblHuyThemChuDeMousePressed(evt);
             }
         });
 
@@ -82,9 +84,9 @@ public class ThemChuDe extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addComponent(lblChuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblThemChuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
-                        .addComponent(lblThemChuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblHuyThemChuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -112,18 +114,20 @@ public class ThemChuDe extends javax.swing.JPanel {
                     .addComponent(txtChuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblChuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblThemChuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblThemChuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHuyThemChuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblThemChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemChuDeMousePressed
+    private void lblHuyThemChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHuyThemChuDeMousePressed
         // TODO add your handling code here:
+        JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
+            frame.dispose();
 
-    }//GEN-LAST:event_lblThemChuDeMousePressed
+    }//GEN-LAST:event_lblHuyThemChuDeMousePressed
 
-    private void lblChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblChuDeMousePressed
+    private void lblThemChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemChuDeMousePressed
         // TODO add your handling code here:
         String chude = txtChuDe.getText();
         if (chude == "") {
@@ -133,14 +137,14 @@ public class ThemChuDe extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Thêm thành công!", "Thông tin", JOptionPane.INFORMATION_MESSAGE);
 
         }
-    }//GEN-LAST:event_lblChuDeMousePressed
+    }//GEN-LAST:event_lblThemChuDeMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel lblChuDe;
+    private javax.swing.JLabel lblHuyThemChuDe;
     private javax.swing.JLabel lblThemChuDe;
     private javax.swing.JTextField txtChuDe;
     private javax.swing.JTextField txtMaChuDe;

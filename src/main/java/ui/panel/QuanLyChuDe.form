@@ -55,7 +55,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel2" max="32767" attributes="0"/>
+                              <Component id="lblSoLuongChuDe" max="32767" attributes="0"/>
                               <EmptySpace min="766" pref="766" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -87,7 +87,7 @@
               <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblSoLuongChuDe" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="381" max="-2" attributes="0"/>
@@ -224,7 +224,7 @@
         <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng ch&#x1ee7; &#x111;&#x1ec1;:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="lblSoLuongChuDe">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="UTM HelvetIns" size="36" style="0"/>

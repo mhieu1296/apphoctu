@@ -4,6 +4,13 @@
  */
 package ui.panel;
 
+import java.awt.CardLayout;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import ui.MainFrame;
+import ui.frame.LoginFrame;
+
 /**
  *
  * @author Admin
@@ -13,10 +20,19 @@ public class MenuUserPanel extends javax.swing.JPanel {
     /**
      * Creates new form MenuUserPanel
      */
+    private MainFrame mainframe;
+    private CardLayout cardlayout;
     public MenuUserPanel() {
         initComponents();
+        this.mainframe = mainframe;
     }
 
+    public MenuUserPanel(MainFrame mainframe) {
+        initComponents();
+        this.mainframe = mainframe;
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,12 +43,12 @@ public class MenuUserPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lblTenAcc = new javax.swing.JLabel();
+        lblTongQuan = new javax.swing.JLabel();
+        lblChuDe = new javax.swing.JLabel();
+        lblHoc1ChuDe = new javax.swing.JLabel();
+        lblLamBaiKiemTra = new javax.swing.JLabel();
+        lblDangXuat = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 204, 102));
 
@@ -41,40 +57,65 @@ public class MenuUserPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Xin chào");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Tên người dùng");
+        lblTenAcc.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTenAcc.setForeground(new java.awt.Color(255, 255, 255));
+        lblTenAcc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTenAcc.setText("Tên người dùng");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/view.png"))); // NOI18N
-        jLabel3.setText("TỔNG QUAN");
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblTongQuan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblTongQuan.setForeground(new java.awt.Color(255, 255, 255));
+        lblTongQuan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/view.png"))); // NOI18N
+        lblTongQuan.setText("TỔNG QUAN");
+        lblTongQuan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblTongQuan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblTongQuanMousePressed(evt);
+            }
+        });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/list.png"))); // NOI18N
-        jLabel4.setText("DANH SÁCH CHỦ ĐỀ");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblChuDe.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblChuDe.setForeground(new java.awt.Color(255, 255, 255));
+        lblChuDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/list.png"))); // NOI18N
+        lblChuDe.setText("CHỦ ĐỀ");
+        lblChuDe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblChuDe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblChuDeMousePressed(evt);
+            }
+        });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/learn.png"))); // NOI18N
-        jLabel5.setText("HỌC 1 CHỦ ĐỀ");
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHoc1ChuDe.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblHoc1ChuDe.setForeground(new java.awt.Color(255, 255, 255));
+        lblHoc1ChuDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/learn.png"))); // NOI18N
+        lblHoc1ChuDe.setText("HỌC 1 CHỦ ĐỀ");
+        lblHoc1ChuDe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHoc1ChuDe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblHoc1ChuDeMousePressed(evt);
+            }
+        });
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/test.png"))); // NOI18N
-        jLabel6.setText("LÀM BÀI KIỂM TRA");
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblLamBaiKiemTra.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblLamBaiKiemTra.setForeground(new java.awt.Color(255, 255, 255));
+        lblLamBaiKiemTra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/test.png"))); // NOI18N
+        lblLamBaiKiemTra.setText("LÀM BÀI KIỂM TRA");
+        lblLamBaiKiemTra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblLamBaiKiemTra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblLamBaiKiemTraMousePressed(evt);
+            }
+        });
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
-        jLabel7.setText("ĐĂNG XUẤT");
-        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblDangXuat.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblDangXuat.setForeground(new java.awt.Color(255, 255, 255));
+        lblDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
+        lblDangXuat.setText("ĐĂNG XUẤT");
+        lblDangXuat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblDangXuat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblDangXuatMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -88,12 +129,12 @@ public class MenuUserPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(lblTongQuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblChuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblHoc1ChuDe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                            .addComponent(lblLamBaiKiemTra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTenAcc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -102,29 +143,63 @@ public class MenuUserPanel extends javax.swing.JPanel {
                 .addGap(76, 76, 76)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(lblTenAcc)
                 .addGap(69, 69, 69)
-                .addComponent(jLabel3)
+                .addComponent(lblTongQuan)
                 .addGap(32, 32, 32)
-                .addComponent(jLabel4)
+                .addComponent(lblChuDe)
                 .addGap(32, 32, 32)
-                .addComponent(jLabel5)
+                .addComponent(lblHoc1ChuDe)
                 .addGap(32, 32, 32)
-                .addComponent(jLabel6)
+                .addComponent(lblLamBaiKiemTra)
                 .addGap(32, 32, 32)
-                .addComponent(jLabel7)
+                .addComponent(lblDangXuat)
                 .addContainerGap(266, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lblTongQuanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTongQuanMousePressed
+        mainframe.showPanel("TongQuan");
+        
+    }//GEN-LAST:event_lblTongQuanMousePressed
+
+    private void lblChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblChuDeMousePressed
+        // TODO add your handling code here:
+        mainframe.showPanel("ChuDe");
+    }//GEN-LAST:event_lblChuDeMousePressed
+
+    private void lblHoc1ChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHoc1ChuDeMousePressed
+        mainframe.showPanel("HocTu");
+    }//GEN-LAST:event_lblHoc1ChuDeMousePressed
+
+    private void lblLamBaiKiemTraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLamBaiKiemTraMousePressed
+        mainframe.showPanel("BaiKiemTra");
+    }//GEN-LAST:event_lblLamBaiKiemTraMousePressed
+
+    private void lblDangXuatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDangXuatMousePressed
+        int chon = JOptionPane.showConfirmDialog(
+                this,
+                "Bạn có muốn đăng xuất?",
+                "Xác nhận",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (chon == JOptionPane.YES_OPTION) {
+
+            new LoginFrame().setVisible(true);
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            frame.dispose();
+        }
+    }//GEN-LAST:event_lblDangXuatMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel lblChuDe;
+    private javax.swing.JLabel lblDangXuat;
+    private javax.swing.JLabel lblHoc1ChuDe;
+    private javax.swing.JLabel lblLamBaiKiemTra;
+    private javax.swing.JLabel lblTenAcc;
+    private javax.swing.JLabel lblTongQuan;
     // End of variables declaration//GEN-END:variables
 }

@@ -26,31 +26,31 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblSuaChuDe" min="-2" pref="153" max="-2" attributes="0"/>
+                          <Component id="lblSuaTaiKhoan" min="-2" pref="153" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblThemChuDe" min="-2" pref="153" max="-2" attributes="0"/>
+                                      <Component id="lblThemTaiKhoan" min="-2" pref="153" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="lblXoaChuDe" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
+                                  <Component id="lblXoaTaiKhoan" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="lblTimKiem" pref="153" max="32767" attributes="0"/>
-                                  <Component id="txtTimChuDe" max="32767" attributes="0"/>
+                                  <Component id="txtTimTaiKhoan" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jComboBox1" min="-2" pref="111" max="-2" attributes="0"/>
+                                      <Component id="comboboxRole" min="-2" pref="111" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                                      <Component id="lblTimKiem1" min="-2" pref="130" max="-2" attributes="0"/>
+                                      <Component id="lblLocTheoRole" min="-2" pref="130" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -73,11 +73,11 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jLabel7" min="-2" pref="218" max="-2" attributes="0"/>
+                              <Component id="lblSoLuongAcc" min="-2" pref="218" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel9" min="-2" pref="116" max="-2" attributes="0"/>
+                              <Component id="lblSoLuongAdmin" min="-2" pref="116" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -92,28 +92,28 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblThemChuDe" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblThemTaiKhoan" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtTimChuDe" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTimTaiKhoan" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboboxRole" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="lblSuaChuDe" min="-2" max="-2" attributes="0"/>
+              <Component id="lblSuaTaiKhoan" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblXoaChuDe" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblXoaTaiKhoan" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblTimKiem" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblTimKiem1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblLocTheoRole" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblSapXepTheoAlphabet" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="122" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblSoLuongAcc" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblSoLuongAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
@@ -123,7 +123,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblThemChuDe">
+    <Component class="javax.swing.JLabel" name="lblThemTaiKhoan">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/icon/plus-solid.png"/>
@@ -134,10 +134,10 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblThemChuDeMousePressed"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblThemTaiKhoanMousePressed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblSuaChuDe">
+    <Component class="javax.swing.JLabel" name="lblSuaTaiKhoan">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/icon/pen-to-square-regular.png"/>
@@ -148,10 +148,10 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblSuaChuDeMousePressed"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblSuaTaiKhoanMousePressed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblXoaChuDe">
+    <Component class="javax.swing.JLabel" name="lblXoaTaiKhoan">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/icon/trash-can-regular (1).png"/>
@@ -162,15 +162,15 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblXoaChuDeMousePressed"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblXoaTaiKhoanMousePressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m t&#xe0;i kho&#x1ea3;n:"/>
+        <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m username:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtTimChuDe">
+    <Component class="javax.swing.JTextField" name="txtTimTaiKhoan">
     </Component>
     <Component class="javax.swing.JLabel" name="lblTimKiem">
       <Properties>
@@ -188,7 +188,7 @@
         <Property name="text" type="java.lang.String" value="L&#x1ecd;c theo role:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="comboboxRole">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="2">
@@ -201,7 +201,7 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblTimKiem1">
+    <Component class="javax.swing.JLabel" name="lblLocTheoRole">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/icon/filter-solid.png"/>
@@ -281,7 +281,7 @@
         <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng t&#xe0;i kho&#x1ea3;n"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel7">
+    <Component class="javax.swing.JLabel" name="lblSoLuongAcc">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="UTM HelvetIns" size="36" style="0"/>
@@ -297,7 +297,7 @@
         <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng admin"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel9">
+    <Component class="javax.swing.JLabel" name="lblSoLuongAdmin">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="UTM HelvetIns" size="36" style="0"/>

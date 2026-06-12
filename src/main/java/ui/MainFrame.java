@@ -7,13 +7,16 @@ package ui;
 // dạng menu bên trái, content bên phải
 
 import java.awt.CardLayout;
-import javax.swing.AbstractButton;
+import ui.panel.BaiKiemTra;
+import ui.panel.ChuDe;
 import ui.panel.DanhSachTKDaLamChuDePanel;
+import ui.panel.HocTu;
 import ui.panel.MenuAdminPanel;
 import ui.panel.MenuUserPanel;
 import ui.panel.QuanLyChuDe;
 import ui.panel.QuanLyTaiKhoan;
 import ui.panel.QuanLyTu;
+import ui.panel.TongQuan;
 
 // đây là panel chính, chỉ chia layout
 // còn những thứ đổ lên layout sẽ được thiết kế sau
@@ -41,8 +44,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void khoiTaoCardLayout() {
 
-        MenuAdminPanel menu = new MenuAdminPanel(this);
-        if (1 == 1) { // viết điều kiện kiểm tra người dùng có vai trò không phải admin
+        
+        if (!(1 == 1)) { // viết điều kiện kiểm tra người dùng có vai trò là admin
+            MenuAdminPanel menu = new MenuAdminPanel(this);
             cardLayout = (CardLayout) informationPanel.getLayout();
 
             menuPanel.add(menu);
@@ -52,8 +56,17 @@ public class MainFrame extends javax.swing.JFrame {
             informationPanel.add(new QuanLyTaiKhoan(), "QuanLyTaiKhoan");
             informationPanel.add(new DanhSachTKDaLamChuDePanel(), "DanhSachTKDaLamChuDePanel");
             cardLayout.show(informationPanel, "QuanLyChuDe");
-        } else { // admin
-            System.out.println("");
+        } else { // ko là admin
+            MenuUserPanel menu = new MenuUserPanel(this);
+            cardLayout = (CardLayout) informationPanel.getLayout();
+
+            menuPanel.add(menu);
+
+            informationPanel.add(new TongQuan(), "TongQuan");
+            informationPanel.add(new ChuDe(), "ChuDe");
+            informationPanel.add(new HocTu(), "HocTu");
+            informationPanel.add(new BaiKiemTra(), "BaiKiemTra");
+            cardLayout.show(informationPanel, "TongQuan");
 
         }
 

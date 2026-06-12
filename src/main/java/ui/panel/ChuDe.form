@@ -36,7 +36,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="lblTenChuDe" max="32767" attributes="0"/>
+                          <Component id="lblChuDe" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
@@ -44,20 +44,15 @@
                           <Component id="lblSoLuongTuTrongChuDe" min="-2" pref="179" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lblThemTuVaoChuDe" alignment="0" max="32767" attributes="0"/>
-                              <Component id="lblSuaTuTrongChuDe" alignment="0" max="32767" attributes="0"/>
-                              <Component id="lblXoaTuTrongChuDe" max="32767" attributes="0"/>
-                              <Component id="lblXuatTXT" alignment="0" min="-2" pref="267" max="-2" attributes="0"/>
-                          </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="353" max="-2" attributes="0"/>
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                  <Component id="txtTimTu" min="-2" pref="218" max="-2" attributes="0"/>
+                                  <Component id="txtTimChuDe" min="-2" pref="218" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblXuatTXT" min="-2" pref="267" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
                                   <Component id="lblTimKiem" min="-2" pref="153" max="-2" attributes="0"/>
                               </Group>
@@ -89,30 +84,20 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblThemTuVaoChuDe" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtTimTu" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTimChuDe" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="lblSuaTuTrongChuDe" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblTimKiem" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblSapXepTheoAlphabet" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblXuatTXT" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="lblXoaTuTrongChuDe" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="62" pref="62" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblTenChuDe" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblChuDe" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -131,7 +116,7 @@
                       <Component id="jScrollPane1" min="-2" pref="360" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="47" max="32767" attributes="0"/>
+              <EmptySpace pref="48" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -152,54 +137,12 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblThemTuVaoChuDe">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/icon/plus-solid.png"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Th&#xea;m t&#x1eeb; m&#x1edb;i v&#xe0;o ch&#x1ee7; &#x111;&#x1ec1;"/>
-        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Hand Cursor"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblThemTuVaoChuDeMousePressed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblSuaTuTrongChuDe">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/icon/pen-to-square-regular.png"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="S&#x1eed;a 1 t&#x1eeb; trong ch&#x1ee7; &#x111;&#x1ec1;"/>
-        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Hand Cursor"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblSuaTuTrongChuDeMousePressed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblXoaTuTrongChuDe">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/icon/trash-can-regular (1).png"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="X&#xf3;a 1 t&#x1eeb; trong ch&#x1ee7; &#x111;&#x1ec1; "/>
-        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Hand Cursor"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblXoaTuTrongChuDeMousePressed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m t&#x1eeb;:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtTimTu">
+    <Component class="javax.swing.JTextField" name="txtTimChuDe">
     </Component>
     <Component class="javax.swing.JLabel" name="lblTimKiem">
       <Properties>
@@ -240,7 +183,7 @@
         <Property name="text" type="java.lang.String" value="Ch&#x1ee7; &#x111;&#x1ec1;:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblTenChuDe">
+    <Component class="javax.swing.JLabel" name="lblChuDe">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="ff" type="rgb"/>
