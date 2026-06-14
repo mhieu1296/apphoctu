@@ -22,7 +22,7 @@ where mysqld.exe > nul 2>nul
 if %errorlevel% neq 0 goto check_default_paths
 for /f "tokens=*" %%i in ('where mysqld.exe') do (
     set "MYSQL_BIN=%%i"
-    goto start_mysql
+    goto prepare_db_dir
 )
 
 :check_default_paths
@@ -30,13 +30,29 @@ for /f "tokens=*" %%i in ('where mysqld.exe') do (
 for %%v in (8.4 8.0 8.1 8.2 8.3 9.0 9.1) do (
     if exist "C:\Program Files\MySQL\MySQL Server %%v\bin\mysqld.exe" (
         set "MYSQL_BIN=C:\Program Files\MySQL\MySQL Server %%v\bin\mysqld.exe"
-        goto start_mysql
+        goto prepare_db_dir
     )
 )
 goto no_mysql_bin
 
-:start_mysql
+:prepare_db_dir
 if not defined MYSQL_BIN goto no_mysql_bin
+
+:: Tu dong tao thu muc db_data neu chua co
+if not exist "%DATA_DIR%" (
+    echo [INFO] Khong tim thay thu muc db_data. Dang tao moi...
+    mkdir "%DATA_DIR%"
+)
+
+:: Tu dong khoi tao database he thong neu thu muc trong rong
+if not exist "%DATA_DIR%\mysql" (
+    echo [INFO] Dang khoi tao database he thong (Database Initialization)...
+    echo [INFO] Vui long cho trong giay lat...
+    "%MYSQL_BIN%" --initialize-insecure --datadir="%DATA_DIR%"
+    echo [SUCCESS] Khoi tao du lieu he thong hoan tat!
+)
+
+:start_mysql
 echo [INFO] Tim thay MySQL tai: "%MYSQL_BIN%"
 echo Dang khoi chay MySQL Server cuc bo...
 start "" /b "%MYSQL_BIN%" --datadir="%DATA_DIR%"
