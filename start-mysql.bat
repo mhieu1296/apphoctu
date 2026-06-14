@@ -1,21 +1,56 @@
 @echo off
-chcp 65001 > nul
+setlocal enabledelayedexpansion
+
 echo ==================================================
-echo   KHỞI CHẠY MYSQL SERVER APPHOCTU
+echo   KHOI CHAY MYSQL SERVER APPHOCTU CUC BO
 echo ==================================================
 echo.
 
-set MYSQL_BIN="C:\Program Files\MySQL\MySQL Server 8.4\bin\mysqld.exe"
-set DATA_DIR="c:\Users\Kyz\Documents\LTJava\db_data"
+:: 1. Xac dinh thu muc luu tru DB cuc bo (su dung duong dan tuong doi)
+set "DATA_DIR=%~dp0db_data"
 
-tasklist /fi "imagename eq mysqld.exe" | find /i "mysqld.exe" > nul
-if %errorlevel% equ 0 (
-    echo [INFO] MySQL Server đang chạy sẵn rồi.
-) else (
-    echo Đang khởi chạy MySQL Server...
-    start "" /b %MYSQL_BIN% --datadir=%DATA_DIR%
-    echo [SUCCESS] Đã kích hoạt chạy ngầm MySQL Server!
+:: 2. Kiem tra xem MySQL da chay tren cong 3306 chua
+netstat -ano | findstr "3306" > nul
+if %errorlevel% equ 0 goto mysql_is_running
+
+:: Neu chua chay, tim kiem tep mysqld.exe
+echo [INFO] MySQL chua chay. Dang tu dong tim kiem mysqld.exe...
+set "MYSQL_BIN="
+
+:: Thu tim trong bien moi truong PATH
+where mysqld.exe > nul 2>nul
+if %errorlevel% neq 0 goto check_default_paths
+for /f "tokens=*" %%i in ('where mysqld.exe') do (
+    set "MYSQL_BIN=%%i"
+    goto start_mysql
 )
 
+:check_default_paths
+:: Thu tim o cac duong dan cai dat mac dinh pho bien
+for %%v in (8.4 8.0 8.1 8.2 8.3 9.0 9.1) do (
+    if exist "C:\Program Files\MySQL\MySQL Server %%v\bin\mysqld.exe" (
+        set "MYSQL_BIN=C:\Program Files\MySQL\MySQL Server %%v\bin\mysqld.exe"
+        goto start_mysql
+    )
+)
+goto no_mysql_bin
+
+:start_mysql
+if not defined MYSQL_BIN goto no_mysql_bin
+echo [INFO] Tim thay MySQL tai: "%MYSQL_BIN%"
+echo Dang khoi chay MySQL Server cuc bo...
+start "" /b "%MYSQL_BIN%" --datadir="%DATA_DIR%"
+echo [SUCCESS] Da kick hoat chay ngam MySQL Server!
+goto end
+
+:mysql_is_running
+echo [INFO] Phat hien MySQL dang hoat dong tren cong 3306.
+goto end
+
+:no_mysql_bin
+echo [ERROR] Khong tim thay mysqld.exe.
+echo Vui long cai dat MySQL hoac bat service MySQL truoc.
+
+:end
 echo.
 pause
