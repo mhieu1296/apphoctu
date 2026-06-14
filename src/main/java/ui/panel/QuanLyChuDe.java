@@ -46,7 +46,7 @@ public class QuanLyChuDe extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableChuDe = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblSoLuongChuDe = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -132,9 +132,9 @@ public class QuanLyChuDe extends javax.swing.JPanel {
 
         jLabel1.setText("Số lượng chủ đề:");
 
-        jLabel2.setFont(new java.awt.Font("UTM HelvetIns", 0, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 204, 102));
-        jLabel2.setText("1");
+        lblSoLuongChuDe.setFont(new java.awt.Font("UTM HelvetIns", 0, 36)); // NOI18N
+        lblSoLuongChuDe.setForeground(new java.awt.Color(0, 204, 102));
+        lblSoLuongChuDe.setText("1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -168,7 +168,7 @@ public class QuanLyChuDe extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblSoLuongChuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(766, 766, 766)))
                         .addGap(41, 41, 41)))
                 .addContainerGap())
@@ -192,7 +192,7 @@ public class QuanLyChuDe extends javax.swing.JPanel {
                 .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(lblSoLuongChuDe))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(89, Short.MAX_VALUE))
@@ -235,7 +235,7 @@ public class QuanLyChuDe extends javax.swing.JPanel {
         int row = tableChuDe.getSelectedRow();
 
         if (row == -1) {
-            System.out.println("Chưa chọn dòng nào!");
+            JOptionPane.showMessageDialog(null, "Phải chọn 1 dòng trong bảng!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
@@ -283,11 +283,11 @@ public class QuanLyChuDe extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblSapXepTheoAlphabet;
+    private javax.swing.JLabel lblSoLuongChuDe;
     private javax.swing.JLabel lblSuaChuDe;
     private javax.swing.JLabel lblThemChuDe;
     private javax.swing.JLabel lblTimKiem;

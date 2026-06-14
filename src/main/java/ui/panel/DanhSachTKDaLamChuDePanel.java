@@ -26,17 +26,17 @@ public class DanhSachTKDaLamChuDePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboboxChuDe = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableDanhSachTKDaLamChuDe = new javax.swing.JTable();
         lblTimKiem = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtTimChuDe = new javax.swing.JTextField();
+        txtTimMaTaiKhoan = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         lblSapXepTheoAlphabet = new javax.swing.JLabel();
-        lblSapXepTheoAlphabet1 = new javax.swing.JLabel();
+        lblSapXepTheoDiemSo = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -45,7 +45,7 @@ public class DanhSachTKDaLamChuDePanel extends javax.swing.JPanel {
 
         jLabel6.setText("Danh sách tài khoản đã làm bài kiểm tra của chủ đề");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableDanhSachTKDaLamChuDe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -56,7 +56,7 @@ public class DanhSachTKDaLamChuDePanel extends javax.swing.JPanel {
                 "STT", "Mã kết quả", "Mã tài khoản", "Mã chủ đề", "Điểm số", "Tổng số câu", "Thời điểm làm bài"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableDanhSachTKDaLamChuDe);
 
         lblTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/magnifying-glass-solid.png"))); // NOI18N
         lblTimKiem.setText("Tìm kiếm");
@@ -71,9 +71,9 @@ public class DanhSachTKDaLamChuDePanel extends javax.swing.JPanel {
         lblSapXepTheoAlphabet.setText("Sắp xếp");
         lblSapXepTheoAlphabet.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        lblSapXepTheoAlphabet1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/arrow-down-a-z-solid.png"))); // NOI18N
-        lblSapXepTheoAlphabet1.setText("Sắp xếp");
-        lblSapXepTheoAlphabet1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblSapXepTheoDiemSo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/arrow-down-a-z-solid.png"))); // NOI18N
+        lblSapXepTheoDiemSo.setText("Sắp xếp");
+        lblSapXepTheoDiemSo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Sắp xếp theo điểm số");
@@ -92,13 +92,13 @@ public class DanhSachTKDaLamChuDePanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(comboboxChuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lblTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtTimChuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtTimMaTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -106,7 +106,7 @@ public class DanhSachTKDaLamChuDePanel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblSapXepTheoAlphabet1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(lblSapXepTheoDiemSo, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 34, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -122,7 +122,7 @@ public class DanhSachTKDaLamChuDePanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel5)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(comboboxChuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -130,11 +130,11 @@ public class DanhSachTKDaLamChuDePanel extends javax.swing.JPanel {
                                         .addGap(80, 80, 80))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(71, 71, 71)
-                                        .addComponent(lblSapXepTheoAlphabet1)))
+                                        .addComponent(lblSapXepTheoDiemSo)))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel4)
-                                        .addComponent(txtTimChuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtTimMaTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(55, 55, 55)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(lblTimKiem)
@@ -149,17 +149,17 @@ public class DanhSachTKDaLamChuDePanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> comboboxChuDe;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblSapXepTheoAlphabet;
-    private javax.swing.JLabel lblSapXepTheoAlphabet1;
+    private javax.swing.JLabel lblSapXepTheoDiemSo;
     private javax.swing.JLabel lblTimKiem;
-    private javax.swing.JTextField txtTimChuDe;
+    private javax.swing.JTable tableDanhSachTKDaLamChuDe;
+    private javax.swing.JTextField txtTimMaTaiKhoan;
     // End of variables declaration//GEN-END:variables
 }

@@ -26,9 +26,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                      <Component id="lblChuDe" min="-2" pref="74" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="lblThemChuDe" min="-2" pref="74" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="lblHuyThemChuDe" min="-2" pref="74" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -66,8 +66,8 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblChuDe" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="lblThemChuDe" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                  <Component id="lblHuyThemChuDe" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="37" max="32767" attributes="0"/>
           </Group>
@@ -98,7 +98,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtChuDe">
     </Component>
-    <Component class="javax.swing.JLabel" name="lblChuDe">
+    <Component class="javax.swing.JLabel" name="lblThemChuDe">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="66" green="cd" red="0" type="rgb"/>
@@ -114,10 +114,10 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
       <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblChuDeMousePressed"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblThemChuDeMousePressed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblThemChuDe">
+    <Component class="javax.swing.JLabel" name="lblHuyThemChuDe">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="ff" type="rgb"/>
@@ -133,7 +133,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
       <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblThemChuDeMousePressed"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblHuyThemChuDeMousePressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">

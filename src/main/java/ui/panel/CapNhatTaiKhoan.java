@@ -4,7 +4,9 @@
  */
 package ui.panel;
 
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -37,8 +39,8 @@ public class CapNhatTaiKhoan extends javax.swing.JPanel {
         txtMatKhau = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         comboboxVaiTro = new javax.swing.JComboBox<>();
-        lblTu = new javax.swing.JLabel();
-        lblHuy = new javax.swing.JLabel();
+        lblThemTu = new javax.swing.JLabel();
+        lblHuyThemTu = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -65,27 +67,27 @@ public class CapNhatTaiKhoan extends javax.swing.JPanel {
 
         comboboxVaiTro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Admin" }));
 
-        lblTu.setBackground(new java.awt.Color(0, 205, 102));
-        lblTu.setForeground(new java.awt.Color(255, 255, 255));
-        lblTu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTu.setText("Cập nhật");
-        lblTu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblTu.setOpaque(true);
-        lblTu.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblThemTu.setBackground(new java.awt.Color(0, 205, 102));
+        lblThemTu.setForeground(new java.awt.Color(255, 255, 255));
+        lblThemTu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblThemTu.setText("Cập nhật");
+        lblThemTu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblThemTu.setOpaque(true);
+        lblThemTu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                lblTuMousePressed(evt);
+                lblThemTuMousePressed(evt);
             }
         });
 
-        lblHuy.setBackground(new java.awt.Color(255, 0, 0));
-        lblHuy.setForeground(new java.awt.Color(255, 255, 255));
-        lblHuy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblHuy.setText("Hủy");
-        lblHuy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblHuy.setOpaque(true);
-        lblHuy.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblHuyThemTu.setBackground(new java.awt.Color(255, 0, 0));
+        lblHuyThemTu.setForeground(new java.awt.Color(255, 255, 255));
+        lblHuyThemTu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHuyThemTu.setText("Hủy");
+        lblHuyThemTu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHuyThemTu.setOpaque(true);
+        lblHuyThemTu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                lblHuyMousePressed(evt);
+                lblHuyThemTuMousePressed(evt);
             }
         });
 
@@ -117,9 +119,9 @@ public class CapNhatTaiKhoan extends javax.swing.JPanel {
                                     .addComponent(comboboxVaiTro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(188, 188, 188)
-                        .addComponent(lblTu, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblThemTu, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
-                        .addComponent(lblHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblHuyThemTu, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -144,8 +146,8 @@ public class CapNhatTaiKhoan extends javax.swing.JPanel {
                     .addComponent(comboboxVaiTro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTu, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblThemTu, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHuyThemTu, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 101, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -161,7 +163,7 @@ public class CapNhatTaiKhoan extends javax.swing.JPanel {
         // không hiển thị mật khẩu lên khung nhập vì cho phép admin đặt lại sau
     }
     
-    private void lblTuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTuMousePressed
+    private void lblThemTuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemTuMousePressed
         // TODO add your handling code here:
         String maTK = txtMaTaiKhoan.getText(), username = txtUsername.getText(), matkhau = txtMatKhau.getText();
         if (maTK == "" || username == "") {
@@ -171,11 +173,13 @@ public class CapNhatTaiKhoan extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Thêm thành công!", "Thông tin", JOptionPane.INFORMATION_MESSAGE);
 
         }
-    }//GEN-LAST:event_lblTuMousePressed
+    }//GEN-LAST:event_lblThemTuMousePressed
 
-    private void lblHuyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHuyMousePressed
+    private void lblHuyThemTuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHuyThemTuMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_lblHuyMousePressed
+        JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
+            frame.dispose();
+    }//GEN-LAST:event_lblHuyThemTuMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -185,8 +189,8 @@ public class CapNhatTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel lblHuy;
-    private javax.swing.JLabel lblTu;
+    private javax.swing.JLabel lblHuyThemTu;
+    private javax.swing.JLabel lblThemTu;
     private javax.swing.JTextField txtMaTaiKhoan;
     private javax.swing.JTextField txtMatKhau;
     private javax.swing.JTextField txtUsername;

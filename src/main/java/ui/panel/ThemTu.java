@@ -4,7 +4,9 @@
  */
 package ui.panel;
 
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -157,6 +159,8 @@ public class ThemTu extends javax.swing.JPanel {
 
     private void lblHuyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHuyMousePressed
         // TODO add your handling code here:
+        JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
+            frame.dispose();
     }//GEN-LAST:event_lblHuyMousePressed
 
 

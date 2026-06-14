@@ -17,7 +17,7 @@ import ui.frame.LoginFrame;
  */
 public class MenuAdminPanel extends javax.swing.JPanel {
 
-    private MainFrame mainframe;
+    private MainFrame mainframe ;
     private CardLayout cardlayout;
 
     /**
@@ -43,12 +43,12 @@ public class MenuAdminPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        lblTenAcc = new javax.swing.JLabel();
+        lblQuanLyChuDe = new javax.swing.JLabel();
+        lblQuanLyTu = new javax.swing.JLabel();
+        lblQuanLyTaiKhoan = new javax.swing.JLabel();
+        lblDSTKDaLamChuDe = new javax.swing.JLabel();
+        lblDangXuat = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 204, 102));
 
@@ -57,63 +57,63 @@ public class MenuAdminPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Xin chào");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Tên admin");
+        lblTenAcc.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTenAcc.setForeground(new java.awt.Color(255, 255, 255));
+        lblTenAcc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTenAcc.setText("Tên admin");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/list.png"))); // NOI18N
-        jLabel4.setText("QUẢN LÝ CHỦ ĐỀ");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblQuanLyChuDe.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblQuanLyChuDe.setForeground(new java.awt.Color(255, 255, 255));
+        lblQuanLyChuDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/list.png"))); // NOI18N
+        lblQuanLyChuDe.setText("QUẢN LÝ CHỦ ĐỀ");
+        lblQuanLyChuDe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblQuanLyChuDe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel4MousePressed(evt);
+                lblQuanLyChuDeMousePressed(evt);
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/char.png"))); // NOI18N
-        jLabel5.setText("QUẢN LÝ TỪ");
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblQuanLyTu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblQuanLyTu.setForeground(new java.awt.Color(255, 255, 255));
+        lblQuanLyTu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/char.png"))); // NOI18N
+        lblQuanLyTu.setText("QUẢN LÝ TỪ");
+        lblQuanLyTu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblQuanLyTu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel5MousePressed(evt);
+                lblQuanLyTuMousePressed(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user.png"))); // NOI18N
-        jLabel6.setText("QUẢN LÝ TÀI KHOẢN");
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblQuanLyTaiKhoan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblQuanLyTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
+        lblQuanLyTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user.png"))); // NOI18N
+        lblQuanLyTaiKhoan.setText("QUẢN LÝ TÀI KHOẢN");
+        lblQuanLyTaiKhoan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblQuanLyTaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel6MousePressed(evt);
+                lblQuanLyTaiKhoanMousePressed(evt);
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/poll.png"))); // NOI18N
-        jLabel7.setText("DS TK ĐÃ LÀM CHỦ ĐỀ");
-        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblDSTKDaLamChuDe.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblDSTKDaLamChuDe.setForeground(new java.awt.Color(255, 255, 255));
+        lblDSTKDaLamChuDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/poll.png"))); // NOI18N
+        lblDSTKDaLamChuDe.setText("DS TK ĐÃ LÀM CHỦ ĐỀ");
+        lblDSTKDaLamChuDe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblDSTKDaLamChuDe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel7MousePressed(evt);
+                lblDSTKDaLamChuDeMousePressed(evt);
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
-        jLabel8.setText("ĐĂNG XUẤT");
-        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblDangXuat.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblDangXuat.setForeground(new java.awt.Color(255, 255, 255));
+        lblDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
+        lblDangXuat.setText("ĐĂNG XUẤT");
+        lblDangXuat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblDangXuat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel8MousePressed(evt);
+                lblDangXuatMousePressed(evt);
             }
         });
 
@@ -129,12 +129,12 @@ public class MenuAdminPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(lblQuanLyChuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblQuanLyTu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblQuanLyTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblDSTKDaLamChuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTenAcc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblDangXuat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -143,39 +143,43 @@ public class MenuAdminPanel extends javax.swing.JPanel {
                 .addGap(76, 76, 76)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(lblTenAcc)
                 .addGap(69, 69, 69)
-                .addComponent(jLabel4)
+                .addComponent(lblQuanLyChuDe)
                 .addGap(32, 32, 32)
-                .addComponent(jLabel5)
+                .addComponent(lblQuanLyTu)
                 .addGap(32, 32, 32)
-                .addComponent(jLabel6)
+                .addComponent(lblQuanLyTaiKhoan)
                 .addGap(32, 32, 32)
-                .addComponent(jLabel7)
+                .addComponent(lblDSTKDaLamChuDe)
                 .addGap(32, 32, 32)
-                .addComponent(jLabel8)
+                .addComponent(lblDangXuat)
                 .addContainerGap(266, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
+    private void lblQuanLyChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuanLyChuDeMousePressed
+        
         mainframe.showPanel("QuanLyChuDe");
-    }//GEN-LAST:event_jLabel4MousePressed
+    }//GEN-LAST:event_lblQuanLyChuDeMousePressed
 
-    private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
+    private void lblQuanLyTuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuanLyTuMousePressed
+        if (mainframe == null) {
+            System.out.println("mainframe NULL");
+        }
         mainframe.showPanel("QuanLyTu");
-    }//GEN-LAST:event_jLabel5MousePressed
+    }//GEN-LAST:event_lblQuanLyTuMousePressed
 
-    private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
+    private void lblQuanLyTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuanLyTaiKhoanMousePressed
         mainframe.showPanel("QuanLyTaiKhoan");
-    }//GEN-LAST:event_jLabel6MousePressed
+    }//GEN-LAST:event_lblQuanLyTaiKhoanMousePressed
 
-    private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed
+    private void lblDSTKDaLamChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDSTKDaLamChuDeMousePressed
         // TODO add your handling code here:
         mainframe.showPanel("DanhSachTKDaLamChuDePanel");
-    }//GEN-LAST:event_jLabel7MousePressed
+    }//GEN-LAST:event_lblDSTKDaLamChuDeMousePressed
 
-    private void jLabel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MousePressed
+    private void lblDangXuatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDangXuatMousePressed
         int chon = JOptionPane.showConfirmDialog(
                 this,
                 "Bạn có muốn đăng xuất?",
@@ -189,16 +193,16 @@ public class MenuAdminPanel extends javax.swing.JPanel {
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
             frame.dispose();
         }
-    }//GEN-LAST:event_jLabel8MousePressed
+    }//GEN-LAST:event_lblDangXuatMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel lblDSTKDaLamChuDe;
+    private javax.swing.JLabel lblDangXuat;
+    private javax.swing.JLabel lblQuanLyChuDe;
+    private javax.swing.JLabel lblQuanLyTaiKhoan;
+    private javax.swing.JLabel lblQuanLyTu;
+    private javax.swing.JLabel lblTenAcc;
     // End of variables declaration//GEN-END:variables
 }
