@@ -40,7 +40,7 @@ Chào mừng bạn đến với **AppHocTu**, ứng dụng hỗ trợ học tậ
    private static final String HOST = "localhost";
    private static final String PORT = "3306";
    private static final String USER = "root";
-   private static final String PASSWORD = "mật_khẩu_mysql_của_bạn";
+   private static final String PASSWORD = "root";
    ```
 3. **Chạy ứng dụng**: Biên dịch và chạy bằng Maven hoặc mở dự án bằng IDE (IntelliJ, VSCode, NetBeans) và chạy tệp `main.AppHocTu`. Cơ sở dữ liệu và dữ liệu mẫu sẽ tự động được khởi tạo ngay khi ứng dụng kết nối lần đầu.
 
