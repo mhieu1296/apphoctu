@@ -1,58 +1,55 @@
 @echo off
-chcp 65001 > nul
 setlocal enabledelayedexpansion
 
 echo ==================================================
-echo   KHỞI CHẠY MYSQL SERVER APPHOCTU CỤC BỘ
+echo   KHOI CHAY MYSQL SERVER APPHOCTU CUC BO
 echo ==================================================
 echo.
 
-:: 1. Xác định thư mục lưu trữ DB cục bộ (sử dụng đường dẫn tương đối)
+:: 1. Xac dinh thu muc luu tru DB cuc bo (su dung duong dan tuong doi)
 set "DATA_DIR=%~dp0db_data"
 
-:: 2. Kiểm tra xem MySQL đã chạy trên cổng 3306 chưa
-netstat -ano | findstr "127.0.0.1:3306" > nul
-if %errorlevel% equ 0 (
-    echo [INFO] Phát hiện dịch vụ MySQL đã hoạt động sẵn trên cổng 3306.
-    goto end
-)
-netstat -ano | findstr "[::]:3306" > nul
-if %errorlevel% equ 0 (
-    echo [INFO] Phát hiện dịch vụ MySQL đã hoạt động sẵn trên cổng 3306.
-    goto end
-)
+:: 2. Kiem tra xem MySQL da chay tren cong 3306 chua
+netstat -ano | findstr "3306" > nul
+if %errorlevel% equ 0 goto mysql_is_running
 
-:: Nếu chưa chạy, tìm kiếm tệp mysqld.exe
-echo [INFO] MySQL chưa chạy. Đang tự động tìm kiếm mysqld.exe trên hệ thống...
+:: Neu chua chay, tim kiem tep mysqld.exe
+echo [INFO] MySQL chua chay. Dang tu dong tim kiem mysqld.exe...
 set "MYSQL_BIN="
 
-:: Thử tìm trong biến môi trường PATH
+:: Thu tim trong bien moi truong PATH
 where mysqld.exe > nul 2>nul
-if %errorlevel% equ 0 (
-    for /f "tokens=*" %%i in ('where mysqld.exe') do (
-        set "MYSQL_BIN=%%i"
-        goto start_mysql
-    )
+if %errorlevel% neq 0 goto check_default_paths
+for /f "tokens=*" %%i in ('where mysqld.exe') do (
+    set "MYSQL_BIN=%%i"
+    goto start_mysql
 )
 
-:: Thử tìm ở các đường dẫn cài đặt mặc định phổ biến
+:check_default_paths
+:: Thu tim o cac duong dan cai dat mac dinh pho bien
 for %%v in (8.4 8.0 8.1 8.2 8.3 9.0 9.1) do (
     if exist "C:\Program Files\MySQL\MySQL Server %%v\bin\mysqld.exe" (
         set "MYSQL_BIN=C:\Program Files\MySQL\MySQL Server %%v\bin\mysqld.exe"
         goto start_mysql
     )
 )
+goto no_mysql_bin
 
 :start_mysql
-if defined MYSQL_BIN (
-    echo [INFO] Tìm thấy MySQL tại: "!MYSQL_BIN!"
-    echo Đang khởi chạy MySQL Server cục bộ trỏ đến thư mục dữ liệu: "%DATA_DIR%"...
-    start "" /b "!MYSQL_BIN!" --datadir="%DATA_DIR%"
-    echo [SUCCESS] Đã kích hoạt chạy ngầm MySQL Server!
-) else (
-    echo [ERROR] Không tìm thấy mysqld.exe cài đặt trên hệ thống. 
-    echo Vui lòng cài đặt MySQL hoặc khởi động dịch vụ MySQL trên máy tính của bạn trước.
-)
+if not defined MYSQL_BIN goto no_mysql_bin
+echo [INFO] Tim thay MySQL tai: "%MYSQL_BIN%"
+echo Dang khoi chay MySQL Server cuc bo...
+start "" /b "%MYSQL_BIN%" --datadir="%DATA_DIR%"
+echo [SUCCESS] Da kick hoat chay ngam MySQL Server!
+goto end
+
+:mysql_is_running
+echo [INFO] Phat hien MySQL dang hoat dong tren cong 3306.
+goto end
+
+:no_mysql_bin
+echo [ERROR] Khong tim thay mysqld.exe.
+echo Vui long cai dat MySQL hoac bat service MySQL truoc.
 
 :end
 echo.

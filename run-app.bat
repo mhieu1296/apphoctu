@@ -1,97 +1,98 @@
 @echo off
-chcp 65001 > nul
 setlocal enabledelayedexpansion
 
 echo ==================================================
-echo   KHỞI ĐỘNG ỨNG DỤNG APPHOCTU (JAVA SWING + MYSQL)
+echo   KHOI DONG UNG DUNG APPHOCTU (JAVA SWING + MYSQL)
 echo ==================================================
 echo.
 
-:: 1. Xác định thư mục lưu trữ DB cục bộ (sử dụng đường dẫn tương đối)
+:: 1. Xac dinh thu muc db_data (duong dan tuong doi)
 set "DATA_DIR=%~dp0db_data"
 
-:: 2. Kiểm tra xem MySQL đã chạy trên cổng 3306 chưa
-netstat -ano | findstr "127.0.0.1:3306" > nul
-if %errorlevel% equ 0 (
-    echo [INFO] Phát hiện dịch vụ MySQL đã hoạt động sẵn trên cổng 3306.
-    goto check_maven
-)
-netstat -ano | findstr "[::]:3306" > nul
-if %errorlevel% equ 0 (
-    echo [INFO] Phát hiện dịch vụ MySQL đã hoạt động sẵn trên cổng 3306.
-    goto check_maven
-)
+:: 2. Kiem tra xem MySQL da chay tren cong 3306 chua
+netstat -ano | findstr "3306" > nul
+if %errorlevel% equ 0 goto mysql_is_running
 
-:: Nếu chưa chạy, tìm kiếm tệp mysqld.exe
-echo [INFO] MySQL chưa chạy. Đang tự động tìm kiếm mysqld.exe trên hệ thống...
+:: Neu chua chay, tim kiem file mysqld.exe
+echo [INFO] MySQL chua chay. Dang tim kiem file mysqld.exe...
 set "MYSQL_BIN="
 
-:: Thử tìm trong biến môi trường PATH
+:: Thu tim trong bien moi truong PATH
 where mysqld.exe > nul 2>nul
-if %errorlevel% equ 0 (
-    for /f "tokens=*" %%i in ('where mysqld.exe') do (
-        set "MYSQL_BIN=%%i"
-        goto start_mysql
-    )
+if %errorlevel% neq 0 goto check_default_paths
+for /f "tokens=*" %%i in ('where mysqld.exe') do (
+    set "MYSQL_BIN=%%i"
+    goto start_mysql
 )
 
-:: Thử tìm ở các đường dẫn cài đặt mặc định phổ biến
+:check_default_paths
+:: Thu tim o cac duong dan cai dat mac dinh pho bien
 for %%v in (8.4 8.0 8.1 8.2 8.3 9.0 9.1) do (
     if exist "C:\Program Files\MySQL\MySQL Server %%v\bin\mysqld.exe" (
         set "MYSQL_BIN=C:\Program Files\MySQL\MySQL Server %%v\bin\mysqld.exe"
         goto start_mysql
     )
 )
+goto check_maven
 
 :start_mysql
-if defined MYSQL_BIN (
-    echo [INFO] Tìm thấy MySQL tại: "!MYSQL_BIN!"
-    echo Đang khởi chạy MySQL Server cục bộ trỏ đến thư mục dữ liệu: "%DATA_DIR%"...
-    start "" /b "!MYSQL_BIN!" --datadir="%DATA_DIR%"
-    :: Đợi 4 giây để MySQL Server khởi động
-    ping 127.0.0.1 -n 5 > nul
-) else (
-    echo [WARNING] Không tìm thấy mysqld.exe cài đặt trên hệ thống. 
-    echo [WARNING] Nếu bạn đã cài đặt MySQL dưới dạng Service, vui lòng đảm bảo Service đang chạy.
-)
+if not defined MYSQL_BIN goto no_mysql_bin
+echo [INFO] Tim thay MySQL tai: "%MYSQL_BIN%"
+echo Dang khoi chay MySQL Server...
+start "" /b "%MYSQL_BIN%" --datadir="%DATA_DIR%"
+:: Doi 4 giay de MySQL khoi dong
+ping 127.0.0.1 -n 5 > nul
+goto check_maven
+
+:no_mysql_bin
+echo [WARNING] Khong tim thay mysqld.exe.
+echo [WARNING] Neu da cai MySQL dang Service, vui long dam bao Service dang chay.
+goto check_maven
+
+:mysql_is_running
+echo [INFO] Phat hien MySQL dang hoat dong tren cong 3306.
 
 :check_maven
 echo.
-echo [INFO] Đang tìm kiếm trình biên dịch Maven (mvn)...
+echo [INFO] Dang tim kiem Maven (mvn)...
 
-:: 1. Kiểm tra lệnh mvn toàn cục
+:: 1. Kiem tra lenh mvn toan cuc
 where mvn > nul 2>nul
-if %errorlevel% equ 0 (
-    echo [INFO] Phát hiện Maven toàn cục (System Path).
-    set "MVN_CMD=mvn"
-    goto run_app
-)
+if %errorlevel% neq 0 goto check_intellij_maven
+echo [INFO] Phat hien Maven toan cuc (System Path).
+set "MVN_CMD=mvn"
+goto run_app
 
-:: 2. Tìm kiếm trong các thư mục của IntelliJ IDEA
-echo [INFO] Không tìm thấy Maven trong biến môi trường. Đang tìm kiếm Maven tích hợp của IntelliJ...
+:check_intellij_maven
+:: 2. Tim kiem trong cac thu mục cua IntelliJ IDEA
+echo [INFO] Khong thay Maven toan cuc. Dang tim Maven trong IntelliJ...
 set "INTELIJ_DIR=C:\Program Files\JetBrains"
-if exist "!INTELIJ_DIR!" (
-    for /r "!INTELIJ_DIR!" %%f in (mvn.cmd) do (
-        if exist "%%f" (
-            set "MVN_CMD=%%f"
-            echo [INFO] Tìm thấy Maven của IntelliJ tại: "!MVN_CMD!"
-            goto run_app
-        )
+if not exist "%INTELIJ_DIR%" goto maven_not_found
+
+for /r "%INTELIJ_DIR%" %%f in (mvn.cmd) do (
+    if exist "%%f" (
+        set "MVN_CMD=%%f"
+        goto found_intellij_maven
     )
 )
+goto maven_not_found
 
-:: Nếu không tìm thấy Maven
-echo [ERROR] Không thể tự động tìm thấy Maven (mvn) trên máy tính của bạn.
+:found_intellij_maven
+echo [INFO] Tim thay Maven tai: "%MVN_CMD%"
+goto run_app
+
+:maven_not_found
+echo [ERROR] Khong tim thay Maven (mvn) tren may tinh.
 echo.
-echo Vui lòng thực hiện một trong các cách sau:
-echo 1. Cài đặt Apache Maven và thêm vào biến môi trường PATH.
-echo 2. Hoặc mở dự án trực tiếp bằng các IDE như NetBeans, VSCode, IntelliJ IDEA và bấm nút "Run" để chạy ứng dụng.
+echo Vui long:
+echo 1. Cai dat Maven va them vao bien PATH.
+echo 2. Hoac mo du an truc tiep bang IDE (VSCode, NetBeans, IntelliJ) va nhan Run.
 echo.
 pause
 exit /b
 
 :run_app
 echo.
-echo [INFO] Đang biên dịch và khởi chạy ứng dụng AppHocTu...
-call "!MVN_CMD!" compile exec:java "-Dexec.mainClass=main.AppHocTu"
+echo [INFO] Dang bien dich va khoi chay ung dung...
+call "%MVN_CMD%" compile exec:java "-Dexec.mainClass=main.AppHocTu"
 pause
