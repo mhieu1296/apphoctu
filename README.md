@@ -27,22 +27,23 @@ Chào mừng bạn đến với **AppHocTu**, ứng dụng hỗ trợ học tậ
 
 ## 3. Hướng Dẫn Cài Đặt & Thiết Lập CSDL
 
-Ứng dụng hỗ trợ hai hình thức khởi động và cấu hình cơ sở dữ liệu tùy thuộc vào nhu cầu của bạn:
+Ứng dụng hỗ trợ cơ chế **tự động khởi tạo cơ sở dữ liệu** (Database Auto-Initialization & Seeding). Khi chạy ứng dụng lần đầu tiên, hệ thống Java sẽ tự động phát hiện, tạo mới cơ sở dữ liệu `apphoctu` (nếu chưa có), thiết lập cấu trúc bảng và nạp sẵn dữ liệu mẫu từ tệp **[database/schema.sql](database/schema.sql)**.
 
-### Cách 1: Thiết lập tự động thông qua Script chạy nhanh (Khuyên dùng trên Windows)
-Dự án được cấu hình sẵn môi trường MySQL cục bộ không cần cài đặt phức tạp:
-1. Đảm bảo bạn đã cài đặt MySQL Server trên máy tính.
-2. Click đúp vào **`run-app.bat`**: File script sẽ tự động kiểm tra, khởi tạo MySQL Server trỏ vào thư mục dữ liệu cục bộ [db_data](db_data), import cơ sở dữ liệu mẫu, tự động biên dịch và chạy ứng dụng.
-3. Nếu muốn khởi chạy riêng dịch vụ cơ sở dữ liệu, bạn có thể click đúp vào **`start-mysql.bat`**.
+### Cách 1: Sử dụng Script chạy nhanh (Windows)
+1. Đảm bảo máy tính đã cài đặt MySQL Server và Maven (hoặc có sẵn IntelliJ).
+2. Click đúp vào **`run-app.bat`**: File script sẽ tự động kiểm tra, khởi động MySQL Server trỏ vào thư mục dữ liệu cục bộ [db_data](db_data), biên dịch và chạy ứng dụng. Dữ liệu sẽ tự động được khởi tạo vào CSDL.
 
-### Cách 2: Thiết lập thủ công (Mọi hệ điều hành)
-1. **Khởi tạo CSDL**: Mở công cụ quản trị MySQL của bạn (MySQL Workbench, phpMyAdmin hoặc CLI) và import tệp tin **[database/schema.sql](database/schema.sql)**. Lệnh này sẽ tự động tạo cơ sở dữ liệu `apphoctu`, thiết lập các bảng và nạp dữ liệu mẫu ban đầu.
-2. **Cấu hình kết nối**: Mở tệp tin **[DBConnection.java](src/main/java/utils/DBConnection.java)** và cập nhật thông tin tài khoản MySQL của bạn:
+### Cách 2: Chạy trực tiếp qua dòng lệnh hoặc IDE (Mọi hệ điều hành)
+1. **Khởi động MySQL**: Hãy đảm bảo dịch vụ MySQL Server trên máy tính của bạn đã được bật.
+2. **Cấu hình kết nối**: Mở tệp tin **[DBConnection.java](src/main/java/utils/DBConnection.java)** và cập nhật tài khoản kết nối MySQL của bạn (nếu có thay đổi):
    ```java
-   private static final String URL = "jdbc:mysql://localhost:3306/apphoctu?useSSL=false&serverTimezone=UTC";
-   private static final String USER = "tên_đăng_nhập";
-   private static final String PASSWORD = "mật_khẩu_của_bạn";
+   private static final String HOST = "localhost";
+   private static final String PORT = "3306";
+   private static final String USER = "root";
+   private static final String PASSWORD = "root";
    ```
+3. **Chạy ứng dụng**: Biên dịch và chạy bằng Maven hoặc mở dự án bằng IDE (IntelliJ, VSCode, NetBeans) và chạy tệp `main.AppHocTu`. Cơ sở dữ liệu và dữ liệu mẫu sẽ tự động được khởi tạo ngay khi ứng dụng kết nối lần đầu.
+
 
 ---
 
