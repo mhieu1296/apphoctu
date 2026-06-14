@@ -22,7 +22,7 @@ where mysqld.exe > nul 2>nul
 if %errorlevel% neq 0 goto check_default_paths
 for /f "tokens=*" %%i in ('where mysqld.exe') do (
     set "MYSQL_BIN=%%i"
-    goto start_mysql
+    goto prepare_db_dir
 )
 
 :check_default_paths
@@ -30,23 +30,34 @@ for /f "tokens=*" %%i in ('where mysqld.exe') do (
 for %%v in (8.4 8.0 8.1 8.2 8.3 9.0 9.1) do (
     if exist "C:\Program Files\MySQL\MySQL Server %%v\bin\mysqld.exe" (
         set "MYSQL_BIN=C:\Program Files\MySQL\MySQL Server %%v\bin\mysqld.exe"
-        goto start_mysql
+        goto prepare_db_dir
     )
 )
 goto check_maven
 
+:prepare_db_dir
+if not defined MYSQL_BIN goto check_maven
+
+:: Tu dong tao thu muc db_data neu chua co
+if not exist "%DATA_DIR%" (
+    echo [INFO] Khong tim thay thu muc db_data. Dang tao moi...
+    mkdir "%DATA_DIR%"
+)
+
+:: Tu dong khoi tao database he thong neu thu muc trong rong
+if not exist "%DATA_DIR%\mysql" (
+    echo [INFO] Dang khoi tao database he thong - Database Initialization...
+    echo [INFO] Vui long cho trong giay lat...
+    "%MYSQL_BIN%" --initialize-insecure --datadir="%DATA_DIR%"
+    echo [SUCCESS] Khoi tao du lieu he thong hoan tat!
+)
+
 :start_mysql
-if not defined MYSQL_BIN goto no_mysql_bin
 echo [INFO] Tim thay MySQL tai: "%MYSQL_BIN%"
 echo Dang khoi chay MySQL Server...
 start "" /b "%MYSQL_BIN%" --datadir="%DATA_DIR%"
 :: Doi 4 giay de MySQL khoi dong
 ping 127.0.0.1 -n 5 > nul
-goto check_maven
-
-:no_mysql_bin
-echo [WARNING] Khong tim thay mysqld.exe.
-echo [WARNING] Neu da cai MySQL dang Service, vui long dam bao Service dang chay.
 goto check_maven
 
 :mysql_is_running
@@ -64,7 +75,7 @@ set "MVN_CMD=mvn"
 goto run_app
 
 :check_intellij_maven
-:: 2. Tim kiem trong cac thu mục cua IntelliJ IDEA
+:: 2. Tim kiem trong cac thu muc cua IntelliJ IDEA
 echo [INFO] Khong thay Maven toan cuc. Dang tim Maven trong IntelliJ...
 set "INTELIJ_DIR=C:\Program Files\JetBrains"
 if not exist "%INTELIJ_DIR%" goto maven_not_found
