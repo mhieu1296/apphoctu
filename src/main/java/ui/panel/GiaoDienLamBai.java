@@ -16,11 +16,140 @@ import ui.frame.LoginFrame;
  */
 public class GiaoDienLamBai extends javax.swing.JPanel {
 
+    private int maTaiKhoan;
+    private int maChuDe;
+    private java.util.List<models.TuVung> testWords = new java.util.ArrayList<>();
+    private java.util.List<String[]> questionOptions = new java.util.ArrayList<>(); // 4 options per question
+    private String[] userAnswers;
+    private int currentQuestionIndex = 0;
+    
+    private dao.TuVungDAO tuVungDAO = new dao.TuVungDAO();
+    private dao.KetQuaKiemTraDAO ketQuaKiemTraDAO = new dao.KetQuaKiemTraDAO();
+    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
+
     /**
      * Creates new form GiaoDienLamBai
      */
     public GiaoDienLamBai() {
         initComponents();
+        
+        java.awt.event.ActionListener radioListener = e -> {
+            saveCurrentAnswer();
+            int completed = 0;
+            for (String ans : userAnswers) {
+                if (ans != null) completed++;
+            }
+            lblSoCauDaHoanThanh.setText(String.valueOf(completed));
+        };
+        radio1.addActionListener(radioListener);
+        radio2.addActionListener(radioListener);
+        radio3.addActionListener(radioListener);
+        radio4.addActionListener(radioListener);
+    }
+
+    public void setupTest(int maTaiKhoan, int maChuDe) {
+        this.maTaiKhoan = maTaiKhoan;
+        this.maChuDe = maChuDe;
+        
+        // Show topic name
+        models.ChuDe cd = chuDeDAO.selectById(maChuDe);
+        if (cd != null) {
+            lblChuDe.setText(cd.getTenChuDe());
+        }
+        
+        // Get all words under this topic
+        java.util.List<models.TuVung> allWordsInTopic = tuVungDAO.selectByChuDe(maChuDe);
+        if (allWordsInTopic.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Chủ đề này chưa có từ vựng để làm bài kiểm tra!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            SwingUtilities.invokeLater(() -> {
+                JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
+                if (frame != null) frame.dispose();
+            });
+            return;
+        }
+        
+        // Pick up to 10 random words as questions
+        java.util.Collections.shuffle(allWordsInTopic);
+        int totalQuestions = Math.min(10, allWordsInTopic.size());
+        testWords = allWordsInTopic.subList(0, totalQuestions);
+        
+        userAnswers = new String[totalQuestions];
+        
+        // Fetch all vocabulary in system to get random incorrect options
+        java.util.List<models.TuVung> allSystemWords = tuVungDAO.selectAll();
+        
+        // Generate options for each question
+        questionOptions.clear();
+        for (models.TuVung correctTv : testWords) {
+            java.util.Set<String> optionsSet = new java.util.HashSet<>();
+            optionsSet.add(correctTv.getNghiaTiengViet());
+            
+            // Add incorrect options from entire system
+            java.util.List<models.TuVung> pool = new java.util.ArrayList<>(allSystemWords);
+            java.util.Collections.shuffle(pool);
+            for (models.TuVung tv : pool) {
+                if (optionsSet.size() >= 4) break;
+                if (!tv.getNghiaTiengViet().equalsIgnoreCase(correctTv.getNghiaTiengViet())) {
+                    optionsSet.add(tv.getNghiaTiengViet());
+                }
+            }
+            
+            // If still less than 4 (e.g. system has very few words), add placeholders
+            while (optionsSet.size() < 4) {
+                optionsSet.add("Đáp án " + (optionsSet.size() + 1));
+            }
+            
+            // Convert to list, shuffle, and add to questionOptions
+            java.util.List<String> optionsList = new java.util.ArrayList<>(optionsSet);
+            java.util.Collections.shuffle(optionsList);
+            questionOptions.add(optionsList.toArray(new String[0]));
+        }
+        
+        currentQuestionIndex = 0;
+        showQuestion();
+    }
+
+    private void showQuestion() {
+        if (testWords == null || testWords.isEmpty()) return;
+        
+        lblSoThuTuCau.setText("Câu hỏi " + (currentQuestionIndex + 1) + "/" + testWords.size());
+        
+        models.TuVung tv = testWords.get(currentQuestionIndex);
+        lblCauHoi.setText("Từ tiếng Anh '" + tv.getTuTiengAnh() + "' có nghĩa là gì?");
+        
+        String[] options = questionOptions.get(currentQuestionIndex);
+        radio1.setText(options[0]);
+        radio2.setText(options[1]);
+        radio3.setText(options[2]);
+        radio4.setText(options[3]);
+        
+        // Load user's previous answer if any
+        DapAn.clearSelection();
+        String prevAnswer = userAnswers[currentQuestionIndex];
+        if (prevAnswer != null) {
+            if (prevAnswer.equals(options[0])) radio1.setSelected(true);
+            else if (prevAnswer.equals(options[1])) radio2.setSelected(true);
+            else if (prevAnswer.equals(options[2])) radio3.setSelected(true);
+            else if (prevAnswer.equals(options[3])) radio4.setSelected(true);
+        }
+        
+        // Update completed count
+        int completed = 0;
+        for (String ans : userAnswers) {
+            if (ans != null) completed++;
+        }
+        lblSoCauDaHoanThanh.setText(String.valueOf(completed));
+    }
+
+    private void saveCurrentAnswer() {
+        if (testWords == null || testWords.isEmpty()) return;
+        String ans = null;
+        if (radio1.isSelected()) ans = radio1.getText();
+        else if (radio2.isSelected()) ans = radio2.getText();
+        else if (radio3.isSelected()) ans = radio3.getText();
+        else if (radio4.isSelected()) ans = radio4.getText();
+        
+        userAnswers[currentQuestionIndex] = ans;
     }
 
     /**
@@ -202,7 +331,6 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblNopBaiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNopBaiMousePressed
-        // TODO add your handling code here:
         int chon = JOptionPane.showConfirmDialog(
                 this,
                 "Bạn có muốn thoát làm bài? Lần làm bài này sẽ không được ghi nhận vào hệ thống.",
@@ -212,24 +340,95 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
 
         if (chon == JOptionPane.YES_OPTION) {
             JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
-            frame.dispose();
+            if (frame != null) frame.dispose();
         }
     }//GEN-LAST:event_lblNopBaiMousePressed
 
     private void lblThoatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThoatMousePressed
-        // TODO add your handling code here:
+        saveCurrentAnswer();
+        
+        // Check if all questions are completed
+        int completed = 0;
+        for (String ans : userAnswers) {
+            if (ans != null) completed++;
+        }
+        
+        if (completed < testWords.size()) {
+            int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "Bạn chưa hoàn thành hết tất cả câu hỏi. Bạn vẫn muốn nộp bài chứ?",
+                "Xác nhận nộp bài",
+                JOptionPane.YES_NO_OPTION
+            );
+            if (confirm != JOptionPane.YES_OPTION) {
+                return;
+            }
+        } else {
+            int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "Bạn có chắc chắn muốn nộp bài kiểm tra?",
+                "Nộp bài",
+                JOptionPane.YES_NO_OPTION
+            );
+            if (confirm != JOptionPane.YES_OPTION) {
+                return;
+            }
+        }
+        
+        // Calculate score
+        int score = 0;
+        for (int i = 0; i < testWords.size(); i++) {
+            String correctAns = testWords.get(i).getNghiaTiengViet();
+            String userAns = userAnswers[i];
+            if (correctAns.equalsIgnoreCase(userAns)) {
+                score++;
+            }
+        }
+        
+        // Insert test result to DB
+        models.KetQuaKiemTra kq = new models.KetQuaKiemTra(
+            0,
+            maTaiKhoan,
+            maChuDe,
+            score,
+            testWords.size(),
+            new java.sql.Timestamp(System.currentTimeMillis())
+        );
+        
+        boolean success = ketQuaKiemTraDAO.insert(kq);
+        if (success) {
+            double convertedScore = score * 10.0 / testWords.size();
+            JOptionPane.showMessageDialog(
+                this,
+                "Nộp bài thành công!\nSố câu đúng: " + score + "/" + testWords.size() + "\nĐiểm số: " + String.format("%.2f", convertedScore),
+                "Kết quả",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
+            if (frame != null) frame.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Lưu kết quả thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_lblThoatMousePressed
 
     private void lblPrevMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPrevMousePressed
-
+        saveCurrentAnswer();
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            showQuestion();
+        }
     }//GEN-LAST:event_lblPrevMousePressed
 
     private void lblNextMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNextMousePressed
-        // TODO add your handling code here:
+        saveCurrentAnswer();
+        if (currentQuestionIndex < testWords.size() - 1) {
+            currentQuestionIndex++;
+            showQuestion();
+        }
     }//GEN-LAST:event_lblNextMousePressed
 
     private void radio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio1ActionPerformed
-        // TODO add your handling code here:
+        // Handled via programmatically added ActionListener
     }//GEN-LAST:event_radio1ActionPerformed
 
 

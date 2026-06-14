@@ -14,11 +14,20 @@ import javax.swing.SwingUtilities;
  */
 public class ThemTu extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ThemTu
-     */
+    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
+
     public ThemTu() {
         initComponents();
+        txtMaTu.setEnabled(false);
+        txtMaTu.setText("(Tự động sinh)");
+        loadChuDeComboBox();
+    }
+    
+    private void loadChuDeComboBox() {
+        comboboxChuDe.removeAllItems();
+        for (models.ChuDe cd : chuDeDAO.selectAll()) {
+            comboboxChuDe.addItem(cd.getTenChuDe());
+        }
     }
 
     /**
@@ -145,17 +154,32 @@ public class ThemTu extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblTuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTuMousePressed
-        // TODO add your handling code here:
-        String eng = txtEng.getText(), vie = txtVie.getText();
-        if (eng == "" || vie == "") {
-            JOptionPane.showMessageDialog(null, "Từ và nghĩa không được để trống!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-        } else {
-            // thêm vào csdl (gọi từ service)
-            JOptionPane.showMessageDialog(null, "Thêm thành công!", "Thông tin", JOptionPane.INFORMATION_MESSAGE);
-
+    private void lblTuMousePressed(java.awt.event.MouseEvent evt) {
+        String eng = txtEng.getText().trim();
+        String vie = txtVie.getText().trim();
+        if (comboboxChuDe.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Phải chọn một chủ đề!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
         }
-    }//GEN-LAST:event_lblTuMousePressed
+        String tenCD = comboboxChuDe.getSelectedItem().toString();
+        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        if (cd == null) return;
+        
+        if (eng.isEmpty() || vie.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Từ tiếng Anh và nghĩa tiếng Việt không được để trống!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        dao.TuVungDAO tuVungDAO = new dao.TuVungDAO();
+        models.TuVung tv = new models.TuVung(0, eng, vie, cd.getMaChuDe());
+        if (tuVungDAO.insert(tv)) {
+            JOptionPane.showMessageDialog(null, "Thêm từ vựng thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
+            frame.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Thêm từ vựng thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     private void lblHuyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHuyMousePressed
         // TODO add your handling code here:

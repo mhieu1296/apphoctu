@@ -19,6 +19,8 @@ public class ThemChuDe extends javax.swing.JPanel {
      */
     public ThemChuDe() {
         initComponents();
+        txtMaChuDe.setEnabled(false);
+        txtMaChuDe.setText("(Tự động sinh)");
     }
 
     /**
@@ -127,17 +129,28 @@ public class ThemChuDe extends javax.swing.JPanel {
 
     }//GEN-LAST:event_lblHuyThemChuDeMousePressed
 
-    private void lblThemChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemChuDeMousePressed
-        // TODO add your handling code here:
-        String chude = txtChuDe.getText();
-        if (chude == "") {
+    private void lblThemChuDeMousePressed(java.awt.event.MouseEvent evt) {
+        String chude = txtChuDe.getText().trim();
+        if (chude.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Chủ đề không được để trống!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-        } else {
-            // thêm vào csdl (gọi từ service)
-            JOptionPane.showMessageDialog(null, "Thêm thành công!", "Thông tin", JOptionPane.INFORMATION_MESSAGE);
-
+            return;
         }
-    }//GEN-LAST:event_lblThemChuDeMousePressed
+        
+        dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
+        if (chuDeDAO.selectByName(chude) != null) {
+            JOptionPane.showMessageDialog(null, "Tên chủ đề đã tồn tại!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        models.ChuDe cd = new models.ChuDe(0, chude);
+        if (chuDeDAO.insert(cd)) {
+            JOptionPane.showMessageDialog(null, "Thêm chủ đề thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
+            frame.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Thêm chủ đề thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

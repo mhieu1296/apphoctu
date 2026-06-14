@@ -15,11 +15,72 @@ import ui.dialog.CRUDTu;
  */
 public class ChuDe extends javax.swing.JPanel {
 
+    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
+    private dao.TuVungDAO tuVungDAO = new dao.TuVungDAO();
+
     /**
      * Creates new form QuanLyTu
      */
     public ChuDe() {
         initComponents();
+        
+        // Add action listener to combobox programmatically
+        comboboxChuDe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboboxChuDeActionPerformed(evt);
+            }
+        });
+
+        // Add mouse listener to XuatTXT programmatically
+        lblXuatTXT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblXuatTXTMousePressed(evt);
+            }
+        });
+
+        loadChuDeComboBox();
+        loadData();
+    }
+
+    private void loadChuDeComboBox() {
+        comboboxChuDe.removeAllItems();
+        for (models.ChuDe cd : chuDeDAO.selectAll()) {
+            comboboxChuDe.addItem(cd.getTenChuDe());
+        }
+    }
+
+    public void loadData() {
+        if (comboboxChuDe.getSelectedItem() == null) {
+            return;
+        }
+        String tenCD = comboboxChuDe.getSelectedItem().toString();
+        lblChuDe.setText(tenCD);
+        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        if (cd != null) {
+            displayWords(tuVungDAO.selectByChuDe(cd.getMaChuDe()));
+        }
+    }
+
+    private void displayWords(java.util.List<models.TuVung> list) {
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tableTu.getModel();
+        model.setRowCount(0);
+        int stt = 1;
+        for (models.TuVung tv : list) {
+            model.addRow(new Object[] {
+                String.format("%02d", stt++),
+                tv.getMaTu(),
+                tv.getTuTiengAnh(),
+                tv.getNghiaTiengViet(),
+                tv.getMaChuDe()
+            });
+        }
+        lblSoLuongTuTrongChuDe.setText(String.valueOf(list.size()));
+        lblEng.setText("English word");
+        lblVie.setText("Vietnamese meaning");
+    }
+
+    private void comboboxChuDeActionPerformed(java.awt.event.ActionEvent evt) {
+        loadData();
     }
 
     /**
@@ -228,16 +289,64 @@ public class ChuDe extends javax.swing.JPanel {
     }//GEN-LAST:event_tableTuMousePressed
 
     private void lblTimKiemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTimKiemMousePressed
-        // TODO add your handling code here:
-                // gọi hàm từ service, services gọi dao và dao gọi db để lấy data
+        if (comboboxChuDe.getSelectedItem() == null) return;
+        String tenCD = comboboxChuDe.getSelectedItem().toString();
+        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        if (cd == null) return;
 
+        String keyword = txtTimChuDe.getText().trim().toLowerCase();
+        java.util.List<models.TuVung> all = tuVungDAO.selectByChuDe(cd.getMaChuDe());
+        java.util.List<models.TuVung> filtered = new java.util.ArrayList<>();
+        for (models.TuVung tv : all) {
+            if (tv.getTuTiengAnh().toLowerCase().contains(keyword) || tv.getNghiaTiengViet().toLowerCase().contains(keyword)) {
+                filtered.add(tv);
+            }
+        }
+        displayWords(filtered);
     }//GEN-LAST:event_lblTimKiemMousePressed
 
     private void lblSapXepTheoAlphabetMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSapXepTheoAlphabetMousePressed
-        // TODO add your handling code here:
-                // gọi hàm từ service, services gọi dao và dao gọi db để lấy data
+        if (comboboxChuDe.getSelectedItem() == null) return;
+        String tenCD = comboboxChuDe.getSelectedItem().toString();
+        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        if (cd == null) return;
 
+        java.util.List<models.TuVung> all = tuVungDAO.selectByChuDe(cd.getMaChuDe());
+        all.sort((tv1, tv2) -> tv1.getTuTiengAnh().compareToIgnoreCase(tv2.getTuTiengAnh()));
+        displayWords(all);
     }//GEN-LAST:event_lblSapXepTheoAlphabetMousePressed
+
+    private void lblXuatTXTMousePressed(java.awt.event.MouseEvent evt) {
+        if (comboboxChuDe.getSelectedItem() == null) {
+            return;
+        }
+        String tenCD = comboboxChuDe.getSelectedItem().toString();
+        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        if (cd == null) return;
+        
+        java.util.List<models.TuVung> list = tuVungDAO.selectByChuDe(cd.getMaChuDe());
+        if (list.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Chủ đề này chưa có từ vựng để xuất!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        java.io.File dir = new java.io.File("report");
+        if (!dir.exists()) dir.mkdirs();
+        
+        java.io.File file = new java.io.File(dir, "words_export_" + tenCD.toLowerCase().replace(" ", "_") + ".txt");
+        try (java.io.PrintWriter writer = new java.io.PrintWriter(new java.io.OutputStreamWriter(new java.io.FileOutputStream(file), java.nio.charset.StandardCharsets.UTF_8))) {
+            writer.println("DANH SÁCH TỪ VỰNG CHỦ ĐỀ: " + tenCD.toUpperCase());
+            writer.println("==========================================");
+            int stt = 1;
+            for (models.TuVung tv : list) {
+                writer.printf("%02d. %-20s : %s\n", stt++, tv.getTuTiengAnh(), tv.getNghiaTiengViet());
+            }
+            JOptionPane.showMessageDialog(null, "Xuất file thành công!\nĐường dẫn: " + file.getAbsolutePath(), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Xuất file thất bại: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

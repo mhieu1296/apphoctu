@@ -19,6 +19,8 @@ public class ThemTaiKhoan extends javax.swing.JPanel {
      */
     public ThemTaiKhoan() {
         initComponents();
+        txtMaTaiKhoan.setEnabled(false);
+        txtMaTaiKhoan.setText("(Tự động sinh)");
     }
 
     /**
@@ -157,14 +159,30 @@ public class ThemTaiKhoan extends javax.swing.JPanel {
     }//GEN-LAST:event_txtUsernameActionPerformed
 
     private void lblTuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTuMousePressed
-        // TODO add your handling code here:
-        String maTK = txtMaTaiKhoan.getText(), username = txtUsername.getText(), matkhau = txtMatKhau.getText();
-        if (maTK == "" || username == "") {
-            JOptionPane.showMessageDialog(null, "Mã tài khoản và username không được để trống!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-        } else {
-            // thêm vào csdl (gọi từ service)
-            JOptionPane.showMessageDialog(null, "Thêm thành công!", "Thông tin", JOptionPane.INFORMATION_MESSAGE);
+        String username = txtUsername.getText().trim();
+        String matkhau = txtMatKhau.getText().trim();
+        String vaiTro = comboboxVaiTro.getSelectedItem().toString();
 
+        if (username.isEmpty() || matkhau.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Username và mật khẩu không được để trống!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        dao.TaiKhoanDAO taiKhoanDAO = new dao.TaiKhoanDAO();
+        if (taiKhoanDAO.selectByUsername(username) != null) {
+            JOptionPane.showMessageDialog(null, "Tên đăng nhập đã tồn tại!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String hashed = LoginPanel.hashPassword(matkhau.toCharArray());
+        models.TaiKhoan tk = new models.TaiKhoan(0, username, hashed, vaiTro);
+        
+        if (taiKhoanDAO.insert(tk)) {
+            JOptionPane.showMessageDialog(null, "Thêm tài khoản thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
+            frame.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Thêm tài khoản thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_lblTuMousePressed
 

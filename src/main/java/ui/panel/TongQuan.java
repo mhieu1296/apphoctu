@@ -1,20 +1,128 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package ui.panel;
 
-/**
- *
- * @author Admin
- */
+import javax.swing.table.DefaultTableModel;
+import javax.swing.SwingUtilities;
+import java.util.List;
+import java.util.ArrayList;
+import ui.MainFrame;
+
 public class TongQuan extends javax.swing.JPanel {
+
+    private MainFrame mainFrame;
+    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
+    private dao.KetQuaKiemTraDAO ketQuaKiemTraDAO = new dao.KetQuaKiemTraDAO();
 
     /**
      * Creates new form TongQuan
      */
     public TongQuan() {
         initComponents();
+    }
+
+    public TongQuan(MainFrame mainFrame) {
+        this.mainFrame = mainFrame;
+        initComponents();
+
+        // Add action listener to combobox programmatically
+        comboboxChuDe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboboxChuDeActionPerformed(evt);
+            }
+        });
+
+        loadChuDeComboBox();
+        loadData();
+    }
+
+    private models.TaiKhoan getCurrentUser() {
+        if (mainFrame != null) {
+            return mainFrame.getCurrentUser();
+        }
+        java.awt.Container parent = SwingUtilities.getWindowAncestor(this);
+        if (parent instanceof MainFrame) {
+            return ((MainFrame) parent).getCurrentUser();
+        }
+        return null;
+    }
+
+    public void loadChuDeComboBox() {
+        comboboxChuDe.removeAllItems();
+        comboboxChuDe.addItem("Tất cả");
+        for (models.ChuDe cd : chuDeDAO.selectAll()) {
+            comboboxChuDe.addItem(cd.getTenChuDe());
+        }
+    }
+
+    public void loadData() {
+        models.TaiKhoan user = getCurrentUser();
+        if (user == null) {
+            return;
+        }
+
+        // Load stats
+        int totalChuDe = chuDeDAO.selectAll().size();
+        int completedChuDe = ketQuaKiemTraDAO.countChuDeDaLam(user.getMaTaiKhoan());
+        double avgScore = ketQuaKiemTraDAO.getDiemTrungBinh(user.getMaTaiKhoan());
+
+        lblTongSoChuDe.setText(String.valueOf(totalChuDe));
+        lblSoChuDeDaLamBaiKiemTra.setText(String.valueOf(completedChuDe));
+        lblDiemTrungBinh.setText(String.format("%.2f", avgScore));
+
+        // Load table results
+        loadTableResults();
+    }
+
+    private void loadTableResults() {
+        models.TaiKhoan user = getCurrentUser();
+        if (user == null || comboboxChuDe.getSelectedItem() == null) {
+            return;
+        }
+
+        String selectedTopic = comboboxChuDe.getSelectedItem().toString();
+        List<models.KetQuaKiemTra> list;
+        if ("Tất cả".equals(selectedTopic)) {
+            list = ketQuaKiemTraDAO.selectByTaiKhoan(user.getMaTaiKhoan());
+        } else {
+            models.ChuDe cd = chuDeDAO.selectByName(selectedTopic);
+            list = new ArrayList<>();
+            if (cd != null) {
+                List<models.KetQuaKiemTra> all = ketQuaKiemTraDAO.selectByTaiKhoan(user.getMaTaiKhoan());
+                for (models.KetQuaKiemTra kq : all) {
+                    if (kq.getMaChuDe() == cd.getMaChuDe()) {
+                        list.add(kq);
+                    }
+                }
+            }
+        }
+
+        DefaultTableModel model = new DefaultTableModel(
+            new Object[][] {},
+            new String[] {"STT", "Chủ đề", "Điểm số", "Tổng số câu", "Thời điểm"}
+        ) {
+            boolean[] canEdit = new boolean[] {false, false, false, false, false};
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        };
+
+        int stt = 1;
+        for (models.KetQuaKiemTra kq : list) {
+            models.ChuDe cd = chuDeDAO.selectById(kq.getMaChuDe());
+            String tenCD = (cd != null) ? cd.getTenChuDe() : "Chủ đề #" + kq.getMaChuDe();
+            model.addRow(new Object[] {
+                String.format("%02d", stt++),
+                tenCD,
+                kq.getDiemSo(),
+                kq.getTongSoCau(),
+                kq.getThoiDiemLamBai()
+            });
+        }
+        tableKetQua.setModel(model);
+    }
+
+    private void comboboxChuDeActionPerformed(java.awt.event.ActionEvent evt) {
+        loadTableResults();
     }
 
     /**

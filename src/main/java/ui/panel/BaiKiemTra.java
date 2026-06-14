@@ -11,13 +11,65 @@ import ui.dialog.LamBai;
  *
  * @author Admin
  */
+import javax.swing.SwingUtilities;
+import javax.swing.JOptionPane;
+import ui.MainFrame;
+
 public class BaiKiemTra extends javax.swing.JPanel {
+
+    private MainFrame mainFrame;
+    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
+    private dao.KetQuaKiemTraDAO ketQuaKiemTraDAO = new dao.KetQuaKiemTraDAO();
 
     /**
      * Creates new form BaiKiemTra
      */
     public BaiKiemTra() {
         initComponents();
+    }
+
+    public BaiKiemTra(MainFrame mainFrame) {
+        this.mainFrame = mainFrame;
+        initComponents();
+        loadChuDeComboBox();
+        loadData();
+    }
+
+    private models.TaiKhoan getCurrentUser() {
+        if (mainFrame != null) {
+            return mainFrame.getCurrentUser();
+        }
+        java.awt.Container parent = SwingUtilities.getWindowAncestor(this);
+        if (parent instanceof MainFrame) {
+            return ((MainFrame) parent).getCurrentUser();
+        }
+        return null;
+    }
+
+    public void loadChuDeComboBox() {
+        comboboxChuDe.removeAllItems();
+        for (models.ChuDe cd : chuDeDAO.selectAll()) {
+            comboboxChuDe.addItem(cd.getTenChuDe());
+        }
+    }
+
+    public void loadData() {
+        models.TaiKhoan user = getCurrentUser();
+        if (user == null || comboboxChuDe.getSelectedItem() == null) {
+            return;
+        }
+        
+        String tenCD = comboboxChuDe.getSelectedItem().toString();
+        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        if (cd == null) return;
+        
+        double maxScore = ketQuaKiemTraDAO.getMaxDiemChuDe(user.getMaTaiKhoan(), cd.getMaChuDe());
+        int attemptCount = ketQuaKiemTraDAO.getSoLanLamChuDe(user.getMaTaiKhoan(), cd.getMaChuDe());
+        double avgScore = ketQuaKiemTraDAO.getDiemTrungBinhChuDe(user.getMaTaiKhoan(), cd.getMaChuDe());
+        
+        lbldiemMaxChuDe.setText(String.format("%.2f", maxScore));
+        lblSoLanLam.setText(String.valueOf(attemptCount));
+        lblDiemTrungBinhChuDe.setText(String.format("%.2f", avgScore));
     }
 
     /**
@@ -128,9 +180,24 @@ public class BaiKiemTra extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblLamBaiKiemTraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLamBaiKiemTraMousePressed
-        // TODO add your handling code here:
+        if (comboboxChuDe.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một chủ đề để làm bài!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        models.TaiKhoan user = getCurrentUser();
+        if (user == null) {
+            return;
+        }
+        
+        String tenCD = comboboxChuDe.getSelectedItem().toString();
+        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        if (cd == null) return;
+        
         LamBai dialog = new LamBai(null, true);
         GiaoDienLamBai panel = new GiaoDienLamBai();
+        panel.setupTest(user.getMaTaiKhoan(), cd.getMaChuDe());
+        
         dialog.getContentPane().removeAll();
         dialog.getContentPane().setLayout(new BorderLayout());
         dialog.getContentPane().add(panel, BorderLayout.CENTER);
@@ -139,10 +206,12 @@ public class BaiKiemTra extends javax.swing.JPanel {
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
         
+        // Refresh statistics after user completes the test
+        loadData();
     }//GEN-LAST:event_lblLamBaiKiemTraMousePressed
 
     private void comboboxChuDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxChuDeActionPerformed
-        // TODO add your handling code here:
+        loadData();
     }//GEN-LAST:event_comboboxChuDeActionPerformed
 
 

@@ -1,20 +1,128 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package ui.panel;
 
-/**
- *
- * @author Admin
- */
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+import java.util.ArrayList;
+
 public class DanhSachTKDaLamChuDePanel extends javax.swing.JPanel {
+
+    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
+    private dao.KetQuaKiemTraDAO ketQuaKiemTraDAO = new dao.KetQuaKiemTraDAO();
+    private List<Object[]> allResults = new ArrayList<>();
 
     /**
      * Creates new form DanhSachTKDaLamChuDePanel
      */
     public DanhSachTKDaLamChuDePanel() {
         initComponents();
+        
+        // Add action listener to combobox programmatically
+        comboboxChuDe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboboxChuDeActionPerformed(evt);
+            }
+        });
+
+        // Add mouse listener to Search label programmatically
+        lblTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblTimKiemMousePressed(evt);
+            }
+        });
+
+        // Add mouse listener to Sort Alphabet programmatically
+        lblSapXepTheoAlphabet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblSapXepTheoAlphabetMousePressed(evt);
+            }
+        });
+
+        // Add mouse listener to Sort Score programmatically
+        lblSapXepTheoDiemSo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblSapXepTheoDiemSoMousePressed(evt);
+            }
+        });
+
+        loadChuDeComboBox();
+        loadData();
+    }
+
+    private void loadChuDeComboBox() {
+        comboboxChuDe.removeAllItems();
+        for (models.ChuDe cd : chuDeDAO.selectAll()) {
+            comboboxChuDe.addItem(cd.getTenChuDe());
+        }
+    }
+
+    public void loadData() {
+        if (comboboxChuDe.getSelectedItem() == null) {
+            return;
+        }
+        String tenCD = comboboxChuDe.getSelectedItem().toString();
+        jLabel6.setText("Danh sách tài khoản đã làm bài kiểm tra của chủ đề: " + tenCD);
+        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        if (cd != null) {
+            allResults = ketQuaKiemTraDAO.selectDetailsByChuDe(cd.getMaChuDe());
+            displayResults(allResults);
+        }
+    }
+
+    private void displayResults(List<Object[]> list) {
+        DefaultTableModel model = new DefaultTableModel(
+            new Object[][] {},
+            new String[] {"STT", "Tên tài khoản", "Điểm số", "Tổng số câu", "Thời điểm làm bài"}
+        ) {
+            boolean[] canEdit = new boolean[] {false, false, false, false, false};
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        };
+        
+        int stt = 1;
+        for (Object[] row : list) {
+            model.addRow(new Object[] {
+                String.format("%02d", stt++),
+                row[0], // username
+                row[1], // score
+                row[2], // total questions
+                row[3]  // timestamp
+            });
+        }
+        tableDanhSachTKDaLamChuDe.setModel(model);
+    }
+
+    private void comboboxChuDeActionPerformed(java.awt.event.ActionEvent evt) {
+        loadData();
+    }
+
+    private void lblTimKiemMousePressed(java.awt.event.MouseEvent evt) {
+        String keyword = txtTimMaTaiKhoan.getText().trim().toLowerCase();
+        List<Object[]> filtered = new ArrayList<>();
+        for (Object[] row : allResults) {
+            String username = row[0].toString().toLowerCase();
+            if (username.contains(keyword)) {
+                filtered.add(row);
+            }
+        }
+        displayResults(filtered);
+    }
+
+    private void lblSapXepTheoAlphabetMousePressed(java.awt.event.MouseEvent evt) {
+        List<Object[]> sorted = new ArrayList<>(allResults);
+        sorted.sort((o1, o2) -> o1[0].toString().compareToIgnoreCase(o2[0].toString()));
+        displayResults(sorted);
+    }
+
+    private void lblSapXepTheoDiemSoMousePressed(java.awt.event.MouseEvent evt) {
+        List<Object[]> sorted = new ArrayList<>(allResults);
+        sorted.sort((o1, o2) -> {
+            int score1 = (int) o1[1];
+            int score2 = (int) o2[1];
+            return Integer.compare(score2, score1); // Descending (highest score first)
+        });
+        displayResults(sorted);
     }
 
     /**

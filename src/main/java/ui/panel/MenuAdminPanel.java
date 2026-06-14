@@ -32,6 +32,10 @@ public class MenuAdminPanel extends javax.swing.JPanel {
         initComponents();
         this.mainframe = mainframe;
     }
+    
+    public void setTenAdmin(String ten) {
+        lblTenAcc.setText(ten);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

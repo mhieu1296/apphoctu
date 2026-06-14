@@ -10,11 +10,88 @@ package ui.panel;
  */
 public class HocTu extends javax.swing.JPanel {
 
+    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
+    private dao.TuVungDAO tuVungDAO = new dao.TuVungDAO();
+    private java.util.List<models.TuVung> currentWords = new java.util.ArrayList<>();
+    private int currentIndex = 0;
+    private boolean isFlipped = false;
+
     /**
      * Creates new form HocTu
      */
     public HocTu() {
         initComponents();
+        
+        // Add action listener to combobox programmatically
+        comboboxChuDe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboboxChuDeActionPerformed(evt);
+            }
+        });
+        
+        loadChuDeComboBox();
+        loadData();
+    }
+
+    public HocTu(ui.MainFrame mainFrame) {
+        initComponents();
+        
+        // Add action listener to combobox programmatically
+        comboboxChuDe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboboxChuDeActionPerformed(evt);
+            }
+        });
+        
+        loadChuDeComboBox();
+        loadData();
+    }
+
+    public void loadChuDeComboBox() {
+        comboboxChuDe.removeAllItems();
+        for (models.ChuDe cd : chuDeDAO.selectAll()) {
+            comboboxChuDe.addItem(cd.getTenChuDe());
+        }
+    }
+
+    public void loadData() {
+        if (comboboxChuDe.getSelectedItem() == null) {
+            currentWords.clear();
+            currentIndex = 0;
+            updateCard();
+            return;
+        }
+        String tenCD = comboboxChuDe.getSelectedItem().toString();
+        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        if (cd != null) {
+            currentWords = tuVungDAO.selectByChuDe(cd.getMaChuDe());
+            currentIndex = 0;
+            isFlipped = false;
+            updateCard();
+        }
+    }
+
+    private void updateCard() {
+        jLabel2.setVisible(false); // Hide the helper text
+        if (currentWords == null || currentWords.isEmpty()) {
+            lblTuHienTaiTrenSoTu.setText("0/0");
+            lblEng.setText("Chủ đề trống");
+            lblVie.setText("");
+            return;
+        }
+        
+        models.TuVung tv = currentWords.get(currentIndex);
+        lblTuHienTaiTrenSoTu.setText((currentIndex + 1) + "/" + currentWords.size());
+        lblEng.setText(tv.getTuTiengAnh());
+        if (isFlipped) {
+            lblVie.setText(tv.getNghiaTiengViet());
+        } else {
+            lblVie.setText("");
+        }
+    }
+
+    private void comboboxChuDeActionPerformed(java.awt.event.ActionEvent evt) {
+        loadData();
     }
 
     /**
@@ -134,15 +211,27 @@ public class HocTu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblPrevMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPrevMousePressed
-        
+        if (currentWords == null || currentWords.isEmpty()) return;
+        if (currentIndex > 0) {
+            currentIndex--;
+            isFlipped = false;
+            updateCard();
+        }
     }//GEN-LAST:event_lblPrevMousePressed
 
     private void lblFlipMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFlipMousePressed
-        // TODO add your handling code here:
+        if (currentWords == null || currentWords.isEmpty()) return;
+        isFlipped = !isFlipped;
+        updateCard();
     }//GEN-LAST:event_lblFlipMousePressed
 
     private void lblNextMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNextMousePressed
-        // TODO add your handling code here:
+        if (currentWords == null || currentWords.isEmpty()) return;
+        if (currentIndex < currentWords.size() - 1) {
+            currentIndex++;
+            isFlipped = false;
+            updateCard();
+        }
     }//GEN-LAST:event_lblNextMousePressed
 
 

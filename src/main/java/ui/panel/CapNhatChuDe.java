@@ -19,6 +19,7 @@ public class CapNhatChuDe extends javax.swing.JPanel {
      */
     public CapNhatChuDe() {
         initComponents();
+        txtMaChuDe.setEnabled(false);
     }
 
     /**
@@ -133,19 +134,32 @@ public class CapNhatChuDe extends javax.swing.JPanel {
         txtMaChuDe.setText(maChuDe);
     }
     
-    private void lblCapNhatChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCapNhatChuDeMousePressed
-        // TODO add your handling code here:
-        String chude = txtTenChuDe.getText();
-        System.out.println(chude.length());
-        if ("".equals(chude)) {
-            JOptionPane.showMessageDialog(null, "Chủ đề không được để trống!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-            
-        } else {
-            // thêm vào csdl (gọi từ service)
-            JOptionPane.showMessageDialog(null, "Thêm thành công!", "Thông tin", JOptionPane.INFORMATION_MESSAGE);
-
+    private void lblCapNhatChuDeMousePressed(java.awt.event.MouseEvent evt) {
+        String maCD = txtMaChuDe.getText().trim();
+        String chude = txtTenChuDe.getText().trim();
+        if (maCD.isEmpty() || chude.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Mã chủ đề và tên chủ đề không được để trống!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
         }
-    }//GEN-LAST:event_lblCapNhatChuDeMousePressed
+
+        int id = Integer.parseInt(maCD);
+        dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
+        models.ChuDe existing = chuDeDAO.selectByName(chude);
+        
+        if (existing != null && existing.getMaChuDe() != id) {
+            JOptionPane.showMessageDialog(null, "Tên chủ đề đã tồn tại trên một chủ đề khác!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        models.ChuDe cd = new models.ChuDe(id, chude);
+        if (chuDeDAO.update(cd)) {
+            JOptionPane.showMessageDialog(null, "Cập nhật chủ đề thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
+            frame.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Cập nhật chủ đề thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

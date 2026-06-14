@@ -6,6 +6,7 @@ package ui.panel;
 
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import ui.dialog.CRUDChuDe;
 import ui.dialog.CRUDTaiKhoan;
 
@@ -15,11 +16,81 @@ import ui.dialog.CRUDTaiKhoan;
  */
 public class QuanLyTaiKhoan extends javax.swing.JPanel {
 
-    /**
-     * Creates new form QuanLyTaiKhoan
-     */
+    private dao.TaiKhoanDAO taiKhoanDAO = new dao.TaiKhoanDAO();
+
     public QuanLyTaiKhoan() {
         initComponents();
+        
+        lblTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblTimKiemMousePressed(evt);
+            }
+        });
+        
+        lblLocTheoRole.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblLocTheoRoleMousePressed(evt);
+            }
+        });
+        
+        lblSapXepTheoAlphabet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblSapXepTheoAlphabetMousePressed(evt);
+            }
+        });
+
+        loadData();
+    }
+
+    public void loadData() {
+        displayAccounts(taiKhoanDAO.selectAll());
+    }
+
+    private void displayAccounts(java.util.List<models.TaiKhoan> list) {
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tableTaiKhoan.getModel();
+        model.setRowCount(0);
+        int stt = 1;
+        for (models.TaiKhoan tk : list) {
+            model.addRow(new Object[] {
+                String.format("%02d", stt++),
+                tk.getMaTaiKhoan(),
+                tk.getTenDangNhap(),
+                tk.getMatKhau(),
+                tk.getVaiTro()
+            });
+        }
+        lblSoLuongAcc.setText(String.valueOf(taiKhoanDAO.countTotal()));
+        lblSoLuongAdmin.setText(String.valueOf(taiKhoanDAO.countAdmins()));
+    }
+
+    private void lblTimKiemMousePressed(java.awt.event.MouseEvent evt) {
+        String keyword = txtTimTaiKhoan.getText().trim().toLowerCase();
+        java.util.List<models.TaiKhoan> all = taiKhoanDAO.selectAll();
+        java.util.List<models.TaiKhoan> filtered = new java.util.ArrayList<>();
+        for (models.TaiKhoan tk : all) {
+            if (tk.getTenDangNhap().toLowerCase().contains(keyword)) {
+                filtered.add(tk);
+            }
+        }
+        displayAccounts(filtered);
+    }
+
+    private void lblLocTheoRoleMousePressed(java.awt.event.MouseEvent evt) {
+        String selectedRole = comboboxRole.getSelectedItem().toString();
+        java.util.List<models.TaiKhoan> all = taiKhoanDAO.selectAll();
+        java.util.List<models.TaiKhoan> filtered = new java.util.ArrayList<>();
+        for (models.TaiKhoan tk : all) {
+            if (tk.getVaiTro().equalsIgnoreCase(selectedRole)) {
+                filtered.add(tk);
+            }
+        }
+        displayAccounts(filtered);
+    }
+
+    private void lblSapXepTheoAlphabetMousePressed(java.awt.event.MouseEvent evt) {
+        java.util.List<models.TaiKhoan> all = taiKhoanDAO.selectAll();
+        all.sort((tk1, tk2) -> tk1.getTenDangNhap().compareToIgnoreCase(tk2.getTenDangNhap()));
+        displayAccounts(all);
     }
 
     /**
@@ -222,37 +293,45 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblXoaTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblXoaTaiKhoanMousePressed
+    private void lblXoaTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {
+        int row = tableTaiKhoan.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null, "Phải chọn 1 dòng trong bảng!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         int chon = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa tài khoản này?", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         if (chon == JOptionPane.YES_OPTION) {
-            // gọi phương thức xóa từ trong service
-
-            JOptionPane.showMessageDialog(null, "Đã xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            int id = Integer.parseInt(tableTaiKhoan.getValueAt(row, 1).toString());
+            ui.MainFrame mainFrame = (ui.MainFrame) SwingUtilities.getWindowAncestor(this);
+            if (mainFrame != null && mainFrame.getCurrentUser() != null && mainFrame.getCurrentUser().getMaTaiKhoan() == id) {
+                JOptionPane.showMessageDialog(null, "Bạn không thể tự xóa tài khoản của chính mình!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (taiKhoanDAO.delete(id)) {
+                JOptionPane.showMessageDialog(null, "Đã xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                loadData();
+            } else {
+                JOptionPane.showMessageDialog(null, "Xóa thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
         }
-    }//GEN-LAST:event_lblXoaTaiKhoanMousePressed
+    }
 
-    private void lblThemTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemTaiKhoanMousePressed
-        // TODO add your handling code here:
+    private void lblThemTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {
         CRUDTaiKhoan dialog = new CRUDTaiKhoan(null, true);
-
         ThemTaiKhoan panel = new ThemTaiKhoan();
-
         dialog.getContentPane().removeAll();
         dialog.getContentPane().setLayout(new BorderLayout());
         dialog.getContentPane().add(panel, BorderLayout.CENTER);
-
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
-    }//GEN-LAST:event_lblThemTaiKhoanMousePressed
+        loadData();
+    }
 
-    private void lblSuaTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSuaTaiKhoanMousePressed
-        // TODO add your handling code here:
+    private void lblSuaTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {
         int row = tableTaiKhoan.getSelectedRow();
-
         if (row == -1) {
             JOptionPane.showMessageDialog(null, "Phải chọn 1 dòng trong bảng!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-
             return;
         }
 
@@ -260,20 +339,18 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
         String username = tableTaiKhoan.getValueAt(row, 2).toString();
         String vaiTro = tableTaiKhoan.getValueAt(row, 4).toString();
 
-        CRUDChuDe dialog = new CRUDChuDe(null, true);
+        CRUDTaiKhoan dialog = new CRUDTaiKhoan(null, true);
         CapNhatTaiKhoan panel = new CapNhatTaiKhoan();
-
-        // truyền dữ liệu sang panel trước khi show
         panel.setAll(maTaiKhoan, username, vaiTro);
 
         dialog.getContentPane().removeAll();
         dialog.getContentPane().setLayout(new BorderLayout());
         dialog.getContentPane().add(panel, BorderLayout.CENTER);
-
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
-    }//GEN-LAST:event_lblSuaTaiKhoanMousePressed
+        loadData();
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
