@@ -19,6 +19,7 @@ public class CapNhatTaiKhoan extends javax.swing.JPanel {
      */
     public CapNhatTaiKhoan() {
         initComponents();
+        txtMaTaiKhoan.setEnabled(false);
     }
 
     /**
@@ -164,14 +165,49 @@ public class CapNhatTaiKhoan extends javax.swing.JPanel {
     }
     
     private void lblThemTuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemTuMousePressed
-        // TODO add your handling code here:
-        String maTK = txtMaTaiKhoan.getText(), username = txtUsername.getText(), matkhau = txtMatKhau.getText();
-        if (maTK == "" || username == "") {
-            JOptionPane.showMessageDialog(null, "Mã tài khoản và username không được để trống!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-        } else {
-            // thêm vào csdl (gọi từ service)
-            JOptionPane.showMessageDialog(null, "Thêm thành công!", "Thông tin", JOptionPane.INFORMATION_MESSAGE);
+        String maTK = txtMaTaiKhoan.getText().trim();
+        String username = txtUsername.getText().trim();
+        String matkhau = txtMatKhau.getText().trim();
+        String vaiTro = comboboxVaiTro.getSelectedItem().toString();
 
+        if (maTK.isEmpty() || username.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Mã tài khoản và tên đăng nhập không được để trống!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int id = Integer.parseInt(maTK);
+        dao.TaiKhoanDAO taiKhoanDAO = new dao.TaiKhoanDAO();
+        models.TaiKhoan existing = taiKhoanDAO.selectByUsername(username);
+        
+        if (existing != null && existing.getMaTaiKhoan() != id) {
+            JOptionPane.showMessageDialog(null, "Tên đăng nhập đã tồn tại trên một tài khoản khác!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Lấy tài khoản hiện tại từ database
+        models.TaiKhoan current = null;
+        for (models.TaiKhoan t : taiKhoanDAO.selectAll()) {
+            if (t.getMaTaiKhoan() == id) {
+                current = t;
+                break;
+            }
+        }
+
+        if (current == null) {
+            JOptionPane.showMessageDialog(null, "Không tìm thấy tài khoản cần cập nhật!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String finalPasswordHash = matkhau.isEmpty() ? current.getMatKhau() : LoginPanel.hashPassword(matkhau.toCharArray());
+
+        models.TaiKhoan updated = new models.TaiKhoan(id, username, finalPasswordHash, vaiTro);
+        
+        if (taiKhoanDAO.update(updated)) {
+            JOptionPane.showMessageDialog(null, "Cập nhật tài khoản thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
+            frame.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Cập nhật tài khoản thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_lblThemTuMousePressed
 

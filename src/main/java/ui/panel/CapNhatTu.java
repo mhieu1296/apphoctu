@@ -14,11 +14,20 @@ import javax.swing.SwingUtilities;
  */
 public class CapNhatTu extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ThemTu
-     */
+    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
+
     public CapNhatTu() {
         initComponents();
+        txtMaTu.setEnabled(false);
+        loadChuDeComboBox();
+        lblThemTu.setText("Cập nhật");
+    }
+    
+    private void loadChuDeComboBox() {
+        comboboxChuDe.removeAllItems();
+        for (models.ChuDe cd : chuDeDAO.selectAll()) {
+            comboboxChuDe.addItem(cd.getTenChuDe());
+        }
     }
 
     /**
@@ -145,24 +154,49 @@ public class CapNhatTu extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setAll(String chuDe, String maTu, String eng, String vie){
-        comboboxChuDe.setSelectedItem(chuDe);
+    public void setAll(String maChuDe, String maTu, String eng, String vie){
+        try {
+            int idCD = Integer.parseInt(maChuDe);
+            models.ChuDe cd = chuDeDAO.selectById(idCD);
+            if (cd != null) {
+                comboboxChuDe.setSelectedItem(cd.getTenChuDe());
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
         txtMaTu.setText(maTu);
         txtEng.setText(eng);
         txtVie.setText(vie);
     }
     
-    private void lblThemTuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemTuMousePressed
-        // TODO add your handling code here:
-        String eng = txtEng.getText(), vie = txtVie.getText();
-        if (eng == "" || vie == "") {
-            JOptionPane.showMessageDialog(null, "Từ và nghĩa không được để trống!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-        } else {
-            // thêm vào csdl (gọi từ service)
-            JOptionPane.showMessageDialog(null, "Thêm thành công!", "Thông tin", JOptionPane.INFORMATION_MESSAGE);
-
+    private void lblThemTuMousePressed(java.awt.event.MouseEvent evt) {
+        String maTuStr = txtMaTu.getText().trim();
+        String eng = txtEng.getText().trim();
+        String vie = txtVie.getText().trim();
+        if (comboboxChuDe.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Phải chọn một chủ đề!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
         }
-    }//GEN-LAST:event_lblThemTuMousePressed
+        String tenCD = comboboxChuDe.getSelectedItem().toString();
+        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        if (cd == null) return;
+        
+        if (maTuStr.isEmpty() || eng.isEmpty() || vie.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Từ tiếng Anh và nghĩa tiếng Việt không được để trống!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int idTu = Integer.parseInt(maTuStr);
+        dao.TuVungDAO tuVungDAO = new dao.TuVungDAO();
+        models.TuVung tv = new models.TuVung(idTu, eng, vie, cd.getMaChuDe());
+        if (tuVungDAO.update(tv)) {
+            JOptionPane.showMessageDialog(null, "Cập nhật từ vựng thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
+            frame.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Cập nhật từ vựng thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     private void lblHuyThemTuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHuyThemTuMousePressed
         // TODO add your handling code here:

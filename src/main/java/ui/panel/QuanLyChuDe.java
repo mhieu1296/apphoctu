@@ -18,12 +18,32 @@ public class QuanLyChuDe extends javax.swing.JPanel {
     private CRUDChuDe crudchude;
     private ThemChuDe themchude;
     private JTextField txtChuDe;
+    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
 
     /**
      * Creates new form QuanLyChuDe
      */
     public QuanLyChuDe() {
         initComponents();
+        loadData();
+    }
+
+    public void loadData() {
+        displayTopics(chuDeDAO.selectAll());
+    }
+
+    private void displayTopics(java.util.List<models.ChuDe> list) {
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tableChuDe.getModel();
+        model.setRowCount(0);
+        int stt = 1;
+        for (models.ChuDe cd : list) {
+            model.addRow(new Object[] {
+                String.format("%02d", stt++),
+                cd.getMaChuDe(),
+                cd.getTenChuDe()
+            });
+        }
+        lblSoLuongChuDe.setText(String.valueOf(chuDeDAO.countTotal()));
     }
 
     /**
@@ -201,39 +221,18 @@ public class QuanLyChuDe extends javax.swing.JPanel {
 
     private void lblThemChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemChuDeMousePressed
         CRUDChuDe dialog = new CRUDChuDe(null, true);
-
         ThemChuDe panel = new ThemChuDe();
-
         dialog.getContentPane().removeAll();
         dialog.getContentPane().setLayout(new BorderLayout());
         dialog.getContentPane().add(panel, BorderLayout.CENTER);
-
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
+        loadData();
     }//GEN-LAST:event_lblThemChuDeMousePressed
 
     private void lblSuaChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSuaChuDeMousePressed
-//        int row = tableChuDe.getSelectedRow();
-//        System.out.println(row);
-//        
-//        CRUDChuDe dialog = new CRUDChuDe(null, true);
-//
-//        CapNhatChuDe panel = new CapNhatChuDe();
-//
-//        dialog.getContentPane().removeAll();
-//        dialog.getContentPane().setLayout(new BorderLayout());
-//        dialog.getContentPane().add(panel, BorderLayout.CENTER);
-//        
-//        dialog.pack();
-//        dialog.setLocationRelativeTo(null);
-//        dialog.setVisible(true);
-//        
-//        String tenCD = tableChuDe.getValueAt(row, 1).toString();
-//        System.out.println(tenCD);
-//        txtChuDe.setText(tenCD);
         int row = tableChuDe.getSelectedRow();
-
         if (row == -1) {
             JOptionPane.showMessageDialog(null, "Phải chọn 1 dòng trong bảng!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
@@ -241,43 +240,57 @@ public class QuanLyChuDe extends javax.swing.JPanel {
         
         String maCD = tableChuDe.getValueAt(row, 1).toString();
         String tenCD = tableChuDe.getValueAt(row, 2).toString();
-        System.out.println("tenCD = " + tenCD);
 
         CRUDChuDe dialog = new CRUDChuDe(null, true);
         CapNhatChuDe panel = new CapNhatChuDe();
 
         // truyền dữ liệu sang panel trước khi show
-        panel.setTenChuDe(tenCD);   // bạn cần tạo hàm này
+        panel.setTenChuDe(tenCD);
         panel.setMaChuDe(maCD);
         
         dialog.getContentPane().removeAll();
         dialog.getContentPane().setLayout(new BorderLayout());
         dialog.getContentPane().add(panel, BorderLayout.CENTER);
-
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
+        loadData();
     }//GEN-LAST:event_lblSuaChuDeMousePressed
 
     private void lblXoaChuDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblXoaChuDeMousePressed
-        int chon = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa chủ đề này?", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-        if (chon == JOptionPane.YES_OPTION) {
-            // gọi phương thức xóa từ trong service
-            
-            JOptionPane.showMessageDialog(null, "Đã xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        int row = tableChuDe.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null, "Phải chọn 1 dòng trong bảng!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
         }
-//        JOptionPane.showConfirmDialog(crudchude, evt, TOOL_TIP_TEXT_KEY, WIDTH)
+        int chon = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa chủ đề này? Hành động này sẽ xóa mọi từ vựng liên quan.", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+        if (chon == JOptionPane.YES_OPTION) {
+            int id = Integer.parseInt(tableChuDe.getValueAt(row, 1).toString());
+            if (chuDeDAO.delete(id)) {
+                JOptionPane.showMessageDialog(null, "Đã xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                loadData();
+            } else {
+                JOptionPane.showMessageDialog(null, "Xóa thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_lblXoaChuDeMousePressed
 
     private void lblTimKiemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTimKiemMousePressed
-        // TODO add your handling code here:
-        // gọi hàm từ service, services gọi dao và dao gọi db để lấy data
+        String keyword = txtTimChuDe.getText().trim().toLowerCase();
+        java.util.List<models.ChuDe> all = chuDeDAO.selectAll();
+        java.util.List<models.ChuDe> filtered = new java.util.ArrayList<>();
+        for (models.ChuDe cd : all) {
+            if (cd.getTenChuDe().toLowerCase().contains(keyword)) {
+                filtered.add(cd);
+            }
+        }
+        displayTopics(filtered);
     }//GEN-LAST:event_lblTimKiemMousePressed
 
     private void lblSapXepTheoAlphabetMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSapXepTheoAlphabetMousePressed
-        // TODO add your handling code here:
-                // gọi hàm từ service, services gọi dao và dao gọi db để lấy data
-
+        java.util.List<models.ChuDe> all = chuDeDAO.selectAll();
+        all.sort((cd1, cd2) -> cd1.getTenChuDe().compareToIgnoreCase(cd2.getTenChuDe()));
+        displayTopics(all);
     }//GEN-LAST:event_lblSapXepTheoAlphabetMousePressed
 
 

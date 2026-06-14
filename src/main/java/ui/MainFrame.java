@@ -24,9 +24,16 @@ import ui.panel.TongQuan;
  *
  * @author Admin
  */
+import models.TaiKhoan;
+
 public class MainFrame extends javax.swing.JFrame {
 
     private CardLayout cardLayout;
+    private TaiKhoan currentUser;
+
+    public TaiKhoan getCurrentUser() {
+        return currentUser;
+    }
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
 
@@ -34,19 +41,42 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form Temp
      */
     public MainFrame() {
+        this(new TaiKhoan(1, "admin", "", "Admin"));
+    }
+
+    public MainFrame(TaiKhoan user) {
+        this.currentUser = user;
         initComponents();
         khoiTaoCardLayout();
     }
 
     public void showPanel(String panelName) {
         cardLayout.show(informationPanel, panelName);
+        for (java.awt.Component comp : informationPanel.getComponents()) {
+            if ("TongQuan".equals(panelName) && comp instanceof TongQuan) {
+                ((TongQuan) comp).loadData();
+            } else if ("HocTu".equals(panelName) && comp instanceof HocTu) {
+                ((HocTu) comp).loadChuDeComboBox();
+                ((HocTu) comp).loadData();
+            } else if ("BaiKiemTra".equals(panelName) && comp instanceof BaiKiemTra) {
+                ((BaiKiemTra) comp).loadChuDeComboBox();
+                ((BaiKiemTra) comp).loadData();
+            } else if ("ChuDe".equals(panelName) && comp instanceof ChuDe) {
+                ((ChuDe) comp).loadData();
+            } else if ("QuanLyTu".equals(panelName) && comp instanceof QuanLyTu) {
+                ((QuanLyTu) comp).loadData();
+            } else if ("DanhSachTKDaLamChuDePanel".equals(panelName) && comp instanceof DanhSachTKDaLamChuDePanel) {
+                ((DanhSachTKDaLamChuDePanel) comp).loadData();
+            }
+        }
     }
 
     private void khoiTaoCardLayout() {
-
+        boolean isAdmin = currentUser != null && "Admin".equalsIgnoreCase(currentUser.getVaiTro());
         
-        if (!(1 == 1)) { // viết điều kiện kiểm tra người dùng có vai trò là admin
+        if (isAdmin) {
             MenuAdminPanel menu = new MenuAdminPanel(this);
+            menu.setTenAdmin(currentUser.getTenDangNhap());
             cardLayout = (CardLayout) informationPanel.getLayout();
 
             menuPanel.add(menu);
@@ -58,14 +88,15 @@ public class MainFrame extends javax.swing.JFrame {
             cardLayout.show(informationPanel, "QuanLyChuDe");
         } else { // ko là admin
             MenuUserPanel menu = new MenuUserPanel(this);
+            menu.setTenUser(currentUser.getTenDangNhap());
             cardLayout = (CardLayout) informationPanel.getLayout();
 
             menuPanel.add(menu);
 
-            informationPanel.add(new TongQuan(), "TongQuan");
+            informationPanel.add(new TongQuan(this), "TongQuan");
             informationPanel.add(new ChuDe(), "ChuDe");
-            informationPanel.add(new HocTu(), "HocTu");
-            informationPanel.add(new BaiKiemTra(), "BaiKiemTra");
+            informationPanel.add(new HocTu(this), "HocTu");
+            informationPanel.add(new BaiKiemTra(this), "BaiKiemTra");
             cardLayout.show(informationPanel, "TongQuan");
 
         }

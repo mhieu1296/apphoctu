@@ -27,14 +27,26 @@ public class TaiKhoanService {
     
     public void dangNhap(String username, char[] password){
         String hashedPassword = hashPassword(password); // để lưu vào csdl
+        System.out.println("[DEBUG LOGIN] Đang đăng nhập với username: '" + username + "'");
+        System.out.println("[DEBUG LOGIN] Mật khẩu đã hash: '" + hashedPassword + "'");
         if (password.length==0 || "".equals(username)) {
             JOptionPane.showMessageDialog(null, "Username và mật khẩu không được để trống!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
-            if (1 == 1) { // viết logic kiểm tra mật khẩu trong db vào đây
+            dao.TaiKhoanDAO taiKhoanDAO = new dao.TaiKhoanDAO();
+            models.TaiKhoan user = taiKhoanDAO.selectByUsername(username);
+            
+            if (user != null) {
+                System.out.println("[DEBUG LOGIN] Tìm thấy user trong DB: '" + user.getTenDangNhap() + "'");
+                System.out.println("[DEBUG LOGIN] Mật khẩu trong DB:      '" + user.getMatKhau() + "'");
+                System.out.println("[DEBUG LOGIN] Khớp mật khẩu? " + user.getMatKhau().equals(hashedPassword));
+            } else {
+                System.out.println("[DEBUG LOGIN] KHÔNG tìm thấy user '" + username + "' trong DB!");
+            }
+            
+            if (user != null && user.getMatKhau().equals(hashedPassword)) {
                 JOptionPane.showMessageDialog(null, "Đăng nhập thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-//                new MainFrame().setVisible(true);
                 FlatLightLaf.setup();
-                mainframe = new MainFrame();
+                mainframe = new MainFrame(user);
                 mainframe.setVisible(true);
                 mainframe.setResizable(false);
                 mainframe.setLocationRelativeTo(null);
