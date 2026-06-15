@@ -42,5 +42,9 @@ exit /b
 :run_test
 echo.
 echo [INFO] Dang bien dich va chay kiem thu...
-call "%MVN_CMD%" compile exec:java "-Dexec.mainClass=main.DBTestRunner"
+if "%MVN_CMD%"=="mvn.cmd" (
+    call mvn.cmd compile exec:java "-Dexec.mainClass=main.DBTestRunner"
+) else (
+    call "%MVN_CMD%" compile exec:java "-Dexec.mainClass=main.DBTestRunner"
+)
 pause
