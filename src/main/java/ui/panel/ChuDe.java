@@ -333,27 +333,7 @@ public class ChuDe extends javax.swing.JPanel {
         if (cd == null) return;
         
         java.util.List<models.TuVung> list = tuVungDAO.selectByChuDe(cd.getMaChuDe());
-        if (list.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Chủ đề này chưa có từ vựng để xuất!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        
-        java.io.File dir = new java.io.File("report");
-        if (!dir.exists()) dir.mkdirs();
-        
-        java.io.File file = new java.io.File(dir, "words_export_" + tenCD.toLowerCase().replace(" ", "_") + ".txt");
-        try (java.io.PrintWriter writer = new java.io.PrintWriter(new java.io.OutputStreamWriter(new java.io.FileOutputStream(file), java.nio.charset.StandardCharsets.UTF_8))) {
-            writer.println("DANH SÁCH TỪ VỰNG CHỦ ĐỀ: " + tenCD.toUpperCase());
-            writer.println("==========================================");
-            int stt = 1;
-            for (models.TuVung tv : list) {
-                writer.printf("%02d. %-20s : %s\n", stt++, tv.getTuTiengAnh(), tv.getNghiaTiengViet());
-            }
-            JOptionPane.showMessageDialog(null, "Xuất file thành công!\nĐường dẫn: " + file.getAbsolutePath(), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Xuất file thất bại: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }
+        utils.XuatTXT.xuatDanhSachTuVung(tenCD, list);
     }
 
 
