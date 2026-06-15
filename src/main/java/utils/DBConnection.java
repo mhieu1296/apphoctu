@@ -15,6 +15,7 @@ public class DBConnection {
     private static final String URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE + "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8";
 
     private static boolean isInitialized = false;
+    private static String activePassword = PASSWORD;
 
     public static Connection getConnection() throws SQLException {
         try {
@@ -28,16 +29,43 @@ public class DBConnection {
             initializeDatabase();
         }
 
-        return DriverManager.getConnection(URL, USER, PASSWORD);
+        String dbUrl = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE + "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8";
+        return DriverManager.getConnection(dbUrl, USER, activePassword);
     }
 
     private static synchronized void initializeDatabase() {
         if (isInitialized) return;
         
+        String testPassword = PASSWORD;
         String baseUrl = "jdbc:mysql://" + HOST + ":" + PORT + "/?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8";
         
+        boolean connected = false;
+        try (Connection conn = DriverManager.getConnection(baseUrl, USER, testPassword)) {
+            connected = true;
+            activePassword = testPassword;
+        } catch (SQLException e) {
+            // Neu loi access denied, thu ket noi voi mat khau rong (CSDL moi khoi tao)
+            if (e.getErrorCode() == 1045 || e.getMessage().contains("Access denied")) {
+                try (Connection conn = DriverManager.getConnection(baseUrl, USER, "")) {
+                    connected = true;
+                    activePassword = "";
+                    System.out.println("[DB Init] Phat hien mat khau root trong. Da tu dong chuyen sang mat khau rong.");
+                } catch (SQLException ex) {
+                    System.err.println("[DB Init] Thu ket noi voi mat khau rong cung that bai: " + ex.getMessage());
+                }
+            } else {
+                System.err.println("[DB Init] Loi ket noi CSDL: " + e.getMessage());
+            }
+        }
+
+        if (!connected) {
+            return;
+        }
+
+        String dbUrl = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE + "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8";
+
         // 1. Tao database neu chua co
-        try (Connection conn = DriverManager.getConnection(baseUrl, USER, PASSWORD);
+        try (Connection conn = DriverManager.getConnection(baseUrl, USER, activePassword);
              java.sql.Statement stmt = conn.createStatement()) {
             stmt.execute("CREATE DATABASE IF NOT EXISTS `" + DATABASE + "` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
         } catch (SQLException e) {
@@ -46,7 +74,7 @@ public class DBConnection {
         }
 
         // 2. Kiem tra xem cac bang da ton tai chua
-        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(dbUrl, USER, activePassword)) {
             boolean tableExists = false;
             try (java.sql.ResultSet rs = conn.getMetaData().getTables(null, null, "tai_khoan", null)) {
                 if (rs.next()) {
