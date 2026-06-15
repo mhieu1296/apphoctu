@@ -53,9 +53,9 @@ public class CapNhatTu extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setBackground(new java.awt.Color(0, 204, 102));
+        jLabel1.setBackground(new java.awt.Color(248, 250, 252));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(15, 23, 42));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CẬP NHẬT TỪ");
         jLabel1.setOpaque(true);
@@ -68,7 +68,7 @@ public class CapNhatTu extends javax.swing.JPanel {
 
         jLabel4.setText("Nghĩa tiếng Việt");
 
-        lblThemTu.setBackground(new java.awt.Color(0, 205, 102));
+        lblThemTu.setBackground(new java.awt.Color(15, 118, 110));
         lblThemTu.setForeground(new java.awt.Color(255, 255, 255));
         lblThemTu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblThemTu.setText("Thêm");

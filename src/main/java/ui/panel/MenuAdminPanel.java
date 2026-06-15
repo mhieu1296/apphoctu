@@ -54,20 +54,20 @@ public class MenuAdminPanel extends javax.swing.JPanel {
         lblDSTKDaLamChuDe = new javax.swing.JLabel();
         lblDangXuat = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(0, 204, 102));
+        setBackground(new java.awt.Color(248, 250, 252));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(15, 23, 42));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Xin chào");
 
         lblTenAcc.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblTenAcc.setForeground(new java.awt.Color(255, 255, 255));
+        lblTenAcc.setForeground(new java.awt.Color(15, 23, 42));
         lblTenAcc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTenAcc.setText("Tên admin");
 
         lblQuanLyChuDe.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblQuanLyChuDe.setForeground(new java.awt.Color(255, 255, 255));
+        lblQuanLyChuDe.setForeground(new java.awt.Color(15, 23, 42));
         lblQuanLyChuDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/list.png"))); // NOI18N
         lblQuanLyChuDe.setText("QUẢN LÝ CHỦ ĐỀ");
         lblQuanLyChuDe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -78,7 +78,7 @@ public class MenuAdminPanel extends javax.swing.JPanel {
         });
 
         lblQuanLyTu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblQuanLyTu.setForeground(new java.awt.Color(255, 255, 255));
+        lblQuanLyTu.setForeground(new java.awt.Color(15, 23, 42));
         lblQuanLyTu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/char.png"))); // NOI18N
         lblQuanLyTu.setText("QUẢN LÝ TỪ");
         lblQuanLyTu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -89,7 +89,7 @@ public class MenuAdminPanel extends javax.swing.JPanel {
         });
 
         lblQuanLyTaiKhoan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblQuanLyTaiKhoan.setForeground(new java.awt.Color(255, 255, 255));
+        lblQuanLyTaiKhoan.setForeground(new java.awt.Color(15, 23, 42));
         lblQuanLyTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user.png"))); // NOI18N
         lblQuanLyTaiKhoan.setText("QUẢN LÝ TÀI KHOẢN");
         lblQuanLyTaiKhoan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -100,7 +100,7 @@ public class MenuAdminPanel extends javax.swing.JPanel {
         });
 
         lblDSTKDaLamChuDe.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblDSTKDaLamChuDe.setForeground(new java.awt.Color(255, 255, 255));
+        lblDSTKDaLamChuDe.setForeground(new java.awt.Color(15, 23, 42));
         lblDSTKDaLamChuDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/poll.png"))); // NOI18N
         lblDSTKDaLamChuDe.setText("DS TK ĐÃ LÀM CHỦ ĐỀ");
         lblDSTKDaLamChuDe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -111,7 +111,7 @@ public class MenuAdminPanel extends javax.swing.JPanel {
         });
 
         lblDangXuat.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblDangXuat.setForeground(new java.awt.Color(255, 255, 255));
+        lblDangXuat.setForeground(new java.awt.Color(15, 23, 42));
         lblDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
         lblDangXuat.setText("ĐĂNG XUẤT");
         lblDangXuat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

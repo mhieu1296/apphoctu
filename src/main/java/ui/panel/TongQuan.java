@@ -149,7 +149,7 @@ public class TongQuan extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 204, 102));
+        jLabel1.setForeground(new java.awt.Color(15, 118, 110));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("TỔNG QUAN");
 
@@ -160,15 +160,15 @@ public class TongQuan extends javax.swing.JPanel {
         jLabel4.setText("Điểm trung bình");
 
         lblTongSoChuDe.setFont(new java.awt.Font("UTM HelvetIns", 0, 36)); // NOI18N
-        lblTongSoChuDe.setForeground(new java.awt.Color(0, 204, 102));
+        lblTongSoChuDe.setForeground(new java.awt.Color(15, 118, 110));
         lblTongSoChuDe.setText("1");
 
         lblSoChuDeDaLamBaiKiemTra.setFont(new java.awt.Font("UTM HelvetIns", 0, 36)); // NOI18N
-        lblSoChuDeDaLamBaiKiemTra.setForeground(new java.awt.Color(0, 204, 102));
+        lblSoChuDeDaLamBaiKiemTra.setForeground(new java.awt.Color(15, 118, 110));
         lblSoChuDeDaLamBaiKiemTra.setText("1");
 
         lblDiemTrungBinh.setFont(new java.awt.Font("UTM HelvetIns", 0, 36)); // NOI18N
-        lblDiemTrungBinh.setForeground(new java.awt.Color(0, 204, 102));
+        lblDiemTrungBinh.setForeground(new java.awt.Color(15, 118, 110));
         lblDiemTrungBinh.setText("8.25");
 
         tableKetQua.setModel(new javax.swing.table.DefaultTableModel(

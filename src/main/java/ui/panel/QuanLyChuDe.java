@@ -153,7 +153,7 @@ public class QuanLyChuDe extends javax.swing.JPanel {
         jLabel1.setText("Số lượng chủ đề:");
 
         lblSoLuongChuDe.setFont(new java.awt.Font("UTM HelvetIns", 0, 36)); // NOI18N
-        lblSoLuongChuDe.setForeground(new java.awt.Color(0, 204, 102));
+        lblSoLuongChuDe.setForeground(new java.awt.Color(15, 118, 110));
         lblSoLuongChuDe.setText("1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

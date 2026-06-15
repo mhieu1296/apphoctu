@@ -145,7 +145,7 @@ public class ChuDe extends javax.swing.JPanel {
         jLabel5.setText("Số lượng từ:");
 
         lblSoLuongTuTrongChuDe.setFont(new java.awt.Font("UTM HelvetIns", 0, 36)); // NOI18N
-        lblSoLuongTuTrongChuDe.setForeground(new java.awt.Color(0, 204, 102));
+        lblSoLuongTuTrongChuDe.setForeground(new java.awt.Color(15, 118, 110));
         lblSoLuongTuTrongChuDe.setText("2");
 
         tableTu.setModel(new javax.swing.table.DefaultTableModel(
@@ -188,7 +188,7 @@ public class ChuDe extends javax.swing.JPanel {
         lblEng.setText("English word");
 
         lblVie.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblVie.setForeground(new java.awt.Color(0, 204, 102));
+        lblVie.setForeground(new java.awt.Color(15, 118, 110));
         lblVie.setText("Vietnamese meaning");
 
         lblXuatTXT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/file-export-solid (1).png"))); // NOI18N

@@ -192,7 +192,7 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
 
         lblThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/check-solid.png"))); // NOI18N
         lblThoat.setText("Nộp bài");
-        lblThoat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 102), 3, true));
+        lblThoat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(15, 118, 110), 3, true));
         lblThoat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblThoat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -200,9 +200,9 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(0, 204, 102));
+        jLabel1.setBackground(new java.awt.Color(248, 250, 252));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(15, 23, 42));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("LÀM BÀI KIỂM TRA CỦA CHỦ ĐỀ");
         jLabel1.setOpaque(true);
@@ -215,7 +215,7 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
         jLabel4.setText("Số câu đã hoàn thành");
 
         lblSoCauDaHoanThanh.setFont(new java.awt.Font("UTM HelvetIns", 0, 36)); // NOI18N
-        lblSoCauDaHoanThanh.setForeground(new java.awt.Color(0, 204, 102));
+        lblSoCauDaHoanThanh.setForeground(new java.awt.Color(15, 118, 110));
         lblSoCauDaHoanThanh.setText("1");
 
         lblCauHoi.setText("Câu hỏi");
@@ -239,7 +239,7 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
 
         lblPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/chevron-left-solid.png"))); // NOI18N
         lblPrev.setText("Câu trước");
-        lblPrev.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 102), 3, true));
+        lblPrev.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(15, 118, 110), 3, true));
         lblPrev.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblPrev.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -249,7 +249,7 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
 
         lblNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/angle-right-solid.png"))); // NOI18N
         lblNext.setText("Câu kế tiếp");
-        lblNext.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 102), 3, true));
+        lblNext.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(15, 118, 110), 3, true));
         lblNext.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblNext.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -258,7 +258,7 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
         });
 
         lblSoThuTuCau.setFont(new java.awt.Font("UTM HelvetIns", 0, 14)); // NOI18N
-        lblSoThuTuCau.setForeground(new java.awt.Color(0, 204, 102));
+        lblSoThuTuCau.setForeground(new java.awt.Color(15, 118, 110));
         lblSoThuTuCau.setText("1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

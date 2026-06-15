@@ -53,9 +53,9 @@ public class ThemTu extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setBackground(new java.awt.Color(0, 204, 102));
+        jLabel1.setBackground(new java.awt.Color(248, 250, 252));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(15, 23, 42));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("THÊM TỪ MỚI");
         jLabel1.setOpaque(true);
@@ -68,7 +68,7 @@ public class ThemTu extends javax.swing.JPanel {
 
         jLabel4.setText("Nghĩa tiếng Việt");
 
-        lblTu.setBackground(new java.awt.Color(0, 205, 102));
+        lblTu.setBackground(new java.awt.Color(15, 118, 110));
         lblTu.setForeground(new java.awt.Color(255, 255, 255));
         lblTu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTu.setText("Thêm");

@@ -126,7 +126,7 @@ public class HocTu extends javax.swing.JPanel {
 
         lblPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/chevron-left-solid.png"))); // NOI18N
         lblPrev.setText("Từ trước");
-        lblPrev.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 102), 3, true));
+        lblPrev.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(15, 118, 110), 3, true));
         lblPrev.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblPrev.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -136,7 +136,7 @@ public class HocTu extends javax.swing.JPanel {
 
         lblFlip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/arrows-rotate-solid.png"))); // NOI18N
         lblFlip.setText("Lật");
-        lblFlip.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 102), 3, true));
+        lblFlip.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(15, 118, 110), 3, true));
         lblFlip.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblFlip.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -146,7 +146,7 @@ public class HocTu extends javax.swing.JPanel {
 
         lblNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/angle-right-solid.png"))); // NOI18N
         lblNext.setText("Từ kế tiếp");
-        lblNext.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 102), 3, true));
+        lblNext.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(15, 118, 110), 3, true));
         lblNext.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblNext.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -155,7 +155,7 @@ public class HocTu extends javax.swing.JPanel {
         });
 
         lblVie.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblVie.setForeground(new java.awt.Color(0, 204, 102));
+        lblVie.setForeground(new java.awt.Color(15, 118, 110));
         lblVie.setText("Vietnamese meaning");
 
         jLabel2.setText("Chú ý: Khi chạy thật thì chỉ 1 trong 2 label xanh hoặc đỏ xuất hiện, cái kia có thể ẩn đi hoặc setText(\"\") và xóa cái này đi");
