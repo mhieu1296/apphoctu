@@ -9,10 +9,10 @@ echo.
 echo [INFO] Dang tim kiem Maven (mvn)...
 
 :: 1. Kiem tra lenh mvn toan cuc
-where mvn > nul 2>nul
+where mvn.cmd > nul 2>nul
 if %errorlevel% neq 0 goto check_intellij_maven
 echo [INFO] Phat hien Maven toan cuc (System Path).
-set "MVN_CMD=mvn"
+set "MVN_CMD=mvn.cmd"
 goto run_test
 
 :check_intellij_maven
