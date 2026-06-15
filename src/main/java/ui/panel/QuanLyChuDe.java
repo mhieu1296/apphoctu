@@ -25,7 +25,17 @@ public class QuanLyChuDe extends javax.swing.JPanel {
      */
     public QuanLyChuDe() {
         initComponents();
+        tintIcons();
         loadData();
+    }
+
+    private void tintIcons() {
+        java.awt.Color tealColor = new java.awt.Color(15, 118, 110);
+        lblThemChuDe.setIcon(utils.ImageUtils.tintIcon(lblThemChuDe.getIcon(), tealColor));
+        lblSuaChuDe.setIcon(utils.ImageUtils.tintIcon(lblSuaChuDe.getIcon(), tealColor));
+        lblXoaChuDe.setIcon(utils.ImageUtils.tintIcon(lblXoaChuDe.getIcon(), tealColor));
+        lblTimKiem.setIcon(utils.ImageUtils.tintIcon(lblTimKiem.getIcon(), tealColor));
+        lblSapXepTheoAlphabet.setIcon(utils.ImageUtils.tintIcon(lblSapXepTheoAlphabet.getIcon(), tealColor));
     }
 
     public void loadData() {

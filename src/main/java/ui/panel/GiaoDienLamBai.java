@@ -32,6 +32,7 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
      */
     public GiaoDienLamBai() {
         initComponents();
+        tintIcons();
         
         java.awt.event.ActionListener radioListener = e -> {
             saveCurrentAnswer();
@@ -45,6 +46,14 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
         radio2.addActionListener(radioListener);
         radio3.addActionListener(radioListener);
         radio4.addActionListener(radioListener);
+    }
+
+    private void tintIcons() {
+        java.awt.Color tealColor = new java.awt.Color(15, 118, 110);
+        lblNopBai.setIcon(utils.ImageUtils.tintIcon(lblNopBai.getIcon(), tealColor));
+        lblThoat.setIcon(utils.ImageUtils.tintIcon(lblThoat.getIcon(), tealColor));
+        lblPrev.setIcon(utils.ImageUtils.tintIcon(lblPrev.getIcon(), tealColor));
+        lblNext.setIcon(utils.ImageUtils.tintIcon(lblNext.getIcon(), tealColor));
     }
 
     public void setupTest(int maTaiKhoan, int maChuDe) {

@@ -26,13 +26,20 @@ public class BaiKiemTra extends javax.swing.JPanel {
      */
     public BaiKiemTra() {
         initComponents();
+        tintIcons();
     }
 
     public BaiKiemTra(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
+        tintIcons();
         loadChuDeComboBox();
         loadData();
+    }
+
+    private void tintIcons() {
+        java.awt.Color tealColor = new java.awt.Color(15, 118, 110);
+        lblLamBaiKiemTra.setIcon(utils.ImageUtils.tintIcon(lblLamBaiKiemTra.getIcon(), tealColor));
     }
 
     private models.TaiKhoan getCurrentUser() {

@@ -20,6 +20,7 @@ public class QuanLyTu extends javax.swing.JPanel {
 
     public QuanLyTu() {
         initComponents();
+        tintIcons();
         
         // Add action listener to combobox programmatically
         comboboxChuDe.addActionListener(new java.awt.event.ActionListener() {
@@ -37,6 +38,16 @@ public class QuanLyTu extends javax.swing.JPanel {
 
         loadChuDeComboBox();
         loadData();
+    }
+
+    private void tintIcons() {
+        java.awt.Color tealColor = new java.awt.Color(15, 118, 110);
+        lblThemTuVaoChuDe.setIcon(utils.ImageUtils.tintIcon(lblThemTuVaoChuDe.getIcon(), tealColor));
+        lblSuaTuTrongChuDe.setIcon(utils.ImageUtils.tintIcon(lblSuaTuTrongChuDe.getIcon(), tealColor));
+        lblXoaTuTrongChuDe.setIcon(utils.ImageUtils.tintIcon(lblXoaTuTrongChuDe.getIcon(), tealColor));
+        lblTimKiem.setIcon(utils.ImageUtils.tintIcon(lblTimKiem.getIcon(), tealColor));
+        lblSapXepTheoAlphabet.setIcon(utils.ImageUtils.tintIcon(lblSapXepTheoAlphabet.getIcon(), tealColor));
+        lblXuatTXT.setIcon(utils.ImageUtils.tintIcon(lblXuatTXT.getIcon(), tealColor));
     }
 
     private void loadChuDeComboBox() {

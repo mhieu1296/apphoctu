@@ -26,11 +26,22 @@ public class MenuAdminPanel extends javax.swing.JPanel {
     public MenuAdminPanel() {
         initComponents();
         this.mainframe = mainframe;
+        tintIcons();
     }
 
     public MenuAdminPanel(MainFrame mainframe) {
         initComponents();
         this.mainframe = mainframe;
+        tintIcons();
+    }
+
+    private void tintIcons() {
+        java.awt.Color darkColor = new java.awt.Color(15, 23, 42);
+        lblQuanLyChuDe.setIcon(utils.ImageUtils.tintIcon(lblQuanLyChuDe.getIcon(), darkColor));
+        lblQuanLyTu.setIcon(utils.ImageUtils.tintIcon(lblQuanLyTu.getIcon(), darkColor));
+        lblQuanLyTaiKhoan.setIcon(utils.ImageUtils.tintIcon(lblQuanLyTaiKhoan.getIcon(), darkColor));
+        lblDSTKDaLamChuDe.setIcon(utils.ImageUtils.tintIcon(lblDSTKDaLamChuDe.getIcon(), darkColor));
+        lblDangXuat.setIcon(utils.ImageUtils.tintIcon(lblDangXuat.getIcon(), darkColor));
     }
     
     public void setTenAdmin(String ten) {

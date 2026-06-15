@@ -25,11 +25,22 @@ public class MenuUserPanel extends javax.swing.JPanel {
     public MenuUserPanel() {
         initComponents();
         this.mainframe = mainframe;
+        tintIcons();
     }
 
     public MenuUserPanel(MainFrame mainframe) {
         initComponents();
         this.mainframe = mainframe;
+        tintIcons();
+    }
+
+    private void tintIcons() {
+        java.awt.Color darkColor = new java.awt.Color(15, 23, 42);
+        lblTongQuan.setIcon(utils.ImageUtils.tintIcon(lblTongQuan.getIcon(), darkColor));
+        lblChuDe.setIcon(utils.ImageUtils.tintIcon(lblChuDe.getIcon(), darkColor));
+        lblHoc1ChuDe.setIcon(utils.ImageUtils.tintIcon(lblHoc1ChuDe.getIcon(), darkColor));
+        lblLamBaiKiemTra.setIcon(utils.ImageUtils.tintIcon(lblLamBaiKiemTra.getIcon(), darkColor));
+        lblDangXuat.setIcon(utils.ImageUtils.tintIcon(lblDangXuat.getIcon(), darkColor));
     }
     
     public void setTenUser(String ten) {

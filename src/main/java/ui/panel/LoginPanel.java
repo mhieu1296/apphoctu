@@ -27,6 +27,13 @@ public class LoginPanel extends javax.swing.JPanel {
      */
     public LoginPanel() {
         initComponents();
+        tintIcons();
+    }
+
+    private void tintIcons() {
+        java.awt.Color tealColor = new java.awt.Color(15, 118, 110);
+        lblDangNhap.setIcon(utils.ImageUtils.tintIcon(lblDangNhap.getIcon(), tealColor));
+        lblThoat.setIcon(utils.ImageUtils.tintIcon(lblThoat.getIcon(), tealColor));
     }
 
     /**

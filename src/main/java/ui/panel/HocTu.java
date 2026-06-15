@@ -21,6 +21,7 @@ public class HocTu extends javax.swing.JPanel {
      */
     public HocTu() {
         initComponents();
+        tintIcons();
         
         // Add action listener to combobox programmatically
         comboboxChuDe.addActionListener(new java.awt.event.ActionListener() {
@@ -33,8 +34,16 @@ public class HocTu extends javax.swing.JPanel {
         loadData();
     }
 
+    private void tintIcons() {
+        java.awt.Color tealColor = new java.awt.Color(15, 118, 110);
+        lblPrev.setIcon(utils.ImageUtils.tintIcon(lblPrev.getIcon(), tealColor));
+        lblFlip.setIcon(utils.ImageUtils.tintIcon(lblFlip.getIcon(), tealColor));
+        lblNext.setIcon(utils.ImageUtils.tintIcon(lblNext.getIcon(), tealColor));
+    }
+
     public HocTu(ui.MainFrame mainFrame) {
         initComponents();
+        tintIcons();
         
         // Add action listener to combobox programmatically
         comboboxChuDe.addActionListener(new java.awt.event.ActionListener() {

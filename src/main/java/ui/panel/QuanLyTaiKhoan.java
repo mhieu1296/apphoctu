@@ -20,6 +20,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
 
     public QuanLyTaiKhoan() {
         initComponents();
+        tintIcons();
         
         lblTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -40,6 +41,16 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
         });
 
         loadData();
+    }
+
+    private void tintIcons() {
+        java.awt.Color tealColor = new java.awt.Color(15, 118, 110);
+        lblThemTaiKhoan.setIcon(utils.ImageUtils.tintIcon(lblThemTaiKhoan.getIcon(), tealColor));
+        lblSuaTaiKhoan.setIcon(utils.ImageUtils.tintIcon(lblSuaTaiKhoan.getIcon(), tealColor));
+        lblXoaTaiKhoan.setIcon(utils.ImageUtils.tintIcon(lblXoaTaiKhoan.getIcon(), tealColor));
+        lblTimKiem.setIcon(utils.ImageUtils.tintIcon(lblTimKiem.getIcon(), tealColor));
+        lblLocTheoRole.setIcon(utils.ImageUtils.tintIcon(lblLocTheoRole.getIcon(), tealColor));
+        lblSapXepTheoAlphabet.setIcon(utils.ImageUtils.tintIcon(lblSapXepTheoAlphabet.getIcon(), tealColor));
     }
 
     public void loadData() {
