@@ -105,5 +105,9 @@ exit /b
 :run_app
 echo.
 echo [INFO] Dang bien dich va khoi chay ung dung...
-call "%MVN_CMD%" compile exec:java "-Dexec.mainClass=main.AppHocTu"
+if "%MVN_CMD%"=="mvn.cmd" (
+    call mvn.cmd compile exec:java "-Dexec.mainClass=main.AppHocTu"
+) else (
+    call "%MVN_CMD%" compile exec:java "-Dexec.mainClass=main.AppHocTu"
+)
 pause
