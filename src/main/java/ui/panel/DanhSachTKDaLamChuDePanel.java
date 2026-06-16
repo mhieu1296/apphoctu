@@ -15,6 +15,7 @@ public class DanhSachTKDaLamChuDePanel extends javax.swing.JPanel {
      */
     public DanhSachTKDaLamChuDePanel() {
         initComponents();
+        tintIcons();
         
         // Add action listener to combobox programmatically
         comboboxChuDe.addActionListener(new java.awt.event.ActionListener() {
@@ -46,6 +47,13 @@ public class DanhSachTKDaLamChuDePanel extends javax.swing.JPanel {
 
         loadChuDeComboBox();
         loadData();
+    }
+
+    private void tintIcons() {
+        java.awt.Color tealColor = new java.awt.Color(15, 118, 110);
+        lblTimKiem.setIcon(utils.ImageUtils.tintIcon(lblTimKiem.getIcon(), tealColor));
+        lblSapXepTheoAlphabet.setIcon(utils.ImageUtils.tintIcon(lblSapXepTheoAlphabet.getIcon(), tealColor));
+        lblSapXepTheoDiemSo.setIcon(utils.ImageUtils.tintIcon(lblSapXepTheoDiemSo.getIcon(), tealColor));
     }
 
     private void loadChuDeComboBox() {

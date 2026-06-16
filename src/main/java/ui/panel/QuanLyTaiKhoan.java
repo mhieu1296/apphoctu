@@ -20,6 +20,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
 
     public QuanLyTaiKhoan() {
         initComponents();
+        tintIcons();
         
         lblTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -40,6 +41,16 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
         });
 
         loadData();
+    }
+
+    private void tintIcons() {
+        java.awt.Color tealColor = new java.awt.Color(15, 118, 110);
+        lblThemTaiKhoan.setIcon(utils.ImageUtils.tintIcon(lblThemTaiKhoan.getIcon(), tealColor));
+        lblSuaTaiKhoan.setIcon(utils.ImageUtils.tintIcon(lblSuaTaiKhoan.getIcon(), tealColor));
+        lblXoaTaiKhoan.setIcon(utils.ImageUtils.tintIcon(lblXoaTaiKhoan.getIcon(), tealColor));
+        lblTimKiem.setIcon(utils.ImageUtils.tintIcon(lblTimKiem.getIcon(), tealColor));
+        lblLocTheoRole.setIcon(utils.ImageUtils.tintIcon(lblLocTheoRole.getIcon(), tealColor));
+        lblSapXepTheoAlphabet.setIcon(utils.ImageUtils.tintIcon(lblSapXepTheoAlphabet.getIcon(), tealColor));
     }
 
     public void loadData() {
@@ -201,13 +212,13 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
         jLabel3.setText("Số lượng tài khoản");
 
         lblSoLuongAcc.setFont(new java.awt.Font("UTM HelvetIns", 0, 36)); // NOI18N
-        lblSoLuongAcc.setForeground(new java.awt.Color(0, 204, 102));
+        lblSoLuongAcc.setForeground(new java.awt.Color(15, 118, 110));
         lblSoLuongAcc.setText("1");
 
         jLabel8.setText("Số lượng admin");
 
         lblSoLuongAdmin.setFont(new java.awt.Font("UTM HelvetIns", 0, 36)); // NOI18N
-        lblSoLuongAdmin.setForeground(new java.awt.Color(0, 204, 102));
+        lblSoLuongAdmin.setForeground(new java.awt.Color(15, 118, 110));
         lblSoLuongAdmin.setText("1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

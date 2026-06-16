@@ -26,13 +26,20 @@ public class BaiKiemTra extends javax.swing.JPanel {
      */
     public BaiKiemTra() {
         initComponents();
+        tintIcons();
     }
 
     public BaiKiemTra(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         initComponents();
+        tintIcons();
         loadChuDeComboBox();
         loadData();
+    }
+
+    private void tintIcons() {
+        java.awt.Color tealColor = new java.awt.Color(15, 118, 110);
+        lblLamBaiKiemTra.setIcon(utils.ImageUtils.tintIcon(lblLamBaiKiemTra.getIcon(), tealColor));
     }
 
     private models.TaiKhoan getCurrentUser() {
@@ -103,7 +110,7 @@ public class BaiKiemTra extends javax.swing.JPanel {
 
         lblLamBaiKiemTra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/check-solid.png"))); // NOI18N
         lblLamBaiKiemTra.setText("Làm bài kiểm tra");
-        lblLamBaiKiemTra.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 102), 3, true));
+        lblLamBaiKiemTra.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(15, 118, 110), 3, true));
         lblLamBaiKiemTra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblLamBaiKiemTra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -114,19 +121,19 @@ public class BaiKiemTra extends javax.swing.JPanel {
         jLabel2.setText("Điểm cao nhất");
 
         lbldiemMaxChuDe.setFont(new java.awt.Font("UTM HelvetIns", 0, 36)); // NOI18N
-        lbldiemMaxChuDe.setForeground(new java.awt.Color(0, 204, 102));
+        lbldiemMaxChuDe.setForeground(new java.awt.Color(15, 118, 110));
         lbldiemMaxChuDe.setText("9.25");
 
         jLabel3.setText("Số lần làm");
 
         lblSoLanLam.setFont(new java.awt.Font("UTM HelvetIns", 0, 36)); // NOI18N
-        lblSoLanLam.setForeground(new java.awt.Color(0, 204, 102));
+        lblSoLanLam.setForeground(new java.awt.Color(15, 118, 110));
         lblSoLanLam.setText("1");
 
         jLabel4.setText("Điểm trung bình của chủ đề");
 
         lblDiemTrungBinhChuDe.setFont(new java.awt.Font("UTM HelvetIns", 0, 36)); // NOI18N
-        lblDiemTrungBinhChuDe.setForeground(new java.awt.Color(0, 204, 102));
+        lblDiemTrungBinhChuDe.setForeground(new java.awt.Color(15, 118, 110));
         lblDiemTrungBinhChuDe.setText("8.625");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

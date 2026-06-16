@@ -41,16 +41,16 @@ public class CapNhatChuDe extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setBackground(new java.awt.Color(0, 204, 102));
+        jLabel1.setBackground(new java.awt.Color(248, 250, 252));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(15, 23, 42));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CẬP NHẬT CHỦ ĐỀ");
         jLabel1.setOpaque(true);
 
         jLabel2.setText("Tên chủ đề");
 
-        lblCapNhatChuDe.setBackground(new java.awt.Color(0, 205, 102));
+        lblCapNhatChuDe.setBackground(new java.awt.Color(15, 118, 110));
         lblCapNhatChuDe.setForeground(new java.awt.Color(255, 255, 255));
         lblCapNhatChuDe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCapNhatChuDe.setText("Cập nhật");

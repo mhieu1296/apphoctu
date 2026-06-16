@@ -23,6 +23,7 @@ public class ChuDe extends javax.swing.JPanel {
      */
     public ChuDe() {
         initComponents();
+        tintIcons();
         
         // Add action listener to combobox programmatically
         comboboxChuDe.addActionListener(new java.awt.event.ActionListener() {
@@ -40,6 +41,13 @@ public class ChuDe extends javax.swing.JPanel {
 
         loadChuDeComboBox();
         loadData();
+    }
+
+    private void tintIcons() {
+        java.awt.Color tealColor = new java.awt.Color(15, 118, 110);
+        lblTimKiem.setIcon(utils.ImageUtils.tintIcon(lblTimKiem.getIcon(), tealColor));
+        lblSapXepTheoAlphabet.setIcon(utils.ImageUtils.tintIcon(lblSapXepTheoAlphabet.getIcon(), tealColor));
+        lblXuatTXT.setIcon(utils.ImageUtils.tintIcon(lblXuatTXT.getIcon(), tealColor));
     }
 
     private void loadChuDeComboBox() {
@@ -145,7 +153,7 @@ public class ChuDe extends javax.swing.JPanel {
         jLabel5.setText("Số lượng từ:");
 
         lblSoLuongTuTrongChuDe.setFont(new java.awt.Font("UTM HelvetIns", 0, 36)); // NOI18N
-        lblSoLuongTuTrongChuDe.setForeground(new java.awt.Color(0, 204, 102));
+        lblSoLuongTuTrongChuDe.setForeground(new java.awt.Color(15, 118, 110));
         lblSoLuongTuTrongChuDe.setText("2");
 
         tableTu.setModel(new javax.swing.table.DefaultTableModel(
@@ -188,7 +196,7 @@ public class ChuDe extends javax.swing.JPanel {
         lblEng.setText("English word");
 
         lblVie.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblVie.setForeground(new java.awt.Color(0, 204, 102));
+        lblVie.setForeground(new java.awt.Color(15, 118, 110));
         lblVie.setText("Vietnamese meaning");
 
         lblXuatTXT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/file-export-solid (1).png"))); // NOI18N
@@ -325,27 +333,7 @@ public class ChuDe extends javax.swing.JPanel {
         if (cd == null) return;
         
         java.util.List<models.TuVung> list = tuVungDAO.selectByChuDe(cd.getMaChuDe());
-        if (list.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Chủ đề này chưa có từ vựng để xuất!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        
-        java.io.File dir = new java.io.File("report");
-        if (!dir.exists()) dir.mkdirs();
-        
-        java.io.File file = new java.io.File(dir, "words_export_" + tenCD.toLowerCase().replace(" ", "_") + ".txt");
-        try (java.io.PrintWriter writer = new java.io.PrintWriter(new java.io.OutputStreamWriter(new java.io.FileOutputStream(file), java.nio.charset.StandardCharsets.UTF_8))) {
-            writer.println("DANH SÁCH TỪ VỰNG CHỦ ĐỀ: " + tenCD.toUpperCase());
-            writer.println("==========================================");
-            int stt = 1;
-            for (models.TuVung tv : list) {
-                writer.printf("%02d. %-20s : %s\n", stt++, tv.getTuTiengAnh(), tv.getNghiaTiengViet());
-            }
-            JOptionPane.showMessageDialog(null, "Xuất file thành công!\nĐường dẫn: " + file.getAbsolutePath(), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Xuất file thất bại: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }
+        utils.XuatTXT.xuatDanhSachTuVung(tenCD, list);
     }
 
 

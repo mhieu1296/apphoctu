@@ -27,6 +27,13 @@ public class LoginPanel extends javax.swing.JPanel {
      */
     public LoginPanel() {
         initComponents();
+        tintIcons();
+    }
+
+    private void tintIcons() {
+        java.awt.Color tealColor = new java.awt.Color(15, 118, 110);
+        lblDangNhap.setIcon(utils.ImageUtils.tintIcon(lblDangNhap.getIcon(), tealColor));
+        lblThoat.setIcon(utils.ImageUtils.tintIcon(lblThoat.getIcon(), tealColor));
     }
 
     /**
@@ -49,9 +56,9 @@ public class LoginPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setBackground(new java.awt.Color(0, 204, 102));
+        jLabel1.setBackground(new java.awt.Color(248, 250, 252));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(15, 23, 42));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("ĐĂNG NHẬP");
         jLabel1.setOpaque(true);
@@ -63,7 +70,7 @@ public class LoginPanel extends javax.swing.JPanel {
         lblDangNhap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/login.png"))); // NOI18N
         lblDangNhap.setText("Đăng nhập");
-        lblDangNhap.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 102), 2, true));
+        lblDangNhap.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(15, 118, 110), 2, true));
         lblDangNhap.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblDangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -88,7 +95,7 @@ public class LoginPanel extends javax.swing.JPanel {
         lblThoat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/circle-xmark-regular.png"))); // NOI18N
         lblThoat.setText("Thoát");
-        lblThoat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 102), 2, true));
+        lblThoat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(15, 118, 110), 2, true));
         lblThoat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblThoat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
