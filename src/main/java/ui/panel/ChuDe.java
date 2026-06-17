@@ -15,8 +15,8 @@ import ui.dialog.CRUDTu;
  */
 public class ChuDe extends javax.swing.JPanel {
 
-    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
-    private dao.TuVungDAO tuVungDAO = new dao.TuVungDAO();
+    private final services.ChuDeService chuDeService = new services.ChuDeService();
+    private final services.TuVungService tuVungService = new services.TuVungService();
 
     /**
      * Creates new form QuanLyTu
@@ -52,7 +52,7 @@ public class ChuDe extends javax.swing.JPanel {
 
     public void loadChuDeComboBox() {
         comboboxChuDe.removeAllItems();
-        for (models.ChuDe cd : chuDeDAO.selectAll()) {
+        for (models.ChuDe cd : chuDeService.getAllTopics()) {
             comboboxChuDe.addItem(cd.getTenChuDe());
         }
     }
@@ -63,9 +63,9 @@ public class ChuDe extends javax.swing.JPanel {
         }
         String tenCD = comboboxChuDe.getSelectedItem().toString();
         lblChuDe.setText(tenCD);
-        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        models.ChuDe cd = chuDeService.getTopicByName(tenCD);
         if (cd != null) {
-            displayWords(tuVungDAO.selectByChuDe(cd.getMaChuDe()));
+            displayWords(tuVungService.getVocabularyByTopic(cd.getMaChuDe()));
         }
     }
 
@@ -299,11 +299,11 @@ public class ChuDe extends javax.swing.JPanel {
     private void lblTimKiemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTimKiemMousePressed
         if (comboboxChuDe.getSelectedItem() == null) return;
         String tenCD = comboboxChuDe.getSelectedItem().toString();
-        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        models.ChuDe cd = chuDeService.getTopicByName(tenCD);
         if (cd == null) return;
 
         String keyword = txtTimChuDe.getText().trim().toLowerCase();
-        java.util.List<models.TuVung> all = tuVungDAO.selectByChuDe(cd.getMaChuDe());
+        java.util.List<models.TuVung> all = tuVungService.getVocabularyByTopic(cd.getMaChuDe());
         java.util.List<models.TuVung> filtered = new java.util.ArrayList<>();
         for (models.TuVung tv : all) {
             if (tv.getTuTiengAnh().toLowerCase().contains(keyword) || tv.getNghiaTiengViet().toLowerCase().contains(keyword)) {
@@ -316,10 +316,10 @@ public class ChuDe extends javax.swing.JPanel {
     private void lblSapXepTheoAlphabetMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSapXepTheoAlphabetMousePressed
         if (comboboxChuDe.getSelectedItem() == null) return;
         String tenCD = comboboxChuDe.getSelectedItem().toString();
-        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        models.ChuDe cd = chuDeService.getTopicByName(tenCD);
         if (cd == null) return;
 
-        java.util.List<models.TuVung> all = tuVungDAO.selectByChuDe(cd.getMaChuDe());
+        java.util.List<models.TuVung> all = tuVungService.getVocabularyByTopic(cd.getMaChuDe());
         all.sort((tv1, tv2) -> tv1.getTuTiengAnh().compareToIgnoreCase(tv2.getTuTiengAnh()));
         displayWords(all);
     }//GEN-LAST:event_lblSapXepTheoAlphabetMousePressed
@@ -329,10 +329,10 @@ public class ChuDe extends javax.swing.JPanel {
             return;
         }
         String tenCD = comboboxChuDe.getSelectedItem().toString();
-        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        models.ChuDe cd = chuDeService.getTopicByName(tenCD);
         if (cd == null) return;
         
-        java.util.List<models.TuVung> list = tuVungDAO.selectByChuDe(cd.getMaChuDe());
+        java.util.List<models.TuVung> list = tuVungService.getVocabularyByTopic(cd.getMaChuDe());
         utils.XuatTXT.xuatDanhSachTuVung(tenCD, list);
     }
 

@@ -190,8 +190,30 @@ public class LoginPanel extends javax.swing.JPanel {
         char[] password = fieldMatKhau.getPassword();
         String username = fieldUserName.getText();
         
-        TaiKhoanService taiKhoanService = new TaiKhoanService(this);
-        taiKhoanService.dangNhap(username, password);
+        if (password.length == 0 || "".equals(username)) {
+            JOptionPane.showMessageDialog(null, "Username và mật khẩu không được để trống!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        TaiKhoanService taiKhoanService = new TaiKhoanService();
+        models.TaiKhoan user = taiKhoanService.authenticate(username, password);
+        
+        if (user != null) {
+            JOptionPane.showMessageDialog(null, "Đăng nhập thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            com.formdev.flatlaf.FlatLightLaf.setup();
+            mainframe = new MainFrame(user);
+            mainframe.setVisible(true);
+            mainframe.setResizable(false);
+            mainframe.setLocationRelativeTo(null);
+            mainframe.getContentPane().setBackground(Color.WHITE);
+            
+            java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+            if (window != null) {
+                window.dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Sai tên đăng nhập hoặc mật khẩu", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_lblDangNhapMousePressed
 
     private void lblAnHienMKMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnHienMKMouseEntered

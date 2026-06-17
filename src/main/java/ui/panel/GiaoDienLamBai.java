@@ -23,9 +23,9 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
     private String[] userAnswers;
     private int currentQuestionIndex = 0;
     
-    private dao.TuVungDAO tuVungDAO = new dao.TuVungDAO();
-    private dao.KetQuaKiemTraDAO ketQuaKiemTraDAO = new dao.KetQuaKiemTraDAO();
-    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
+    private final services.TuVungService tuVungService = new services.TuVungService();
+    private final services.KetQuaKiemTraService ketQuaKiemTraService = new services.KetQuaKiemTraService();
+    private final services.ChuDeService chuDeService = new services.ChuDeService();
 
     /**
      * Creates new form GiaoDienLamBai
@@ -61,13 +61,13 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
         this.maChuDe = maChuDe;
         
         // Show topic name
-        models.ChuDe cd = chuDeDAO.selectById(maChuDe);
+        models.ChuDe cd = chuDeService.getTopicById(maChuDe);
         if (cd != null) {
             lblChuDe.setText(cd.getTenChuDe());
         }
         
         // Get all words under this topic
-        java.util.List<models.TuVung> allWordsInTopic = tuVungDAO.selectByChuDe(maChuDe);
+        java.util.List<models.TuVung> allWordsInTopic = tuVungService.getVocabularyByTopic(maChuDe);
         if (allWordsInTopic.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Chủ đề này chưa có từ vựng để làm bài kiểm tra!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             SwingUtilities.invokeLater(() -> {
@@ -85,7 +85,7 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
         userAnswers = new String[totalQuestions];
         
         // Fetch all vocabulary in system to get random incorrect options
-        java.util.List<models.TuVung> allSystemWords = tuVungDAO.selectAll();
+        java.util.List<models.TuVung> allSystemWords = tuVungService.getAllVocabulary();
         
         // Generate options for each question
         questionOptions.clear();
@@ -404,7 +404,7 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
             new java.sql.Timestamp(System.currentTimeMillis())
         );
         
-        boolean success = ketQuaKiemTraDAO.insert(kq);
+        boolean success = ketQuaKiemTraService.saveResult(kq);
         if (success) {
             double convertedScore = score * 10.0 / testWords.size();
             JOptionPane.showMessageDialog(

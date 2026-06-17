@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class DanhSachTKDaLamChuDePanel extends javax.swing.JPanel {
 
-    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
-    private dao.KetQuaKiemTraDAO ketQuaKiemTraDAO = new dao.KetQuaKiemTraDAO();
+    private final services.ChuDeService chuDeService = new services.ChuDeService();
+    private final services.KetQuaKiemTraService ketQuaKiemTraService = new services.KetQuaKiemTraService();
     private List<Object[]> allResults = new ArrayList<>();
 
     /**
@@ -58,7 +58,7 @@ public class DanhSachTKDaLamChuDePanel extends javax.swing.JPanel {
 
     public void loadChuDeComboBox() {
         comboboxChuDe.removeAllItems();
-        for (models.ChuDe cd : chuDeDAO.selectAll()) {
+        for (models.ChuDe cd : chuDeService.getAllTopics()) {
             comboboxChuDe.addItem(cd.getTenChuDe());
         }
     }
@@ -69,9 +69,9 @@ public class DanhSachTKDaLamChuDePanel extends javax.swing.JPanel {
         }
         String tenCD = comboboxChuDe.getSelectedItem().toString();
         jLabel6.setText("Danh sách tài khoản đã làm bài kiểm tra của chủ đề: " + tenCD);
-        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        models.ChuDe cd = chuDeService.getTopicByName(tenCD);
         if (cd != null) {
-            allResults = ketQuaKiemTraDAO.selectDetailsByChuDe(cd.getMaChuDe());
+            allResults = ketQuaKiemTraService.getDetailsByTopic(cd.getMaChuDe());
             displayResults(allResults);
         }
     }

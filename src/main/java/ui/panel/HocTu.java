@@ -10,8 +10,8 @@ package ui.panel;
  */
 public class HocTu extends javax.swing.JPanel {
 
-    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
-    private dao.TuVungDAO tuVungDAO = new dao.TuVungDAO();
+    private final services.ChuDeService chuDeService = new services.ChuDeService();
+    private final services.TuVungService tuVungService = new services.TuVungService();
     private java.util.List<models.TuVung> currentWords = new java.util.ArrayList<>();
     private int currentIndex = 0;
     private boolean isFlipped = false;
@@ -58,7 +58,7 @@ public class HocTu extends javax.swing.JPanel {
 
     public void loadChuDeComboBox() {
         comboboxChuDe.removeAllItems();
-        for (models.ChuDe cd : chuDeDAO.selectAll()) {
+        for (models.ChuDe cd : chuDeService.getAllTopics()) {
             comboboxChuDe.addItem(cd.getTenChuDe());
         }
     }
@@ -71,9 +71,9 @@ public class HocTu extends javax.swing.JPanel {
             return;
         }
         String tenCD = comboboxChuDe.getSelectedItem().toString();
-        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        models.ChuDe cd = chuDeService.getTopicByName(tenCD);
         if (cd != null) {
-            currentWords = tuVungDAO.selectByChuDe(cd.getMaChuDe());
+            currentWords = tuVungService.getVocabularyByTopic(cd.getMaChuDe());
             currentIndex = 0;
             isFlipped = false;
             updateCard();

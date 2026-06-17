@@ -16,7 +16,7 @@ import ui.dialog.CRUDTaiKhoan;
  */
 public class QuanLyTaiKhoan extends javax.swing.JPanel {
 
-    private dao.TaiKhoanDAO taiKhoanDAO = new dao.TaiKhoanDAO();
+    private final services.TaiKhoanService taiKhoanService = new services.TaiKhoanService();
 
     public QuanLyTaiKhoan() {
         initComponents();
@@ -54,7 +54,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
     }
 
     public void loadData() {
-        displayAccounts(taiKhoanDAO.selectAll());
+        displayAccounts(taiKhoanService.getAllAccounts());
     }
 
     private void displayAccounts(java.util.List<models.TaiKhoan> list) {
@@ -70,13 +70,13 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
                 tk.getVaiTro()
             });
         }
-        lblSoLuongAcc.setText(String.valueOf(taiKhoanDAO.countTotal()));
-        lblSoLuongAdmin.setText(String.valueOf(taiKhoanDAO.countAdmins()));
+        lblSoLuongAcc.setText(String.valueOf(taiKhoanService.countTotal()));
+        lblSoLuongAdmin.setText(String.valueOf(taiKhoanService.countAdmins()));
     }
 
     private void lblTimKiemMousePressed(java.awt.event.MouseEvent evt) {
         String keyword = txtTimTaiKhoan.getText().trim().toLowerCase();
-        java.util.List<models.TaiKhoan> all = taiKhoanDAO.selectAll();
+        java.util.List<models.TaiKhoan> all = taiKhoanService.getAllAccounts();
         java.util.List<models.TaiKhoan> filtered = new java.util.ArrayList<>();
         for (models.TaiKhoan tk : all) {
             if (tk.getTenDangNhap().toLowerCase().contains(keyword)) {
@@ -88,7 +88,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
 
     private void lblLocTheoRoleMousePressed(java.awt.event.MouseEvent evt) {
         String selectedRole = comboboxRole.getSelectedItem().toString();
-        java.util.List<models.TaiKhoan> all = taiKhoanDAO.selectAll();
+        java.util.List<models.TaiKhoan> all = taiKhoanService.getAllAccounts();
         java.util.List<models.TaiKhoan> filtered = new java.util.ArrayList<>();
         for (models.TaiKhoan tk : all) {
             if (tk.getVaiTro().equalsIgnoreCase(selectedRole)) {
@@ -99,7 +99,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
     }
 
     private void lblSapXepTheoAlphabetMousePressed(java.awt.event.MouseEvent evt) {
-        java.util.List<models.TaiKhoan> all = taiKhoanDAO.selectAll();
+        java.util.List<models.TaiKhoan> all = taiKhoanService.getAllAccounts();
         all.sort((tk1, tk2) -> tk1.getTenDangNhap().compareToIgnoreCase(tk2.getTenDangNhap()));
         displayAccounts(all);
     }
@@ -318,7 +318,7 @@ public class QuanLyTaiKhoan extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Bạn không thể tự xóa tài khoản của chính mình!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            if (taiKhoanDAO.delete(id)) {
+            if (taiKhoanService.deleteAccount(id)) {
                 JOptionPane.showMessageDialog(null, "Đã xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 loadData();
             } else {

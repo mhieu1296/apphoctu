@@ -143,8 +143,8 @@ public class CapNhatChuDe extends javax.swing.JPanel {
         }
 
         int id = Integer.parseInt(maCD);
-        dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
-        models.ChuDe existing = chuDeDAO.selectByName(chude);
+        services.ChuDeService chuDeService = new services.ChuDeService();
+        models.ChuDe existing = chuDeService.getTopicByName(chude);
         
         if (existing != null && existing.getMaChuDe() != id) {
             JOptionPane.showMessageDialog(null, "Tên chủ đề đã tồn tại trên một chủ đề khác!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
@@ -152,7 +152,7 @@ public class CapNhatChuDe extends javax.swing.JPanel {
         }
 
         models.ChuDe cd = new models.ChuDe(id, chude);
-        if (chuDeDAO.update(cd)) {
+        if (chuDeService.updateTopic(cd)) {
             JOptionPane.showMessageDialog(null, "Cập nhật chủ đề thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
             frame.dispose();

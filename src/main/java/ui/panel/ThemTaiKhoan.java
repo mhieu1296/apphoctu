@@ -168,21 +168,13 @@ public class ThemTaiKhoan extends javax.swing.JPanel {
             return;
         }
 
-        dao.TaiKhoanDAO taiKhoanDAO = new dao.TaiKhoanDAO();
-        if (taiKhoanDAO.selectByUsername(username) != null) {
-            JOptionPane.showMessageDialog(null, "Tên đăng nhập đã tồn tại!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        String hashed = LoginPanel.hashPassword(matkhau.toCharArray());
-        models.TaiKhoan tk = new models.TaiKhoan(0, username, hashed, vaiTro);
-        
-        if (taiKhoanDAO.insert(tk)) {
+        services.TaiKhoanService taiKhoanService = new services.TaiKhoanService();
+        if (taiKhoanService.addAccount(username, matkhau, vaiTro)) {
             JOptionPane.showMessageDialog(null, "Thêm tài khoản thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
             frame.dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "Thêm tài khoản thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Thêm tài khoản thất bại (tên đăng nhập đã tồn tại hoặc lỗi hệ thống)!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_lblTuMousePressed
 
