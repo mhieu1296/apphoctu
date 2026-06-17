@@ -85,7 +85,7 @@ public class HocTu extends javax.swing.JPanel {
         if (currentWords == null || currentWords.isEmpty()) {
             lblTuHienTaiTrenSoTu.setText("0/0");
             lblEng.setText("Chủ đề trống");
-            lblVie.setText("");
+            lblVie.setText(" ");
             return;
         }
         
@@ -95,7 +95,7 @@ public class HocTu extends javax.swing.JPanel {
         if (isFlipped) {
             lblVie.setText(tv.getNghiaTiengViet());
         } else {
-            lblVie.setText("");
+            lblVie.setText(" ");
         }
     }
 

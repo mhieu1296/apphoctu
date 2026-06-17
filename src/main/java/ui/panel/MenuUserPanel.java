@@ -26,12 +26,83 @@ public class MenuUserPanel extends javax.swing.JPanel {
         initComponents();
         this.mainframe = mainframe;
         tintIcons();
+        setupSelectionAndHover();
     }
 
     public MenuUserPanel(MainFrame mainframe) {
         initComponents();
         this.mainframe = mainframe;
         tintIcons();
+        setupSelectionAndHover();
+    }
+
+    private javax.swing.JLabel selectedLabel = null;
+    private final java.awt.Color hoverColor = new java.awt.Color(241, 245, 249); // Slate 100: #F1F5F9
+    private final java.awt.Color selectColor = new java.awt.Color(226, 232, 240); // Slate 200: #E2E8F0
+
+    private void setupSelectionAndHover() {
+        javax.swing.JLabel[] labels = {lblTongQuan, lblChuDe, lblHoc1ChuDe, lblLamBaiKiemTra};
+        for (javax.swing.JLabel label : labels) {
+            label.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 10, 6, 10));
+            label.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseEntered(java.awt.event.MouseEvent e) {
+                    if (label != selectedLabel) {
+                        label.setOpaque(true);
+                        label.setBackground(hoverColor);
+                        label.repaint();
+                    }
+                }
+
+                @Override
+                public void mouseExited(java.awt.event.MouseEvent e) {
+                    if (label != selectedLabel) {
+                        label.setOpaque(false);
+                        label.setBackground(null);
+                        label.repaint();
+                    }
+                }
+
+                @Override
+                public void mousePressed(java.awt.event.MouseEvent e) {
+                    changeSelection(label);
+                }
+            });
+        }
+        
+        lblDangXuat.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 10, 6, 10));
+        lblDangXuat.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+                lblDangXuat.setOpaque(true);
+                lblDangXuat.setBackground(hoverColor);
+                lblDangXuat.repaint();
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent e) {
+                lblDangXuat.setOpaque(false);
+                lblDangXuat.setBackground(null);
+                lblDangXuat.repaint();
+            }
+        });
+        
+        // Mặc định chọn mục đầu tiên (Tổng quan)
+        changeSelection(lblTongQuan);
+    }
+
+    public void changeSelection(javax.swing.JLabel label) {
+        if (selectedLabel != null) {
+            selectedLabel.setOpaque(false);
+            selectedLabel.setBackground(null);
+            selectedLabel.repaint();
+        }
+        selectedLabel = label;
+        if (selectedLabel != null) {
+            selectedLabel.setOpaque(true);
+            selectedLabel.setBackground(selectColor);
+            selectedLabel.repaint();
+        }
     }
 
     private void tintIcons() {
