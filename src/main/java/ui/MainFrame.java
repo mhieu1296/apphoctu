@@ -54,6 +54,7 @@ public class MainFrame extends javax.swing.JFrame {
         cardLayout.show(informationPanel, panelName);
         for (java.awt.Component comp : informationPanel.getComponents()) {
             if ("TongQuan".equals(panelName) && comp instanceof TongQuan) {
+                ((TongQuan) comp).loadChuDeComboBox();
                 ((TongQuan) comp).loadData();
             } else if ("HocTu".equals(panelName) && comp instanceof HocTu) {
                 ((HocTu) comp).loadChuDeComboBox();
@@ -62,10 +63,13 @@ public class MainFrame extends javax.swing.JFrame {
                 ((BaiKiemTra) comp).loadChuDeComboBox();
                 ((BaiKiemTra) comp).loadData();
             } else if ("ChuDe".equals(panelName) && comp instanceof ChuDe) {
+                ((ChuDe) comp).loadChuDeComboBox();
                 ((ChuDe) comp).loadData();
             } else if ("QuanLyTu".equals(panelName) && comp instanceof QuanLyTu) {
+                ((QuanLyTu) comp).loadChuDeComboBox();
                 ((QuanLyTu) comp).loadData();
             } else if ("DanhSachTKDaLamChuDePanel".equals(panelName) && comp instanceof DanhSachTKDaLamChuDePanel) {
+                ((DanhSachTKDaLamChuDePanel) comp).loadChuDeComboBox();
                 ((DanhSachTKDaLamChuDePanel) comp).loadData();
             }
         }
