@@ -56,7 +56,7 @@ public class DanhSachTKDaLamChuDePanel extends javax.swing.JPanel {
         lblSapXepTheoDiemSo.setIcon(utils.ImageUtils.tintIcon(lblSapXepTheoDiemSo.getIcon(), tealColor));
     }
 
-    private void loadChuDeComboBox() {
+    public void loadChuDeComboBox() {
         comboboxChuDe.removeAllItems();
         for (models.ChuDe cd : chuDeDAO.selectAll()) {
             comboboxChuDe.addItem(cd.getTenChuDe());

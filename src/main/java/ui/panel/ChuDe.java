@@ -50,7 +50,7 @@ public class ChuDe extends javax.swing.JPanel {
         lblXuatTXT.setIcon(utils.ImageUtils.tintIcon(lblXuatTXT.getIcon(), tealColor));
     }
 
-    private void loadChuDeComboBox() {
+    public void loadChuDeComboBox() {
         comboboxChuDe.removeAllItems();
         for (models.ChuDe cd : chuDeDAO.selectAll()) {
             comboboxChuDe.addItem(cd.getTenChuDe());
