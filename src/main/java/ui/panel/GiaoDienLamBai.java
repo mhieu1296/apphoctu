@@ -189,23 +189,23 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        lblNopBai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/circle-xmark-solid.png"))); // NOI18N
-        lblNopBai.setText("Thoát");
-        lblNopBai.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 3, true));
-        lblNopBai.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblNopBai.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                lblNopBaiMousePressed(evt);
-            }
-        });
-
-        lblThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/check-solid.png"))); // NOI18N
-        lblThoat.setText("Nộp bài");
-        lblThoat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(15, 118, 110), 3, true));
+        lblThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/circle-xmark-solid.png"))); // NOI18N
+        lblThoat.setText("Thoát");
+        lblThoat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 3, true));
         lblThoat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblThoat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblThoatMousePressed(evt);
+            }
+        });
+
+        lblNopBai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/check-solid.png"))); // NOI18N
+        lblNopBai.setText("Nộp bài");
+        lblNopBai.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(15, 118, 110), 3, true));
+        lblNopBai.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblNopBai.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblNopBaiMousePressed(evt);
             }
         });
 
@@ -297,9 +297,9 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(lblNext, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(lblThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblNopBai, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(lblNopBai, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblSoThuTuCau, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -330,8 +330,8 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblNopBai)
-                        .addComponent(lblThoat))
+                        .addComponent(lblThoat)
+                        .addComponent(lblNopBai))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblPrev)
                         .addComponent(lblNext)))
@@ -339,7 +339,7 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblNopBaiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNopBaiMousePressed
+    private void lblThoatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThoatMousePressed
         int chon = JOptionPane.showConfirmDialog(
                 this,
                 "Bạn có muốn thoát làm bài? Lần làm bài này sẽ không được ghi nhận vào hệ thống.",
@@ -351,9 +351,9 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
             JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
             if (frame != null) frame.dispose();
         }
-    }//GEN-LAST:event_lblNopBaiMousePressed
+    }//GEN-LAST:event_lblThoatMousePressed
 
-    private void lblThoatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThoatMousePressed
+    private void lblNopBaiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNopBaiMousePressed
         saveCurrentAnswer();
         
         // Check if all questions are completed
@@ -418,7 +418,7 @@ public class GiaoDienLamBai extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(this, "Lưu kết quả thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_lblThoatMousePressed
+    }//GEN-LAST:event_lblNopBaiMousePressed
 
     private void lblPrevMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPrevMousePressed
         saveCurrentAnswer();

@@ -51,9 +51,9 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="lblNext" min="-2" pref="153" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="lblThoat" min="-2" pref="153" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="lblNopBai" min="-2" pref="153" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="lblThoat" min="-2" pref="153" max="-2" attributes="0"/>
                   </Group>
                   <Component id="lblSoThuTuCau" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
               </Group>
@@ -90,8 +90,8 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="lblNopBai" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblThoat" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblNopBai" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblPrev" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -104,7 +104,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblNopBai">
+    <Component class="javax.swing.JLabel" name="lblThoat">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/icon/circle-xmark-solid.png"/>
@@ -122,10 +122,10 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblNopBaiMousePressed"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblThoatMousePressed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblThoat">
+    <Component class="javax.swing.JLabel" name="lblNopBai">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/icon/check-solid.png"/>
@@ -143,7 +143,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblThoatMousePressed"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblNopBaiMousePressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
