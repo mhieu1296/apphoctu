@@ -18,8 +18,8 @@ import ui.MainFrame;
 public class BaiKiemTra extends javax.swing.JPanel {
 
     private MainFrame mainFrame;
-    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
-    private dao.KetQuaKiemTraDAO ketQuaKiemTraDAO = new dao.KetQuaKiemTraDAO();
+    private final services.ChuDeService chuDeService = new services.ChuDeService();
+    private final services.KetQuaKiemTraService ketQuaKiemTraService = new services.KetQuaKiemTraService();
 
     /**
      * Creates new form BaiKiemTra
@@ -55,7 +55,7 @@ public class BaiKiemTra extends javax.swing.JPanel {
 
     public void loadChuDeComboBox() {
         comboboxChuDe.removeAllItems();
-        for (models.ChuDe cd : chuDeDAO.selectAll()) {
+        for (models.ChuDe cd : chuDeService.getAllTopics()) {
             comboboxChuDe.addItem(cd.getTenChuDe());
         }
     }
@@ -67,12 +67,12 @@ public class BaiKiemTra extends javax.swing.JPanel {
         }
         
         String tenCD = comboboxChuDe.getSelectedItem().toString();
-        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        models.ChuDe cd = chuDeService.getTopicByName(tenCD);
         if (cd == null) return;
         
-        double maxScore = ketQuaKiemTraDAO.getMaxDiemChuDe(user.getMaTaiKhoan(), cd.getMaChuDe());
-        int attemptCount = ketQuaKiemTraDAO.getSoLanLamChuDe(user.getMaTaiKhoan(), cd.getMaChuDe());
-        double avgScore = ketQuaKiemTraDAO.getDiemTrungBinhChuDe(user.getMaTaiKhoan(), cd.getMaChuDe());
+        double maxScore = ketQuaKiemTraService.getMaxScore(user.getMaTaiKhoan(), cd.getMaChuDe());
+        int attemptCount = ketQuaKiemTraService.getAttemptCount(user.getMaTaiKhoan(), cd.getMaChuDe());
+        double avgScore = ketQuaKiemTraService.getAverageScore(user.getMaTaiKhoan(), cd.getMaChuDe());
         
         lbldiemMaxChuDe.setText(String.format("%.2f", maxScore));
         lblSoLanLam.setText(String.valueOf(attemptCount));
@@ -198,7 +198,7 @@ public class BaiKiemTra extends javax.swing.JPanel {
         }
         
         String tenCD = comboboxChuDe.getSelectedItem().toString();
-        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        models.ChuDe cd = chuDeService.getTopicByName(tenCD);
         if (cd == null) return;
         
         LamBai dialog = new LamBai(null, true);

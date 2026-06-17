@@ -176,8 +176,8 @@ public class CapNhatTaiKhoan extends javax.swing.JPanel {
         }
 
         int id = Integer.parseInt(maTK);
-        dao.TaiKhoanDAO taiKhoanDAO = new dao.TaiKhoanDAO();
-        models.TaiKhoan existing = taiKhoanDAO.selectByUsername(username);
+        services.TaiKhoanService taiKhoanService = new services.TaiKhoanService();
+        models.TaiKhoan existing = taiKhoanService.getAccountByUsername(username);
         
         if (existing != null && existing.getMaTaiKhoan() != id) {
             JOptionPane.showMessageDialog(null, "Tên đăng nhập đã tồn tại trên một tài khoản khác!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
@@ -186,7 +186,7 @@ public class CapNhatTaiKhoan extends javax.swing.JPanel {
 
         // Lấy tài khoản hiện tại từ database
         models.TaiKhoan current = null;
-        for (models.TaiKhoan t : taiKhoanDAO.selectAll()) {
+        for (models.TaiKhoan t : taiKhoanService.getAllAccounts()) {
             if (t.getMaTaiKhoan() == id) {
                 current = t;
                 break;
@@ -202,7 +202,7 @@ public class CapNhatTaiKhoan extends javax.swing.JPanel {
 
         models.TaiKhoan updated = new models.TaiKhoan(id, username, finalPasswordHash, vaiTro);
         
-        if (taiKhoanDAO.update(updated)) {
+        if (taiKhoanService.updateAccount(updated)) {
             JOptionPane.showMessageDialog(null, "Cập nhật tài khoản thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
             frame.dispose();

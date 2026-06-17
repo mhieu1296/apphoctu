@@ -18,7 +18,7 @@ public class QuanLyChuDe extends javax.swing.JPanel {
     private CRUDChuDe crudchude;
     private ThemChuDe themchude;
     private JTextField txtChuDe;
-    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
+    private final services.ChuDeService chuDeService = new services.ChuDeService();
 
     /**
      * Creates new form QuanLyChuDe
@@ -39,7 +39,7 @@ public class QuanLyChuDe extends javax.swing.JPanel {
     }
 
     public void loadData() {
-        displayTopics(chuDeDAO.selectAll());
+        displayTopics(chuDeService.getAllTopics());
     }
 
     private void displayTopics(java.util.List<models.ChuDe> list) {
@@ -53,7 +53,7 @@ public class QuanLyChuDe extends javax.swing.JPanel {
                 cd.getTenChuDe()
             });
         }
-        lblSoLuongChuDe.setText(String.valueOf(chuDeDAO.countTotal()));
+        lblSoLuongChuDe.setText(String.valueOf(chuDeService.countTotal()));
     }
 
     /**
@@ -276,7 +276,7 @@ public class QuanLyChuDe extends javax.swing.JPanel {
         int chon = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa chủ đề này? Hành động này sẽ xóa mọi từ vựng liên quan.", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         if (chon == JOptionPane.YES_OPTION) {
             int id = Integer.parseInt(tableChuDe.getValueAt(row, 1).toString());
-            if (chuDeDAO.delete(id)) {
+            if (chuDeService.deleteTopic(id)) {
                 JOptionPane.showMessageDialog(null, "Đã xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 loadData();
             } else {
@@ -287,7 +287,7 @@ public class QuanLyChuDe extends javax.swing.JPanel {
 
     private void lblTimKiemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTimKiemMousePressed
         String keyword = txtTimChuDe.getText().trim().toLowerCase();
-        java.util.List<models.ChuDe> all = chuDeDAO.selectAll();
+        java.util.List<models.ChuDe> all = chuDeService.getAllTopics();
         java.util.List<models.ChuDe> filtered = new java.util.ArrayList<>();
         for (models.ChuDe cd : all) {
             if (cd.getTenChuDe().toLowerCase().contains(keyword)) {
@@ -298,7 +298,7 @@ public class QuanLyChuDe extends javax.swing.JPanel {
     }//GEN-LAST:event_lblTimKiemMousePressed
 
     private void lblSapXepTheoAlphabetMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSapXepTheoAlphabetMousePressed
-        java.util.List<models.ChuDe> all = chuDeDAO.selectAll();
+        java.util.List<models.ChuDe> all = chuDeService.getAllTopics();
         all.sort((cd1, cd2) -> cd1.getTenChuDe().compareToIgnoreCase(cd2.getTenChuDe()));
         displayTopics(all);
     }//GEN-LAST:event_lblSapXepTheoAlphabetMousePressed

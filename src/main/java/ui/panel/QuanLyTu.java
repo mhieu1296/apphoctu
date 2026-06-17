@@ -15,8 +15,8 @@ import ui.dialog.CRUDTu;
  */
 public class QuanLyTu extends javax.swing.JPanel {
 
-    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
-    private dao.TuVungDAO tuVungDAO = new dao.TuVungDAO();
+    private final services.ChuDeService chuDeService = new services.ChuDeService();
+    private final services.TuVungService tuVungService = new services.TuVungService();
 
     public QuanLyTu() {
         initComponents();
@@ -52,7 +52,7 @@ public class QuanLyTu extends javax.swing.JPanel {
 
     public void loadChuDeComboBox() {
         comboboxChuDe.removeAllItems();
-        for (models.ChuDe cd : chuDeDAO.selectAll()) {
+        for (models.ChuDe cd : chuDeService.getAllTopics()) {
             comboboxChuDe.addItem(cd.getTenChuDe());
         }
     }
@@ -63,9 +63,9 @@ public class QuanLyTu extends javax.swing.JPanel {
         }
         String tenCD = comboboxChuDe.getSelectedItem().toString();
         lblTenChuDe.setText(tenCD);
-        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        models.ChuDe cd = chuDeService.getTopicByName(tenCD);
         if (cd != null) {
-            displayWords(tuVungDAO.selectByChuDe(cd.getMaChuDe()));
+            displayWords(tuVungService.getVocabularyByTopic(cd.getMaChuDe()));
         }
     }
 
@@ -373,7 +373,7 @@ public class QuanLyTu extends javax.swing.JPanel {
         int chon = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa từ này?", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         if (chon == JOptionPane.YES_OPTION) {
             int id = Integer.parseInt(tableTu.getValueAt(row, 1).toString());
-            if (tuVungDAO.delete(id)) {
+            if (tuVungService.deleteVocabulary(id)) {
                 JOptionPane.showMessageDialog(null, "Đã xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 loadData();
             } else {
@@ -397,11 +397,11 @@ public class QuanLyTu extends javax.swing.JPanel {
     private void lblTimKiemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTimKiemMousePressed
         if (comboboxChuDe.getSelectedItem() == null) return;
         String tenCD = comboboxChuDe.getSelectedItem().toString();
-        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        models.ChuDe cd = chuDeService.getTopicByName(tenCD);
         if (cd == null) return;
 
         String keyword = txtTimTu.getText().trim().toLowerCase();
-        java.util.List<models.TuVung> all = tuVungDAO.selectByChuDe(cd.getMaChuDe());
+        java.util.List<models.TuVung> all = tuVungService.getVocabularyByTopic(cd.getMaChuDe());
         java.util.List<models.TuVung> filtered = new java.util.ArrayList<>();
         for (models.TuVung tv : all) {
             if (tv.getTuTiengAnh().toLowerCase().contains(keyword) || tv.getNghiaTiengViet().toLowerCase().contains(keyword)) {
@@ -414,10 +414,10 @@ public class QuanLyTu extends javax.swing.JPanel {
     private void lblSapXepTheoAlphabetMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSapXepTheoAlphabetMousePressed
         if (comboboxChuDe.getSelectedItem() == null) return;
         String tenCD = comboboxChuDe.getSelectedItem().toString();
-        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        models.ChuDe cd = chuDeService.getTopicByName(tenCD);
         if (cd == null) return;
 
-        java.util.List<models.TuVung> all = tuVungDAO.selectByChuDe(cd.getMaChuDe());
+        java.util.List<models.TuVung> all = tuVungService.getVocabularyByTopic(cd.getMaChuDe());
         all.sort((tv1, tv2) -> tv1.getTuTiengAnh().compareToIgnoreCase(tv2.getTuTiengAnh()));
         displayWords(all);
     }//GEN-LAST:event_lblSapXepTheoAlphabetMousePressed
@@ -427,10 +427,10 @@ public class QuanLyTu extends javax.swing.JPanel {
             return;
         }
         String tenCD = comboboxChuDe.getSelectedItem().toString();
-        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        models.ChuDe cd = chuDeService.getTopicByName(tenCD);
         if (cd == null) return;
         
-        java.util.List<models.TuVung> list = tuVungDAO.selectByChuDe(cd.getMaChuDe());
+        java.util.List<models.TuVung> list = tuVungService.getVocabularyByTopic(cd.getMaChuDe());
         utils.XuatTXT.xuatDanhSachTuVung(tenCD, list);
     }
 

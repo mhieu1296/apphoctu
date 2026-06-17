@@ -14,7 +14,8 @@ import javax.swing.SwingUtilities;
  */
 public class ThemTu extends javax.swing.JPanel {
 
-    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
+    private final services.ChuDeService chuDeService = new services.ChuDeService();
+    private final services.TuVungService tuVungService = new services.TuVungService();
 
     public ThemTu() {
         initComponents();
@@ -25,7 +26,7 @@ public class ThemTu extends javax.swing.JPanel {
     
     private void loadChuDeComboBox() {
         comboboxChuDe.removeAllItems();
-        for (models.ChuDe cd : chuDeDAO.selectAll()) {
+        for (models.ChuDe cd : chuDeService.getAllTopics()) {
             comboboxChuDe.addItem(cd.getTenChuDe());
         }
     }
@@ -162,7 +163,7 @@ public class ThemTu extends javax.swing.JPanel {
             return;
         }
         String tenCD = comboboxChuDe.getSelectedItem().toString();
-        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        models.ChuDe cd = chuDeService.getTopicByName(tenCD);
         if (cd == null) return;
         
         if (eng.isEmpty() || vie.isEmpty()) {
@@ -170,9 +171,8 @@ public class ThemTu extends javax.swing.JPanel {
             return;
         }
 
-        dao.TuVungDAO tuVungDAO = new dao.TuVungDAO();
         models.TuVung tv = new models.TuVung(0, eng, vie, cd.getMaChuDe());
-        if (tuVungDAO.insert(tv)) {
+        if (tuVungService.addVocabulary(tv)) {
             JOptionPane.showMessageDialog(null, "Thêm từ vựng thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
             frame.dispose();

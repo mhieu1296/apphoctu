@@ -9,8 +9,8 @@ import ui.MainFrame;
 public class TongQuan extends javax.swing.JPanel {
 
     private MainFrame mainFrame;
-    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
-    private dao.KetQuaKiemTraDAO ketQuaKiemTraDAO = new dao.KetQuaKiemTraDAO();
+    private final services.ChuDeService chuDeService = new services.ChuDeService();
+    private final services.KetQuaKiemTraService ketQuaKiemTraService = new services.KetQuaKiemTraService();
 
     /**
      * Creates new form TongQuan
@@ -48,7 +48,7 @@ public class TongQuan extends javax.swing.JPanel {
     public void loadChuDeComboBox() {
         comboboxChuDe.removeAllItems();
         comboboxChuDe.addItem("Tất cả");
-        for (models.ChuDe cd : chuDeDAO.selectAll()) {
+        for (models.ChuDe cd : chuDeService.getAllTopics()) {
             comboboxChuDe.addItem(cd.getTenChuDe());
         }
     }
@@ -60,9 +60,9 @@ public class TongQuan extends javax.swing.JPanel {
         }
 
         // Load stats
-        int totalChuDe = chuDeDAO.selectAll().size();
-        int completedChuDe = ketQuaKiemTraDAO.countChuDeDaLam(user.getMaTaiKhoan());
-        double avgScore = ketQuaKiemTraDAO.getDiemTrungBinh(user.getMaTaiKhoan());
+        int totalChuDe = chuDeService.countTotal();
+        int completedChuDe = ketQuaKiemTraService.countTopicsCompleted(user.getMaTaiKhoan());
+        double avgScore = ketQuaKiemTraService.getOverallAverageScore(user.getMaTaiKhoan());
 
         lblTongSoChuDe.setText(String.valueOf(totalChuDe));
         lblSoChuDeDaLamBaiKiemTra.setText(String.valueOf(completedChuDe));
@@ -81,12 +81,12 @@ public class TongQuan extends javax.swing.JPanel {
         String selectedTopic = comboboxChuDe.getSelectedItem().toString();
         List<models.KetQuaKiemTra> list;
         if ("Tất cả".equals(selectedTopic)) {
-            list = ketQuaKiemTraDAO.selectByTaiKhoan(user.getMaTaiKhoan());
+            list = ketQuaKiemTraService.getResultsByAccount(user.getMaTaiKhoan());
         } else {
-            models.ChuDe cd = chuDeDAO.selectByName(selectedTopic);
+            models.ChuDe cd = chuDeService.getTopicByName(selectedTopic);
             list = new ArrayList<>();
             if (cd != null) {
-                List<models.KetQuaKiemTra> all = ketQuaKiemTraDAO.selectByTaiKhoan(user.getMaTaiKhoan());
+                List<models.KetQuaKiemTra> all = ketQuaKiemTraService.getResultsByAccount(user.getMaTaiKhoan());
                 for (models.KetQuaKiemTra kq : all) {
                     if (kq.getMaChuDe() == cd.getMaChuDe()) {
                         list.add(kq);
@@ -108,7 +108,7 @@ public class TongQuan extends javax.swing.JPanel {
 
         int stt = 1;
         for (models.KetQuaKiemTra kq : list) {
-            models.ChuDe cd = chuDeDAO.selectById(kq.getMaChuDe());
+            models.ChuDe cd = chuDeService.getTopicById(kq.getMaChuDe());
             String tenCD = (cd != null) ? cd.getTenChuDe() : "Chủ đề #" + kq.getMaChuDe();
             model.addRow(new Object[] {
                 String.format("%02d", stt++),

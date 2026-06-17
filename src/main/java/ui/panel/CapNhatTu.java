@@ -14,7 +14,8 @@ import javax.swing.SwingUtilities;
  */
 public class CapNhatTu extends javax.swing.JPanel {
 
-    private dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
+    private final services.ChuDeService chuDeService = new services.ChuDeService();
+    private final services.TuVungService tuVungService = new services.TuVungService();
 
     public CapNhatTu() {
         initComponents();
@@ -25,7 +26,7 @@ public class CapNhatTu extends javax.swing.JPanel {
     
     private void loadChuDeComboBox() {
         comboboxChuDe.removeAllItems();
-        for (models.ChuDe cd : chuDeDAO.selectAll()) {
+        for (models.ChuDe cd : chuDeService.getAllTopics()) {
             comboboxChuDe.addItem(cd.getTenChuDe());
         }
     }
@@ -157,7 +158,7 @@ public class CapNhatTu extends javax.swing.JPanel {
     public void setAll(String maChuDe, String maTu, String eng, String vie){
         try {
             int idCD = Integer.parseInt(maChuDe);
-            models.ChuDe cd = chuDeDAO.selectById(idCD);
+            models.ChuDe cd = chuDeService.getTopicById(idCD);
             if (cd != null) {
                 comboboxChuDe.setSelectedItem(cd.getTenChuDe());
             }
@@ -178,7 +179,7 @@ public class CapNhatTu extends javax.swing.JPanel {
             return;
         }
         String tenCD = comboboxChuDe.getSelectedItem().toString();
-        models.ChuDe cd = chuDeDAO.selectByName(tenCD);
+        models.ChuDe cd = chuDeService.getTopicByName(tenCD);
         if (cd == null) return;
         
         if (maTuStr.isEmpty() || eng.isEmpty() || vie.isEmpty()) {
@@ -187,9 +188,8 @@ public class CapNhatTu extends javax.swing.JPanel {
         }
 
         int idTu = Integer.parseInt(maTuStr);
-        dao.TuVungDAO tuVungDAO = new dao.TuVungDAO();
         models.TuVung tv = new models.TuVung(idTu, eng, vie, cd.getMaChuDe());
-        if (tuVungDAO.update(tv)) {
+        if (tuVungService.updateVocabulary(tv)) {
             JOptionPane.showMessageDialog(null, "Cập nhật từ vựng thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
             frame.dispose();

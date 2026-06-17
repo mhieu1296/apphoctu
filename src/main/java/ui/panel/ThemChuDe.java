@@ -136,19 +136,13 @@ public class ThemChuDe extends javax.swing.JPanel {
             return;
         }
         
-        dao.ChuDeDAO chuDeDAO = new dao.ChuDeDAO();
-        if (chuDeDAO.selectByName(chude) != null) {
-            JOptionPane.showMessageDialog(null, "Tên chủ đề đã tồn tại!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        models.ChuDe cd = new models.ChuDe(0, chude);
-        if (chuDeDAO.insert(cd)) {
+        services.ChuDeService chuDeService = new services.ChuDeService();
+        if (chuDeService.addTopic(chude)) {
             JOptionPane.showMessageDialog(null, "Thêm chủ đề thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             JDialog frame = (JDialog) SwingUtilities.getWindowAncestor(this);
             frame.dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "Thêm chủ đề thất bại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Thêm chủ đề thất bại (tên chủ đề đã tồn tại hoặc lỗi hệ thống)!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
 
